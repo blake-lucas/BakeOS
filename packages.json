@@ -15,9 +15,8 @@
                 "xprop",
                 "yaru-theme",
                 "gnome-shell-extension-appindicator",
-                "gnome-shell-extension-dash-to-panel",
                 "gnome-shell-extension-blur-my-shell",
-                "gnome-shell-extension-caffein",
+                "gnome-shell-extension-caffeine",
                 "openssl",
                 "qemu-guest-agent",
                 "nextcloud-client-nautilus",
@@ -25,8 +24,6 @@
                 "virt-manager",
                 "wget",
                 "curl",
-                "gdu",
-                "diskus",
                 "htop",
                 "btop",
                 "iotop",
@@ -40,7 +37,6 @@
                 "nvtop",
                 "firefox",
                 "firefox-langpacks",
-                "steam",
                 "keepassxc"
             ]
         },
