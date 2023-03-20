@@ -1,5 +1,5 @@
 ARG BASE_IMAGE_NAME="${BASE_IMAGE_NAME:-silverblue}"
-ARG IMAGE_FLAVOR="${IMAGE_FLAVOR:-main}"
+ARG IMAGE_FLAVOR="${IMAGE_FLAVOR:-nvidia}"
 ARG SOURCE_IMAGE="${SOURCE_IMAGE:-$BASE_IMAGE_NAME-$IMAGE_FLAVOR}"
 ARG BASE_IMAGE="ghcr.io/ublue-os/${SOURCE_IMAGE}"
 ARG FEDORA_MAJOR_VERSION="${FEDORA_MAJOR_VERSION:-37}"
@@ -14,10 +14,11 @@ COPY usr /usr
 
 COPY --from=docker.io/bketelsen/vanilla-os:v0.0.12 /usr/share/backgrounds/vanilla /usr/share/backgrounds/vanilla
 COPY --from=docker.io/bketelsen/vanilla-os:v0.0.12 /usr/share/gnome-background-properties/vanilla.xml /usr/share/gnome-background-properties/vanilla.xml
-COPY --from=docker.io/bketelsen/apx:latest /usr/bin/apx /usr/bin/apx
-COPY --from=docker.io/bketelsen/apx:latest /etc/apx/config.json /etc/apx/config.json
-COPY --from=docker.io/bketelsen/apx:latest /usr/share/apx /usr/share/apx
 
+#APX install - https://github.com/Vanilla-OS/apx
+#COPY --from=docker.io/bketelsen/apx:latest /usr/bin/apx /usr/bin/apx
+#COPY --from=docker.io/bketelsen/apx:latest /etc/apx/config.json /etc/apx/config.json
+#COPY --from=docker.io/bketelsen/apx:latest /usr/share/apx /usr/share/apx
 
 COPY --from=docker.io/bketelsen/fleek:latest /app/fleek /usr/bin/fleek
 COPY --from=docker.io/bketelsen/fleek:latest /app/fleek.1.gz /usr/share/man/man1/fleek.1.gz
