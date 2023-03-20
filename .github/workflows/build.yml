@@ -1,4 +1,4 @@
-name: build-ublue
+name: build-bakeos
 on:
   pull_request:
     branches:
@@ -16,7 +16,7 @@ on:
       - '**.txt'
   workflow_dispatch:
 env:
-    IMAGE_BASE_NAME: bluefin
+    IMAGE_BASE_NAME: bakeos
     IMAGE_REGISTRY: ghcr.io/${{ github.repository_owner }}
 
 jobs:
@@ -31,14 +31,11 @@ jobs:
       fail-fast: false
       matrix:
         image_flavor: [main, nvidia]
-        major_version: [37, 38]
+        major_version: [37]
         include:
           - major_version: 37
             is_latest_version: true
             is_stable_version: true
-          - major_version: 38
-            is_latest_version: false
-            is_stable_version: false
     steps: 
       # Checkout push-to-registry action GitHub repository
       - name: Checkout Push to Registry action
