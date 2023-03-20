@@ -1,10 +1,10 @@
 [Unit]
 Description=Copies GNOME extensions if a users profile is missing ones under /etc/gnome-extensions.
-Documentation=https://github.com/coreos/rpm-ostree/issues/1944
+Documentation=https://github.com/blake-lucas/BakeOS
 
 [Service]
 Type=oneshot
-ExecStart=for ext in /etc/gnome-extensions/*; do for user in /var/home/*; do if [ ! -d "$user/.local/share/gnome-shell/extensions/$ext" ]; then cp -r "$ext" "$user/.local/share/gnome-shell/extensions/"; fi; done done && foreach extension name in /etc/gnome-extensions echo gnome-extensions enable ext-folder-name to .sh under /var/home/users/.config/autostart
+ExecStart=for ext in /etc/gnome-extensions/*; do for user in /var/home/*; do if [ ! -d "$user/.local/share/gnome-shell/extensions/$(basename $ext)" ]; then cp -r "$ext" "$user/.local/share/gnome-shell/extensions/" && echo "gnome-extensions enable $(basename $ext)" >> $user/.config/autostart/enable-extensions.sh && chmod +x $user/.config/autostart/enable-extensions.sh; fi; done done && for user in /var/home/*; do echo "rm -f $user/.config/autostart/enable-extensions.sh" >> $user/.config/autostart/enable-extensions.sh; done
 
 [Install]
 WantedBy=multi-user.target

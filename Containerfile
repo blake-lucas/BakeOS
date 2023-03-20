@@ -35,7 +35,7 @@ ADD https://extensions.gnome.org/extension-data/appindicatorsupportrgcjonas.gmai
 ADD https://extensions.gnome.org/extension-data/wireless-hidchlumskyvaclav.gmail.com.v10.shell-extension.zip                /tmp/extensions/wireless-hid@chlumskyvaclav.gmail.com.zip
 ADD https://extensions.gnome.org/extension-data/dash-to-paneljderose9.github.com.v55.shell-extension.zip                    /tmp/extensions/dash-to-panel@jderose9.github.com
 
-RUN cd /tmp/extensions && \
+RUN cd /tmp/extensions && mkdir /etc/gnome-extensions && \
     for EXTENSION in *.zip; do \
         unzip "${EXTENSION}" -d "/etc/gnome-extensions/${EXTENSION%.*}"; \
     done
