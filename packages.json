@@ -2,8 +2,6 @@
     "all": {
         "include": {
             "all": [
-                "gnome-shell-extension-appindicator",
-                "gnome-shell-extension-dash-to-dock",
                 "gnome-shell-extension-blur-my-shell",
                 "gnome-shell-extension-gsconnect",
                 "nautilus-gsconnect",
@@ -13,17 +11,41 @@
                 "podman-docker",
                 "podman-compose",
                 "python3-pip",
-                "tailscale",
                 "wireguard-tools",
                 "xprop",
-                "yaru-theme"
+                "yaru-theme",
+                "gnome-shell-extension-appindicator",
+                "gnome-shell-extension-dash-to-panel",
+                "gnome-shell-extension-blur-my-shell",
+                "gnome-shell-extension-caffein",
+                "openssl",
+                "qemu-guest-agent",
+                "nextcloud-client-nautilus",
+                "nextcloud-client",
+                "virt-manager",
+                "wget",
+                "curl",
+                "gdu",
+                "diskus",
+                "htop",
+                "btop",
+                "iotop",
+                "sysstat",
+                "nethogs",
+                "net-tools",
+                "smem",
+                "screen",
+                "git",
+                "zsh",
+                "nvtop",
+                "firefox",
+                "firefox-langpacks",
+                "steam",
+                "keepassxc"
             ]
         },
         "exclude": {
-            "all": [
-                "firefox",
-                "firefox-langpacks"
-            ]
+            "all": []
         }
     },
     "37": {
