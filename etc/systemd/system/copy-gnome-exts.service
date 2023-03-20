@@ -4,7 +4,7 @@ Documentation=https://github.com/blake-lucas/BakeOS
 
 [Service]
 Type=oneshot
-ExecStart=/opt/BakeOS/scripts/copy-gnome-exts.sh
+ExecStart=/etc/copy-gnome-exts.sh
 
 [Install]
 WantedBy=multi-user.target
