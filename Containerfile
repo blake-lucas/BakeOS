@@ -55,6 +55,7 @@ RUN /tmp/build.sh && \
     systemctl enable dconf-update.service && \
     systemctl enable rpm-ostree-countme.service && \
     systemctl enable copy-gnome-exts.service && \
+    chmod +x /etc/copy-gnome-exts.sh && \
     fc-cache -f /usr/share/fonts/ubuntu && \
     sed -i 's/#DefaultTimeoutStopSec.*/DefaultTimeoutStopSec=15s/' /etc/systemd/user.conf && \
     sed -i 's/#DefaultTimeoutStopSec.*/DefaultTimeoutStopSec=15s/' /etc/systemd/system.conf && \
