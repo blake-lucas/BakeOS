@@ -4,7 +4,7 @@ Documentation=https://github.com/blake-lucas/BakeOS
 
 [Service]
 Type=oneshot
-ExecStart=for ext in /etc/gnome-extensions/*; do for user in /var/home/*; do if [ ! -d "$user/.local/share/gnome-shell/extensions/$(basename $ext)" ]; then cp -r "$ext" "$user/.local/share/gnome-shell/extensions/" && echo "gnome-extensions enable $(basename $ext)" >> $user/.config/autostart/enable-extensions.sh && chmod +x $user/.config/autostart/enable-extensions.sh; fi; done done && for user in /var/home/*; do echo "rm -f $user/.config/autostart/enable-extensions.sh" >> $user/.config/autostart/enable-extensions.sh; done
+ExecStart=/opt/BakeOS/scripts/copy-gnome-exts.sh
 
 [Install]
 WantedBy=multi-user.target

@@ -33,7 +33,8 @@ RUN wget https://raw.githubusercontent.com/Vanilla-OS/apx/main/config/config.jso
 ADD https://extensions.gnome.org/extension-data/arcmenuarcmenu.com.v43.shell-extension.zip                                  /tmp/extensions/arcmenu@arcmenu.com.zip
 ADD https://extensions.gnome.org/extension-data/appindicatorsupportrgcjonas.gmail.com.v46.shell-extension.zip               /tmp/extensions/appindicatorsupport@rgcjonas.gmail.com.zip
 ADD https://extensions.gnome.org/extension-data/wireless-hidchlumskyvaclav.gmail.com.v10.shell-extension.zip                /tmp/extensions/wireless-hid@chlumskyvaclav.gmail.com.zip
-ADD https://extensions.gnome.org/extension-data/dash-to-paneljderose9.github.com.v55.shell-extension.zip                    /tmp/extensions/dash-to-panel@jderose9.github.com
+ADD https://extensions.gnome.org/extension-data/dash-to-paneljderose9.github.com.v55.shell-extension.zip                    /tmp/extensions/dash-to-panel@jderose9.github.com.zip
+ADD https://extensions.gnome.org/extension-data/windowIsReady_Removernunofarrucagmail.com.v19.shell-extension.zip           /tmp/extensions/windowIsReady_Remover@nunofarruca@gmail.com.zip
 
 RUN cd /tmp/extensions && mkdir /etc/gnome-extensions && \
     for EXTENSION in *.zip; do \
@@ -41,6 +42,7 @@ RUN cd /tmp/extensions && mkdir /etc/gnome-extensions && \
     done
 RUN sudo rm -rf /tmp/extensions
 RUN chmod 755 /etc/gnome-extensions -R
+COPY opt /opt
 
 #RUN wget https://copr.fedorainfracloud.org/coprs/kylegospo/gnome-vrr/repo/fedora-"${FEDORA_MAJOR_VERSION}"/kylegospo-gnome-vrr-fedora-"${FEDORA_MAJOR_VERSION}".repo -O /etc/yum.repos.d/_copr_kylegospo-gnome-vrr.repo
 #RUN rpm-ostree override replace --experimental --from repo=copr:copr.fedorainfracloud.org:kylegospo:gnome-vrr mutter gnome-control-center gnome-control-center-filesystem
@@ -53,6 +55,7 @@ RUN /tmp/build.sh && \
     systemctl unmask dconf-update.service && \
     systemctl enable dconf-update.service && \
     systemctl enable rpm-ostree-countme.service && \
+    systemctl enable copy-gnome-exts.service && \
     fc-cache -f /usr/share/fonts/ubuntu && \
     sed -i 's/#DefaultTimeoutStopSec.*/DefaultTimeoutStopSec=15s/' /etc/systemd/user.conf && \
     sed -i 's/#DefaultTimeoutStopSec.*/DefaultTimeoutStopSec=15s/' /etc/systemd/system.conf && \
