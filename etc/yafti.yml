@@ -35,6 +35,7 @@ screens:
           packages:
           - Backup: org.gnome.World.PikaBackup
           - Black Box Terminal: com.raggesilver.BlackBox
+          - FSearch: io.github.cboxdoerfer.FSearch
           - Calculator: org.gnome.Calculator
           - Calendar: org.gnome.Calendar
           - Characters: org.gnome.Characters
