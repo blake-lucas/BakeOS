@@ -13,7 +13,7 @@ screens:
   can-we-modify-your-flatpaks:
     source: yafti.screen.consent
     values:
-      title: Welcome, Traveler
+      title: Welcome, even
       condition:
         run: flatpak remotes --system | grep fedora
       description: |
