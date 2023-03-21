@@ -15,16 +15,18 @@ COPY usr /usr
 #COPY --from=docker.io/bketelsen/vanilla-os:v0.0.12 /usr/share/backgrounds/vanilla /usr/share/backgrounds/vanilla
 #COPY --from=docker.io/bketelsen/vanilla-os:v0.0.12 /usr/share/gnome-background-properties/vanilla.xml /usr/share/gnome-background-properties/vanilla.xml
 
+#Manual download of APX instead maybe
+#RUN wget https://github.com/Vanilla-OS/apx/releases/latest/download/apx_Linux_x86_64.tar.gz -O /tmp/apx_Linux_x86_64.tar.gz
+#RUN tar xzvf /tmp/apx_Linux_x86_64.tar.gz --directory /tmp/
+#RUN mv /tmp/apx /usr/bin/apx
+#RUN ln -s /usr/bin/apx /usr/share/apx
+#RUN mkdir /etc/apx
+#RUN wget https://raw.githubusercontent.com/Vanilla-OS/apx/main/config/config.json -O /etc/apx/config.json
+#Doesn't work lol, lets just use the dudes build
 #APX install - https://github.com/Vanilla-OS/apx
-#COPY --from=docker.io/bketelsen/apx:latest /usr/bin/apx /usr/bin/apx
-#COPY --from=docker.io/bketelsen/apx:latest /etc/apx/config.json /etc/apx/config.json
-#COPY --from=docker.io/bketelsen/apx:latest /usr/share/apx /usr/share/apx
-RUN wget https://github.com/Vanilla-OS/apx/releases/latest/download/apx_Linux_x86_64.tar.gz -O /tmp/apx_Linux_x86_64.tar.gz
-RUN tar xzvf /tmp/apx_Linux_x86_64.tar.gz --directory /tmp/
-RUN mv /tmp/apx /usr/bin/apx
-RUN ln -s /usr/bin/apx /usr/share/apx
-RUN mkdir /etc/apx
-RUN wget https://raw.githubusercontent.com/Vanilla-OS/apx/main/config/config.json -O /etc/apx/config.json
+COPY --from=docker.io/bketelsen/apx:latest /usr/bin/apx /usr/bin/apx
+COPY --from=docker.io/bketelsen/apx:latest /etc/apx/config.json /etc/apx/config.json
+COPY --from=docker.io/bketelsen/apx:latest /usr/share/apx /usr/share/apx
 
 #GNOME extensions
 #RUN git clone https://github.com/vchlum/wireless-hid.git && cd wireless-hid && pwd && ls && glib-compile-schemas schemas && gnome-extensions pack --force --extra-source=LICENSE --extra-source=README.md --extra-source=CHANGELOG.md --extra-source=ui --extra-source=wirelesshid.js --extra-source=prefs.css && mv "wireless-hid@chlumskyvaclav.gmail.com.shell-extension.zip" "wireless-hid@chlumskyvaclav.gmail.com.zip" && gnome-extensions install wireless-hid@chlumskyvaclav.gmail.com.zip
