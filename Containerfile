@@ -36,6 +36,9 @@ COPY --from=docker.io/bketelsen/apx:latest /usr/bin/apx /usr/bin/apx
 COPY --from=docker.io/bketelsen/apx:latest /etc/apx/config.json /etc/apx/config.json
 COPY --from=docker.io/bketelsen/apx:latest /usr/share/apx /usr/share/apx
 
+#RustDesk download. Install is handled by build.sh and is at the top of the packages.json file.
+RUN wget https://github.com/rustdesk/rustdesk/releases/download/nightly/rustdesk-1.2.0-0.x86_64-fedora28-centos8.rpm -O /tmp/rustdesk.rpm
+
 #GNOME extensions
 #RUN git clone https://github.com/vchlum/wireless-hid.git && cd wireless-hid && pwd && ls && glib-compile-schemas schemas && gnome-extensions pack --force --extra-source=LICENSE --extra-source=README.md --extra-source=CHANGELOG.md --extra-source=ui --extra-source=wirelesshid.js --extra-source=prefs.css && mv "wireless-hid@chlumskyvaclav.gmail.com.shell-extension.zip" "wireless-hid@chlumskyvaclav.gmail.com.zip" && gnome-extensions install wireless-hid@chlumskyvaclav.gmail.com.zip
 #Wireless HID
@@ -45,6 +48,7 @@ ADD https://extensions.gnome.org/extension-data/appindicatorsupportrgcjonas.gmai
 ADD https://extensions.gnome.org/extension-data/wireless-hidchlumskyvaclav.gmail.com.v10.shell-extension.zip                /tmp/extensions/wireless-hid@chlumskyvaclav.gmail.com.zip
 ADD https://extensions.gnome.org/extension-data/dash-to-paneljderose9.github.com.v55.shell-extension.zip                    /tmp/extensions/dash-to-panel@jderose9.github.com.zip
 ADD https://extensions.gnome.org/extension-data/windowIsReady_Removernunofarrucagmail.com.v19.shell-extension.zip           /tmp/extensions/windowIsReady_Remover@nunofarruca@gmail.com.zip
+ADD https://extensions.gnome.org/extension-data/panoelhan.io.v19.shell-extension.zip                                        /tmp/extensions/clipboard-indicator@tudmotu.com.zip
 
 RUN cd /tmp/extensions && mkdir /etc/gnome-extensions && \
     for EXTENSION in *.zip; do \

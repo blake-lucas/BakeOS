@@ -2,6 +2,7 @@
     "all": {
         "include": {
             "all": [
+                "/tmp/rustdesk.rpm",
                 "gnome-shell-extension-blur-my-shell",
                 "gnome-shell-extension-gsconnect",
                 "nautilus-gsconnect",

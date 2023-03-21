@@ -1,0 +1,113 @@
+[org/gnome/shell] 
+favorite-apps = ['org.mozilla.firefox.desktop', 'org.mozilla.Thunderbird.desktop', 'org.gnome.Nautilus.desktop', 'org.gnome.Rhythmbox3.desktop', 'org.libreoffice.LibreOffice.writer.desktop', 'org.gnome.Software.desktop', 'yelp.desktop']
+enabled-extensions = ['appindicatorsupport@rgcjonas.gmail.com', 'dash-to-dock@micxgx.gmail.com', 'blur-my-shell@aunetx', 'gsconnect@andyholmes.github.io']
+
+[org/gnome/desktop/background]
+picture-uri='file:///usr/share/backgrounds/gnome/blobs-l.svg'
+picture-options='stretched'
+primary-color='000000'
+secondary-color='FFFFFF'
+
+[org/gnome/desktop/interface]
+enable-hot-corners=true
+clock-show-weekday=true
+cursor-theme="Yaru"
+icon-theme="Yaru"
+gtk-theme="Yaru"
+font-antialiasing="rgba"
+font-name="Ubuntu 12"
+document-font-name="Ubuntu 12"
+monospace-font-name="Ubuntu Mono 18"
+
+[org/gnome/desktop/sound]
+allow-volume-above-100-percent=true
+theme-name="Yaru"
+
+[org/gnome/desktop/wm/preferences]
+action-middle-click-titlebar='minimize'
+button-layout=":minimize,maximize,close"
+num-workspaces='4'
+title-bar-font="Ubuntu Bold 12"
+
+[org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0]
+binding='<Control><Alt>t'
+command='flatpak run com.raggesilver.BlackBox'
+name='blackbox'
+
+[org/gnome/software]
+allow-updates=false
+download-updates=false
+download-updates-notify=false
+
+[org/gnome/settings-daemon/plugins/media-keys]
+custom-keybindings=['/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/']
+home=['<Super>e']
+
+[com/raggesilver/BlackBox]
+command-as-login-shell=true
+use-custom-command=true
+custom-shell-command=''
+theme-dark="Yaru"
+style-preference=2
+font="Ubuntu Mono 16"
+window-width=975
+window-height=650
+
+[org/gnome/shell]
+enabled-extensions=['appindicatorsupport@rgcjonas.gmail.com', 'dash-to-dock@micxgx.gmail.com', 'blur-my-shell@aunetx', 'gsconnect@andyholmes.github.io', 'arcmenu@arcmenu.com', 'dash-to-panel@jderose9.github.com', 'windowIsReady_Remover@nunofarruca@gmail.com', 'wireless-hid@chlumskyvaclav.gmail.com']
+favorite-apps=['firefox.desktop', 'org.gnome.Nautilus.desktop']
+welcome-dialog-last-shown-version='43.0'
+
+[org/gnome/shell/extensions/dash-to-dock]
+dock-fixed=true
+force-straight-corner=false
+custom-theme-shring=true
+disable-overview-on-startup=true
+transparency-mode='DYNAMIC'
+
+[org/gnome/shell/extensions/arcmenu]
+custom-menu-button-icon-size=32.0
+disable-recently-installed-apps=true
+distro-icon=2
+menu-background-color='rgba(48,48,49,0.98)'
+menu-border-color='rgb(60,60,60)'
+menu-button-appearance='Icon'
+menu-button-icon='Distro_Icon'
+menu-foreground-color='rgb(223,223,223)'
+menu-height=550
+menu-item-active-bg-color='rgb(25,98,163)'
+menu-item-active-fg-color='rgb(255,255,255)'
+menu-item-hover-bg-color='rgb(21,83,158)'
+menu-item-hover-fg-color='rgb(255,255,255)'
+menu-separator-color='rgba(255,255,255,0.1)'
+pinned-app-list=['Firefox', '', 'firefox.desktop', 'Terminal', '', 'org.gnome.Terminal.desktop', 'Files', '', 'org.gnome.Nautilus.desktop']
+power-options=[(0, true), (1, true), (2, true), (3, true), (4, true), (5, false), (6, false), (7, false)]
+prefs-visible-page=0
+recently-installed-apps=[]
+search-entry-border-radius=(true, 25)
+
+[org/gnome/shell/extensions/dash-to-dock]
+custom-theme-shring=true
+disable-overview-on-startup=true
+dock-fixed=true
+force-straight-corner=false
+transparency-mode='DYNAMIC'
+
+[org/gnome/shell/extensions/dash-to-panel]
+animate-appicon-hover-animation-extent={'RIPPLE': 4, 'PLANK': 4, 'SIMPLE': 1}
+appicon-margin=2
+appicon-padding=6
+available-monitors=[0]
+click-action='TOGGLE-SHOWPREVIEW'
+dot-position='BOTTOM'
+hot-keys=true
+hotkeys-overlay-combo='NEVER'
+leftbox-padding=-1
+panel-anchors='{"0":"MIDDLE"}'
+panel-element-positions='{"0":[{"element":"showAppsButton","visible":false,"position":"stackedTL"},{"element":"activitiesButton","visible":false,"position":"stackedTL"},{"element":"leftBox","visible":true,"position":"centerMonitor"},{"element":"taskbar","visible":true,"position":"centerMonitor"},{"element":"centerBox","visible":true,"position":"stackedBR"},{"element":"rightBox","visible":true,"position":"stackedBR"},{"element":"dateMenu","visible":true,"position":"stackedBR"},{"element":"systemMenu","visible":true,"position":"stackedBR"},{"element":"desktopButton","visible":true,"position":"stackedBR"}]}'
+panel-lengths='{"0":100}'
+panel-sizes='{"0":48}'
+primary-monitor=0
+status-icon-padding=-1
+tray-padding=8
+window-preview-title-position='TOP'
