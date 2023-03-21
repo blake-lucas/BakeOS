@@ -1,10 +1,7 @@
 title: Welcome to BakeOS
 actions:
-  pre:
-  - run: /usr/bin/flatpak remote-delete flathub --force
-  - run: /usr/bin/flatpak remote-add --user --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
-  - run: /usr/bin/flatpak remove --system --noninteractive --all
-  - run: /usr/bin/flatpak remote-delete fedora --force
+properties:
+  mode: "run-on-change"
 screens:
   first-screen:
     source: yafti.screen.title
@@ -13,6 +10,18 @@ screens:
       icon: "/path/to/icon"
       description: |
         Pick some applications to get started
+  can-we-modify-your-flatpaks:
+    source: yafti.screen.consent
+    values:
+      title: Welcome, Traveler
+      condition:
+        run: flatpak remotes --system | grep fedora
+      description: |
+        WARNING: This will modify your Flatpaks if you are rebasing! If you do not want to do this exit the installer.
+      actions:
+        - run: flatpak remote-delete fedora --force
+        - run: flatpak remove --system --noninteractive --all
+        - run: flatpak remote-add --if-not-exists --user flathub https://flathub.org/repo/flathub.flatpakrepo
   applications:
     source: yafti.screen.package
     values:
@@ -83,7 +92,7 @@ screens:
           - Gstreamer VAAPI for OBS: com.obsproject.Studio.Plugin.GStreamerVaapi
           - Boatswain for Streamdeck: com.feaneron.Boatswain
         Overlay:
-          description: Already installed
+          description: Already installed, these are the flatpaks
           default: false
           packages:
           - Steam: com.valvesoftware.Steam

@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=BakeOS First Boot Setup
+Comment=Sets up BakeOS Desktop Correctly On FirstBoot
+Exec=/usr/bin/yafti /etc/yafti.yml
+Icon=org.gnome.Terminal
+Type=Application
+Categories=Utility;System;
+Name[en_US]=startup
