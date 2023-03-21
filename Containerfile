@@ -15,6 +15,9 @@ COPY usr /usr
 #Latest linux-firmware
 RUN cd /tmp && git clone git://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-firmware.git && rm -rf /lib/firmware/* && mv /tmp/linux-firmware/* /lib/firmware/
 
+#Latest mesa drivers via copr repo
+RUN wget https://copr.fedorainfracloud.org/coprs/xxmitsu/mesa-git/repo/fedora-"${FEDORA_MAJOR_VERSION}"/xxmitsu-mesa-git-fedora-"${FEDORA_MAJOR_VERSION}".repo -O /etc/yum.repos.d/_copr_mesa.repo
+
 #Nobara kernel and mutter (vrr patch) install
 RUN rpm-ostree cliwrap install-to-root /
 RUN wget https://copr.fedorainfracloud.org/coprs/gloriouseggroll/nobara/repo/fedora-"${FEDORA_MAJOR_VERSION}"/gloriouseggroll-nobara-fedora-"${FEDORA_MAJOR_VERSION}".repo -O /etc/yum.repos.d/_copr_nobara.repo
@@ -56,6 +59,9 @@ RUN cd /tmp/extensions && mkdir /etc/gnome-extensions && \
     done
 RUN sudo rm -rf /tmp/extensions
 RUN chmod 755 /etc/gnome-extensions -R
+
+#Add rpmfusion repos. Steam is installed on system to take advantage of latest drivers and such.
+RUN sudo rpm-ostree install https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
 
 ADD packages.json /tmp/packages.json
 ADD build.sh /tmp/build.sh
