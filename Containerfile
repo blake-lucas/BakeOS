@@ -12,13 +12,13 @@ ARG FEDORA_MAJOR_VERSION="${FEDORA_MAJOR_VERSION}"
 COPY etc /etc
 COPY usr /usr
 
-#Nobara kernel install
-RUN rpm-ostree cliwrap install-to-root /
-RUN wget https://copr.fedorainfracloud.org/coprs/gloriouseggroll/nobara/repo/fedora-"${FEDORA_MAJOR_VERSION}"/gloriouseggroll-nobara-fedora-"${FEDORA_MAJOR_VERSION}".repo -O /etc/yum.repos.d/_copr_nobara.repo
-RUN rpm-ostree override remove kernel-devel-matched kernel-modules-extra && rpm-ostree override --experimental replace --from repo=copr:copr.fedorainfracloud.org:gloriouseggroll:nobara kernel kernel-core kernel-modules
-
 #Latest linux-firmware
 RUN cd /tmp && git clone git://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-firmware.git && rm -rf /lib/firmware/* && mv /tmp/linux-firmware/* /lib/firmware/
+
+#Nobara kernel and mutter (vrr patch) install
+RUN rpm-ostree cliwrap install-to-root /
+RUN wget https://copr.fedorainfracloud.org/coprs/gloriouseggroll/nobara/repo/fedora-"${FEDORA_MAJOR_VERSION}"/gloriouseggroll-nobara-fedora-"${FEDORA_MAJOR_VERSION}".repo -O /etc/yum.repos.d/_copr_nobara.repo
+RUN rpm-ostree override remove kernel-devel-matched kernel-modules-extra && rpm-ostree override --experimental replace --from repo=copr:copr.fedorainfracloud.org:gloriouseggroll:nobara kernel kernel-core kernel-modules mutter
 
 #COPY --from=docker.io/bketelsen/vanilla-os:v0.0.12 /usr/share/backgrounds/vanilla /usr/share/backgrounds/vanilla
 #COPY --from=docker.io/bketelsen/vanilla-os:v0.0.12 /usr/share/gnome-background-properties/vanilla.xml /usr/share/gnome-background-properties/vanilla.xml
@@ -30,7 +30,7 @@ RUN cd /tmp && git clone git://git.kernel.org/pub/scm/linux/kernel/git/firmware/
 #RUN ln -s /usr/bin/apx /usr/share/apx
 #RUN mkdir /etc/apx
 #RUN wget https://raw.githubusercontent.com/Vanilla-OS/apx/main/config/config.json -O /etc/apx/config.json
-#Doesn't work lol, lets just use the dudes build
+#Doesn't work lol. Lets just use the dudes build for now
 #APX install - https://github.com/Vanilla-OS/apx
 COPY --from=docker.io/bketelsen/apx:latest /usr/bin/apx /usr/bin/apx
 COPY --from=docker.io/bketelsen/apx:latest /etc/apx/config.json /etc/apx/config.json
@@ -52,9 +52,6 @@ RUN cd /tmp/extensions && mkdir /etc/gnome-extensions && \
     done
 RUN sudo rm -rf /tmp/extensions
 RUN chmod 755 /etc/gnome-extensions -R
-
-#RUN wget https://copr.fedorainfracloud.org/coprs/kylegospo/gnome-vrr/repo/fedora-"${FEDORA_MAJOR_VERSION}"/kylegospo-gnome-vrr-fedora-"${FEDORA_MAJOR_VERSION}".repo -O /etc/yum.repos.d/_copr_kylegospo-gnome-vrr.repo
-#RUN rpm-ostree override replace --experimental --from repo=copr:copr.fedorainfracloud.org:kylegospo:gnome-vrr mutter gnome-control-center gnome-control-center-filesystem
 
 ADD packages.json /tmp/packages.json
 ADD build.sh /tmp/build.sh
