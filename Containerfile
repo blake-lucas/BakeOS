@@ -60,9 +60,6 @@ RUN cd /tmp/extensions && mkdir /etc/gnome-extensions && \
 RUN sudo rm -rf /tmp/extensions
 RUN chmod 755 /etc/gnome-extensions -R
 
-#Add rpmfusion repos. Steam is installed on system to take advantage of latest drivers and such.
-RUN sudo rpm-ostree install https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
-
 ADD packages.json /tmp/packages.json
 ADD build.sh /tmp/build.sh
 
