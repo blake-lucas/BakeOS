@@ -38,8 +38,7 @@
                 "nvtop",
                 "firefox",
                 "firefox-langpacks",
-                "keepassxc",
-                "mesa"
+                "keepassxc"
             ]
         },
         "exclude": {
