@@ -83,7 +83,7 @@ menu-separator-color='rgba(255,255,255,0.1)'
 pinned-app-list=['Firefox', '', 'firefox.desktop', 'Terminal', '', 'org.gnome.Terminal.desktop', 'Files', '', 'org.gnome.Nautilus.desktop']
 power-options=[(0, true), (1, true), (2, true), (3, true), (4, true), (5, false), (6, false), (7, false)]
 prefs-visible-page=0
-recently-installed-apps=[]
+recently-installed-apps=['']
 search-entry-border-radius=(true, 25)
 
 [org/gnome/shell/extensions/dash-to-dock]
