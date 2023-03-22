@@ -23,6 +23,7 @@
                 "nextcloud-client-nautilus",
                 "nextcloud-client",
                 "virt-manager",
+                "util-linux-user",
                 "wget",
                 "curl",
                 "htop",

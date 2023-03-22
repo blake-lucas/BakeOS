@@ -8,6 +8,9 @@ done
 
 #If a users local extensions folder doesn't have all the extensions in /etc/gnome-extensions, copy them and dump a script to their autostart folder to enable on login. If the user has all the extensions in their extension folder, the script will do nothing other than delete itself on login each time.
 for user in /var/home/*; do
+  if [ ! -d "$user/justfile" ];
+    then cp -r "/etc/justfile" "$user/justfile"
+  fi;
   for ext in /etc/gnome-extensions/*; do
       if [ ! -d "$user/.local/share/gnome-shell/extensions/$(basename $ext)" ];
         then cp -r "$ext" "$user/.local/share/gnome-shell/extensions/"

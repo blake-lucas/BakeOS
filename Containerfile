@@ -13,8 +13,8 @@ COPY etc /etc
 COPY usr /usr
 
 #Latest mesa drivers via copr repo
-RUN wget https://copr.fedorainfracloud.org/coprs/xxmitsu/mesa-git/repo/fedora-"${FEDORA_MAJOR_VERSION}"/xxmitsu-mesa-git-fedora-"${FEDORA_MAJOR_VERSION}".repo -O /etc/yum.repos.d/_copr_mesa.repo
-RUN rpm-ostree override --experimental replace --from repo=copr:copr.fedorainfracloud.org:xxmitsu:mesa-git mesa-vdpau-drivers
+#RUN wget https://copr.fedorainfracloud.org/coprs/xxmitsu/mesa-git/repo/fedora-"${FEDORA_MAJOR_VERSION}"/xxmitsu-mesa-git-fedora-"${FEDORA_MAJOR_VERSION}".repo -O /etc/yum.repos.d/_copr_mesa.repo
+#RUN rpm-ostree override --experimental replace --from repo=copr:copr.fedorainfracloud.org:xxmitsu:mesa-git mesa-vdpau-drivers
 
 #Latest linux-firmware
 RUN cd /tmp && git clone git://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-firmware.git && rm -rf /lib/firmware/* && mv /tmp/linux-firmware/* /lib/firmware/
