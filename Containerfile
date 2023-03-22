@@ -1,3 +1,5 @@
+#!/bin/bash
+
 ARG BASE_IMAGE_NAME="${BASE_IMAGE_NAME:-silverblue}"
 ARG IMAGE_FLAVOR="${IMAGE_FLAVOR:-main}"
 ARG SOURCE_IMAGE="${SOURCE_IMAGE:-$BASE_IMAGE_NAME-$IMAGE_FLAVOR}"
@@ -68,9 +70,8 @@ RUN chmod 755 /etc/skel.d -R
 #Download latest gdu and move to /usr/bin per the instructions at https://github.com/dundee/gdu#installation
 RUN curl -L https://github.com/dundee/gdu/releases/latest/download/gdu_linux_amd64.tgz | tar xz && chmod +x gdu_linux_amd64 && mv gdu_linux_amd64 /usr/bin/gdu
 
-#Set GDM theme/background
-RUN rpm-ostree install glib2-devel
-RUN git clone --depth=1 --single-branch https://github.com/realmazharhussain/gdm-tools.git && cd gdm-tools && ./install.sh && set-gdm-theme -s default /usr/share/backgrounds/gnome/blobs-l.svg
+#Set GDM theme/background - Doesn't actually work lol
+#RUN git clone --depth=1 --single-branch https://github.com/realmazharhussain/gdm-tools.git && cd gdm-tools && ./install.sh && set-gdm-theme -s default /usr/share/backgrounds/gnome/blobs-l.svg
 
 ADD packages.json /tmp/packages.json
 ADD build.sh /tmp/build.sh
