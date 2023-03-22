@@ -13,16 +13,15 @@ COPY etc /etc
 COPY usr /usr
 
 #Latest mesa drivers via copr repo
-#RUN wget https://copr.fedorainfracloud.org/coprs/xxmitsu/mesa-git/repo/fedora-"${FEDORA_MAJOR_VERSION}"/xxmitsu-mesa-git-fedora-"${FEDORA_MAJOR_VERSION}".repo -O /etc/yum.repos.d/_copr_mesa.repo
-#RUN rpm-ostree override --experimental replace --from repo=copr:copr.fedorainfracloud.org:xxmitsu:mesa-git mesa-vdpau-drivers
+
+#Nobara kernel, mesa, and mutter (vrr patch)
+RUN rpm-ostree cliwrap install-to-root /
+RUN wget https://copr.fedorainfracloud.org/coprs/gloriouseggroll/nobara/repo/fedora-"${FEDORA_MAJOR_VERSION}"/gloriouseggroll-nobara-fedora-"${FEDORA_MAJOR_VERSION}".repo -O /etc/yum.repos.d/_copr_nobara.repo
+RUN rpm-ostree override remove kernel-devel-matched kernel-modules-extra
+RUN rpm-ostree override --experimental replace mesa-libglapi mesa-libxatracker mesa-dri-drivers mesa-libgbm mesa-libEGL mesa-libGL mesa-filesystem mesa-vdpau-drivers mesa-vulkan-drivers mesa-va-drivers-freeworld kernel kernel-core kernel-modules mutter --from repo=copr:copr.fedorainfracloud.org:gloriouseggroll:nobara
 
 #Latest linux-firmware
 RUN cd /tmp && git clone git://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-firmware.git && rm -rf /lib/firmware/* && mv /tmp/linux-firmware/* /lib/firmware/
-
-#Nobara kernel and mutter (vrr patch) install
-RUN rpm-ostree cliwrap install-to-root /
-RUN wget https://copr.fedorainfracloud.org/coprs/gloriouseggroll/nobara/repo/fedora-"${FEDORA_MAJOR_VERSION}"/gloriouseggroll-nobara-fedora-"${FEDORA_MAJOR_VERSION}".repo -O /etc/yum.repos.d/_copr_nobara.repo
-RUN rpm-ostree override remove kernel-devel-matched kernel-modules-extra && rpm-ostree override --experimental replace --from repo=copr:copr.fedorainfracloud.org:gloriouseggroll:nobara kernel kernel-core kernel-modules mutter
 
 #COPY --from=docker.io/bketelsen/vanilla-os:v0.0.12 /usr/share/backgrounds/vanilla /usr/share/backgrounds/vanilla
 #COPY --from=docker.io/bketelsen/vanilla-os:v0.0.12 /usr/share/gnome-background-properties/vanilla.xml /usr/share/gnome-background-properties/vanilla.xml
