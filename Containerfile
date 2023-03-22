@@ -12,19 +12,17 @@ ARG FEDORA_MAJOR_VERSION="${FEDORA_MAJOR_VERSION}"
 COPY etc /etc
 COPY usr /usr
 
-#Latest mesa drivers via copr repo
-
 #Nobara kernel, mesa, and mutter (vrr patch)
 RUN rpm-ostree cliwrap install-to-root /
 RUN wget https://copr.fedorainfracloud.org/coprs/gloriouseggroll/nobara/repo/fedora-"${FEDORA_MAJOR_VERSION}"/gloriouseggroll-nobara-fedora-"${FEDORA_MAJOR_VERSION}".repo -O /etc/yum.repos.d/_copr_nobara.repo
-RUN rpm-ostree override remove kernel-devel-matched kernel-modules-extra
-RUN rpm-ostree override --experimental replace mesa-libglapi mesa-libxatracker mesa-dri-drivers mesa-libgbm mesa-libEGL mesa-libGL mesa-filesystem mesa-vdpau-drivers mesa-vulkan-drivers mesa-va-drivers-freeworld kernel kernel-core kernel-modules mutter --from repo=copr:copr.fedorainfracloud.org:gloriouseggroll:nobara
+#Only replace kernel for Main image since Nvidia driver builds are too much of a pain for me to figure out right now
+RUN if ["$IMAGE_FLAVOR" = "main"]; then rpm-ostree override remove kernel-devel-matched kernel-modules-extra
+RUN if ["$IMAGE_FLAVOR" = "main"]; then rpm-ostree override --experimental replace kernel kernel-core kernel-modules --from repo=copr:copr.fedorainfracloud.org:gloriouseggroll:nobara
+RUN rpm-ostree override --experimental replace mesa-libglapi mesa-libxatracker mesa-dri-drivers mesa-libgbm mesa-libEGL mesa-libGL \
+    mesa-filesystem mesa-vdpau-drivers mesa-vulkan-drivers mesa-va-drivers-freeworld kernel kernel-core kernel-modules mutter --from repo=copr:copr.fedorainfracloud.org:gloriouseggroll:nobara
 
 #Latest linux-firmware
 RUN cd /tmp && git clone git://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-firmware.git && rm -rf /lib/firmware/* && mv /tmp/linux-firmware/* /lib/firmware/
-
-#COPY --from=docker.io/bketelsen/vanilla-os:v0.0.12 /usr/share/backgrounds/vanilla /usr/share/backgrounds/vanilla
-#COPY --from=docker.io/bketelsen/vanilla-os:v0.0.12 /usr/share/gnome-background-properties/vanilla.xml /usr/share/gnome-background-properties/vanilla.xml
 
 #Manual download of APX instead maybe
 #RUN wget https://github.com/Vanilla-OS/apx/releases/latest/download/apx_Linux_x86_64.tar.gz -O /tmp/apx_Linux_x86_64.tar.gz
@@ -68,6 +66,10 @@ RUN chmod 755 /etc/skel.d -R
 
 #Download latest gdu and move to /usr/bin per the instructions at https://github.com/dundee/gdu#installation
 RUN curl -L https://github.com/dundee/gdu/releases/latest/download/gdu_linux_amd64.tgz | tar xz && chmod +x gdu_linux_amd64 && mv gdu_linux_amd64 /usr/bin/gdu
+
+#Set GDM theme/background
+RUN rpm-ostree install glib2-devel
+RUN git clone --depth=1 --single-branch https://github.com/realmazharhussain/gdm-tools.git && cd gdm-tools && ./install.sh && set-gdm-theme -s default /usr/share/backgrounds/gnome/blobs-l.svg
 
 ADD packages.json /tmp/packages.json
 ADD build.sh /tmp/build.sh
