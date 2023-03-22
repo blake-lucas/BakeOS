@@ -1,5 +1,3 @@
-#!/bin/bash
-
 ARG BASE_IMAGE_NAME="${BASE_IMAGE_NAME:-silverblue}"
 ARG IMAGE_FLAVOR="${IMAGE_FLAVOR:-main}"
 ARG SOURCE_IMAGE="${SOURCE_IMAGE:-$BASE_IMAGE_NAME-$IMAGE_FLAVOR}"
@@ -19,8 +17,8 @@ RUN rpm-ostree cliwrap install-to-root /
 RUN wget https://copr.fedorainfracloud.org/coprs/gloriouseggroll/nobara/repo/fedora-"${FEDORA_MAJOR_VERSION}"/gloriouseggroll-nobara-fedora-"${FEDORA_MAJOR_VERSION}".repo -O /etc/yum.repos.d/_copr_nobara.repo
 #Only replace kernel for Main image since Nvidia driver builds are too much of a pain for me to figure out right now
 RUN echo $IMAGE_FLAVOR
-RUN if [["$IMAGE_FLAVOR" = "main"]]; then rpm-ostree override remove kernel-devel-matched kernel-modules-extra; fi
-RUN if [["$IMAGE_FLAVOR" = "main"]]; then rpm-ostree override --experimental replace kernel kernel-core kernel-modules --from repo=copr:copr.fedorainfracloud.org:gloriouseggroll:nobara; fi
+RUN if [ "$IMAGE_FLAVOR" = "main" ]; then rpm-ostree override remove kernel-devel-matched kernel-modules-extra; fi
+RUN if [ "$IMAGE_FLAVOR" = "main" ]; then rpm-ostree override --experimental replace kernel kernel-core kernel-modules --from repo=copr:copr.fedorainfracloud.org:gloriouseggroll:nobara; fi
 RUN rpm-ostree override --experimental replace mesa-libglapi mesa-libxatracker mesa-dri-drivers mesa-libgbm mesa-libEGL mesa-libGL \
     mesa-filesystem mesa-vdpau-drivers mesa-vulkan-drivers mesa-va-drivers-freeworld kernel kernel-core kernel-modules mutter --from repo=copr:copr.fedorainfracloud.org:gloriouseggroll:nobara
 
