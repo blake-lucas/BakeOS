@@ -47,5 +47,5 @@ done
 
 #Set ownership of justfile, zsh stuff, autostart and extension folders for each user profile
 for user in /var/home/*; do
-  chown $(basename $user):$(basename $user) $user/.config/autostart $user/.local/share/gnome-shell/extensions $user/justfile $user/.oh-my-zsh -R
+  chown $(basename $user):$(basename $user) $user/.config/autostart $user/.local/share/gnome-shell/extensions $user/justfile $user/.oh-my-zsh $user/.zshrc -R
 done

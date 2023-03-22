@@ -30,8 +30,8 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        #image_flavor: [main, nvidia]
-        image_flavor: [main]
+        image_flavor: [main, nvidia]
+        #image_flavor: [main]
         major_version: [37]
         include:
           - major_version: 37
