@@ -39,3 +39,8 @@ setup-zsh:
   sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
   git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
   git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+
+steam-mesa-git:
+  systemctl --user set-environment FLATPAK_GL_DRIVERS=mesa-git
+  systemctl --user restart flatpak-portal.service
+  FLATPAK_GL_DRIVERS=mesa-git flatpak run com.valvesoftware.Steam

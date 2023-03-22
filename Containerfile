@@ -14,7 +14,7 @@ COPY usr /usr
 
 #Latest mesa drivers via copr repo
 RUN wget https://copr.fedorainfracloud.org/coprs/xxmitsu/mesa-git/repo/fedora-"${FEDORA_MAJOR_VERSION}"/xxmitsu-mesa-git-fedora-"${FEDORA_MAJOR_VERSION}".repo -O /etc/yum.repos.d/_copr_mesa.repo
-RUN rpm-ostree override --experimental replace --from repo=copr:copr.fedorainfracloud.org:xxmitsu:mesa-git mesa-dri-drivers
+RUN rpm-ostree override --experimental replace --from repo=copr:copr.fedorainfracloud.org:xxmitsu:mesa-git mesa-vdpau-drivers
 
 #Latest linux-firmware
 RUN cd /tmp && git clone git://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-firmware.git && rm -rf /lib/firmware/* && mv /tmp/linux-firmware/* /lib/firmware/
@@ -53,6 +53,7 @@ ADD https://extensions.gnome.org/extension-data/wireless-hidchlumskyvaclav.gmail
 ADD https://extensions.gnome.org/extension-data/dash-to-paneljderose9.github.com.v55.shell-extension.zip                    /tmp/extensions/dash-to-panel@jderose9.github.com.zip
 ADD https://extensions.gnome.org/extension-data/windowIsReady_Removernunofarrucagmail.com.v19.shell-extension.zip           /tmp/extensions/windowIsReady_Remover@nunofarruca@gmail.com.zip
 ADD https://extensions.gnome.org/extension-data/panoelhan.io.v19.shell-extension.zip                                        /tmp/extensions/clipboard-indicator@tudmotu.com.zip
+ADD https://extensions.gnome.org/extension-data/tiling-assistantleleat-on-github.v39.shell-extension.zip                    /tmp/extensions/tiling-assistant@leleat-on-github.zip
 
 RUN cd /tmp/extensions && mkdir /etc/gnome-extensions && \
     for EXTENSION in *.zip; do \
