@@ -26,7 +26,7 @@ done
 #If a user doesn't have a .zshrc, change the default shell and copy ohmyzsh plugins and such
 for user in /var/home/*; do
   if [ ! -d "$user/.zshrc" ];
-    then cp -r "/etc/skel.d/.oh-my-zsh" "$user/" && usermod -s /usr/bin/zsh $user
+    then cp -r "/etc/skel.d/.oh-my-zsh" "$user/" && cp "/etc/skel.d/.zshrc" "$user/.zshrc" && usermod -s /usr/bin/zsh $(basename $user)
   fi;
 done
 
@@ -40,7 +40,7 @@ for user in /var/home/*; do
   echo "X-GNOME-Autostart-enabled=true" >> $user/.config/autostart/enable-extensions.desktop;
 done
 
-#Set ownership of justfile, autostart and extension folders for each user profile
+#Set ownership of justfile, zsh stuff, autostart and extension folders for each user profile
 for user in /var/home/*; do
-  chown $(basename $user):$(basename $user) $user/.config/autostart $user/.local/share/gnome-shell/extensions $user/justfile -R;
+  chown $(basename $user):$(basename $user) $user/.config/autostart $user/.local/share/gnome-shell/extensions $user/justfile $user/.oh-my-zsh -R;
 done

@@ -65,6 +65,10 @@ RUN chmod 755 /etc/gnome-extensions -R
 #ZSH plugins. See /etc/skel.d/.oh-my-zsh/templates/zshrc.zsh-template for default zshrc
 RUN git clone https://github.com/zsh-users/zsh-autosuggestions /etc/skel.d/.oh-my-zsh/custom/plugins/zsh-autosuggestions
 RUN git clone https://github.com/zsh-users/zsh-syntax-highlighting.git /etc/skel.d/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
+RUN chmod 755 /etc/skel.d -R
+
+#Download latest gdu and move to /usr/bin per the instructions at https://github.com/dundee/gdu#installation
+RUN curl -L https://github.com/dundee/gdu/releases/latest/download/gdu_linux_amd64.tgz | tar xz && chmod +x gdu_linux_amd64 && mv gdu_linux_amd64 /usr/bin/gdu
 
 ADD packages.json /tmp/packages.json
 ADD build.sh /tmp/build.sh
