@@ -1,0 +1,50 @@
+default:
+    @just --list
+    
+bios:
+  systemctl reboot --firmware-setup
+
+changelogs:
+  rpm-ostree db diff --changelogs
+
+distrobox-boxkit:
+  echo 'Creating Boxkit distrobox ...'
+  distrobox create --image ghcr.io/ublue-os/boxkit -n boxkit -Y
+
+distrobox-debian:
+  echo 'Creating Debian distrobox ...'
+  distrobox create --image quay.io/toolbx-images/debian-toolbox:unstable -n debian -Y
+
+distrobox-opensuse:
+  echo 'Creating openSUSE distrobox ...'
+  distrobox create --image quay.io/toolbx-images/opensuse-toolbox:tumbleweed -n opensuse -Y
+ 
+distrobox-ubuntu:
+  echo 'Creating Ubuntu distrobox ...'
+  distrobox create --image quay.io/toolbx-images/ubuntu-toolbox:22.04 -n ubuntu -Y
+
+nix-me-up:
+  echo 'Setting phasers to kill. Installing nix.'
+  /usr/bin/ublue-nix-install
+
+update:
+  rpm-ostree update
+  flatpak update -y
+  distrobox upgrade -a
+  
+yafti:
+  yafti /etc/yafti.yml
+
+#setup-zsh:
+#  sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
+#  git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+#  git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+#  sed -i 's/ZSH_THEME="robbyrussell"/ZSH_THEME="agnoster"/g' ~/.zshrc
+#  sed -i 's/plugins=(git)/plugins=(git timer zsh-autosuggestions zsh-syntax-highlighting)/g' ~/.zshrc
+#  #Enter password to change default shell. Once this is done, sign out and back in to update.
+#  chsh -s $(which zsh)
+
+steam-mesa-git:
+  systemctl --user set-environment FLATPAK_GL_DRIVERS=mesa-git
+  systemctl --user restart flatpak-portal.service
+  FLATPAK_GL_DRIVERS=mesa-git flatpak run com.valvesoftware.Steam

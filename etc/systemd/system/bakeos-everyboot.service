@@ -1,0 +1,10 @@
+[Unit]
+Description=Startup service for BakeOS. Does multiple things, see /etc/profile.d/bakeos-everyboot.sh.
+Documentation=https://github.com/blake-lucas/BakeOS
+
+[Service]
+Type=oneshot
+ExecStart=/etc/profile.d/bakeos-everyboot.sh
+
+[Install]
+WantedBy=multi-user.target

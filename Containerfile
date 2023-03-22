@@ -62,6 +62,10 @@ RUN cd /tmp/extensions && mkdir /etc/gnome-extensions && \
 RUN sudo rm -rf /tmp/extensions
 RUN chmod 755 /etc/gnome-extensions -R
 
+#ZSH plugins. See /etc/skel.d/.oh-my-zsh/templates/zshrc.zsh-template for default zshrc
+RUN git clone https://github.com/zsh-users/zsh-autosuggestions /etc/skel.d/.oh-my-zsh/custom/plugins/zsh-autosuggestions
+RUN git clone https://github.com/zsh-users/zsh-syntax-highlighting.git /etc/skel.d/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
+
 ADD packages.json /tmp/packages.json
 ADD build.sh /tmp/build.sh
 
@@ -70,8 +74,8 @@ RUN /tmp/build.sh && \
     systemctl unmask dconf-update.service && \
     systemctl enable dconf-update.service && \
     systemctl enable rpm-ostree-countme.service && \
-    systemctl enable copy-gnome-exts.service && \
-    chmod +x /etc/copy-gnome-exts.sh && \
+    systemctl enable bakeos-everyboot.service && \
+    chmod +x /etc/profile.d/bakeos-everyboot.sh && \
     fc-cache -f /usr/share/fonts/ubuntu && \
     sed -i 's/#DefaultTimeoutStopSec.*/DefaultTimeoutStopSec=15s/' /etc/systemd/user.conf && \
     sed -i 's/#DefaultTimeoutStopSec.*/DefaultTimeoutStopSec=15s/' /etc/systemd/system.conf && \
