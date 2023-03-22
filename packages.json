@@ -39,7 +39,8 @@
                 "nvtop",
                 "firefox",
                 "firefox-langpacks",
-                "keepassxc"
+                "keepassxc",
+                "glib2-devel"
             ]
         },
         "exclude": {
