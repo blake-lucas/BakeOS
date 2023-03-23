@@ -60,9 +60,13 @@ window-width=975
 window-height=650
 
 [org/gnome/shell]
-enabled-extensions=['appindicatorsupport@rgcjonas.gmail.com', 'dash-to-dock@micxgx.gmail.com', 'blur-my-shell@aunetx', 'gsconnect@andyholmes.github.io', 'arcmenu@arcmenu.com', 'dash-to-panel@jderose9.github.com', 'windowIsReady_Remover@nunofarruca@gmail.com', 'wireless-hid@chlumskyvaclav.gmail.com']
 favorite-apps=['firefox.desktop', 'org.gnome.Nautilus.desktop']
 welcome-dialog-last-shown-version='43.0'
+
+[org/gnome/shell/extensions/ding]
+check-x11wayland=true
+show-home=false
+show-trash=false
 
 [org/gnome/shell/extensions/dash-to-dock]
 dock-fixed=true
