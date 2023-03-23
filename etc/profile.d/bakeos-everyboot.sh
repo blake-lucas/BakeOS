@@ -1,51 +1,49 @@
 #!/bin/bash
 #I'm not a bash expert so no bully pls
 
-#Create autostart and extension folders since they apparently don't exist by default
+#Run the following stuff for every user under /var/home (default path)
 for user in /var/home/*; do
-  if [ ! -d "$user/.config/autostart" ];
-    then mkdir $user/.config/autostart
-  fi;
-  if [ ! -d "$user/.local/share/gnome-shell/extensions" ];
-    then mkdir $user/.local/share/gnome-shell/extensions
-  fi;
-done
+  #Create folders that don't exist by default
+  mkdir -p $user/.config/autostart
+  mkdir -p $user/.config/rustdesk
+  mkdir -p $user/.local/share/gnome-shell/extensions
 
-#If a users local extensions folder doesn't have all the extensions in /etc/gnome-extensions, copy them and dump a script to their autostart folder to enable on login. If the user has all the extensions in their extension folder, the script will do nothing other than delete itself on login each time.
-for user in /var/home/*; do
+  #If the user doesn't have a justfile, copy the one from /etc/skel.d
   if [ ! -f "$user/justfile" ];
     then cp -r "/etc/skel.d/justfile" "$user/justfile"
   fi;
-  for ext in /etc/gnome-extensions/*; do
-      if [ ! -d "$user/.local/share/gnome-shell/extensions/$(basename $ext)" ];
-        then cp -r "$ext" "$user/.local/share/gnome-shell/extensions/"
-        echo "gnome-extensions enable $(basename $ext)" >> $user/.config/autostart/enable-extensions.sh
-        chmod +x $user/.config/autostart/enable-extensions.sh
-      fi;
-    done
-done
-for user in /var/home/*; do
-  echo "rm -f $user/.config/autostart/enable-extensions.sh" >> $user/.config/autostart/enable-extensions.sh
-done
 
-#If a user doesn't have a .zshrc, change the default shell and copy ohmyzsh plugins and such
-for user in /var/home/*; do
+  #If a user doesn't have a .zshrc, change the default shell and copy ohmyzsh plugins and such
   if [ ! -f "$user/.zshrc" ];
     then cp -r "/etc/skel.d/.oh-my-zsh" "$user/" && cp "/etc/skel.d/.zshrc" "$user/.zshrc" && usermod -s /usr/bin/zsh $(basename $user)
   fi;
-done
 
-#Create .desktop file under ~/.config/autostart because GNOME won't directly run a .sh
-for user in /var/home/*; do
-  echo "[Desktop Entry]" > $user/.config/autostart/enable-extensions.desktop
-  echo "Name=Enable-Extensions" >> $user/.config/autostart/enable-extensions.desktop
-  echo "Exec=$user/.config/autostart/enable-extensions.sh" >> $user/.config/autostart/enable-extensions.desktop
-  echo "Terminal=false" >> $user/.config/autostart/enable-extensions.desktop
-  echo "Type=Application" >> $user/.config/autostart/enable-extensions.desktop
-  echo "X-GNOME-Autostart-enabled=true" >> $user/.config/autostart/enable-extensions.desktop
-done
+  #Copy rustdesk server config to each users profile
+  if [ ! -f "$user/.config/rustdesk/RustDesk2.toml" ];
+    then cp -r "/etc/skel.d/.config/rustdesk/RustDesk2.toml" "$user/.config/rustdesk/RustDesk2.toml"
+  fi;
 
-#Set ownership of justfile, zsh stuff, autostart and extension folders for each user profile
-for user in /var/home/*; do
-  chown $(basename $user):$(basename $user) $user/.config/autostart $user/.local/share/gnome-shell/extensions $user/justfile $user/.oh-my-zsh $user/.zshrc -R
+  #Copy GNOME extensions if they don't exist for the user. If the user disables the extension, the folder is still present and won't be automatically enabled again.
+  #Uninstalling extensions will probably force enable it again though
+  for ext in /etc/gnome-extensions/*; do
+      if [ ! -d "$user/.local/share/gnome-shell/extensions/$(basename $ext)" ];
+        then cp -r "$ext" "$user/.local/share/gnome-shell/extensions/"
+        echo "gnome-extensions enable $(basename $ext)" >> $user/.config/autostart/bakeos-everyboot.sh
+        chmod +x $user/.config/autostart/bakeos-everyboot.sh
+      fi;
+  done
+
+  #Add a line for the script to delete itself after being run
+  echo "rm -f $user/.config/autostart/bakeos-everyboot.sh && rm -f $user/.config/autostart/bakeos-everyboot.desktop" >> $user/.config/autostart/bakeos-everyboot.sh
+
+  #GNOME won't directly run a .sh so make a .desktop for the script
+  echo "[Desktop Entry]" > $user/.config/autostart/bakeos-everyboot.desktop
+  echo "Name=bakeos-everyboot" >> $user/.config/autostart/bakeos-everyboot.desktop
+  echo "Exec=$user/.config/autostart/bakeos-everyboot.sh" >> $user/.config/autostart/bakeos-everyboot.desktop
+  echo "Terminal=false" >> $user/.config/autostart/bakeos-everyboot.desktop
+  echo "Type=Application" >> $user/.config/autostart/bakeos-everyboot.desktop
+  echo "X-GNOME-Autostart-enabled=true" >> $user/.config/autostart/bakeos-everyboot.desktop
+
+  #Set ownership of justfile, zsh stuff, autostart and extension folders for each user profile
+  chown $(basename $user):$(basename $user) $user/.config/autostart $user/.local/share/gnome-shell/extensions $user/.config/rustdesk $user/justfile $user/.oh-my-zsh $user/.zshrc -R
 done

@@ -1,0 +1,10 @@
+rendezvous_server = 'rs-ny.rustdesk.com:21116'
+nat_type = 2
+serial = 0
+
+[options]
+relay-server = 'rustdesk.blakelucas.com'
+custom-rendezvous-server = 'rustdesk.blakelucas.com'
+key = 'fDxE6kUqctKHjKEFcKDTpqx0HZARwmWtWdWBGUZWR3I='
+verification-method = 'use-permanent-password'
+local-ip-addr = '0.0.0.0'
