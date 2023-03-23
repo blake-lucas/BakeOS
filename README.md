@@ -29,7 +29,6 @@ A customized Silverblue image built with the following tweaks:
   - Desktop Icons NG - Adds desktop icon functionality. Home and Trash are hidden by default.
   - Blur my Shell - Pretty
   - GSConnect - Pair your phone with your PC for handy stuff
-  - 
 
 Currently you'll need to have Fedora Silverblue installed to rebase to this image (see below). Premade ISOs will be provided as soon as the custom image feature lands in the Fedora installer.
 
