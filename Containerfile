@@ -19,7 +19,7 @@ COPY usr /usr
 RUN if ! rpm -qa | grep -qw kmod-nvidia; then rpm-ostree override remove kernel-devel-matched kernel-modules-extra; fi
 RUN if ! rpm -qa | grep -qw kmod-nvidia; then rpm-ostree override --experimental replace kernel kernel-core kernel-modules --from repo=copr:copr.fedorainfracloud.org:gloriouseggroll:nobara; fi
 RUN rpm-ostree override --experimental replace mesa-libglapi mesa-libxatracker mesa-dri-drivers mesa-libgbm mesa-libEGL mesa-libGL \
-    mesa-filesystem mesa-vdpau-drivers mesa-vulkan-drivers mesa-va-drivers-freeworld kernel kernel-core kernel-modules mutter --from repo=copr:copr.fedorainfracloud.org:gloriouseggroll:nobara
+    mesa-filesystem mesa-vdpau-drivers mesa-vulkan-drivers mesa-va-drivers-freeworld mutter --from repo=copr:copr.fedorainfracloud.org:gloriouseggroll:nobara
 
 #Latest linux-firmware
 RUN cd /tmp && git clone git://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-firmware.git && rm -rf /lib/firmware/* && mv /tmp/linux-firmware/* /lib/firmware/
