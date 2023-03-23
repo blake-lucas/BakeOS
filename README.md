@@ -89,13 +89,6 @@ System updates are image-based and automatic. Applications are logically seperat
     - If you've never used an image-based Linux before just use your computer normally
     - Don't overthink it, just shut your computer off when you're not using it
 
-### Future Features
-
-These are currently unimplemented ideas that we plan on adding:
-
-- Provide a `:lts` tag derived from CentOS Stream for a more enterprise-like cadence
-- [Firecracker](https://github.com/firecracker-microvm/firecracker) - help wanted with this!
-
 ### Applications
 
 - Mozilla Firefox, Mozilla Thunderbird, Extension Manager, Libreoffice, Pika Backup, FontDownloader, Flatseal, and the Celluloid Media Player
