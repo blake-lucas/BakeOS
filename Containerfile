@@ -52,6 +52,7 @@ ADD https://extensions.gnome.org/extension-data/dash-to-paneljderose9.github.com
 ADD https://extensions.gnome.org/extension-data/windowIsReady_Removernunofarrucagmail.com.v19.shell-extension.zip           /tmp/extensions/windowIsReady_Remover@nunofarruca@gmail.com.zip
 ADD https://extensions.gnome.org/extension-data/panoelhan.io.v19.shell-extension.zip                                        /tmp/extensions/clipboard-indicator@tudmotu.com.zip
 ADD https://extensions.gnome.org/extension-data/tiling-assistantleleat-on-github.v39.shell-extension.zip                    /tmp/extensions/tiling-assistant@leleat-on-github.zip
+ADD https://extensions.gnome.org/extension-data/dingrastersoft.com.v54.shell-extension.zip                                  /tmp/extensions/ding@rastersoft.com.zip
 
 RUN cd /tmp/extensions && mkdir /etc/gnome-extensions && \
     for EXTENSION in *.zip; do \
