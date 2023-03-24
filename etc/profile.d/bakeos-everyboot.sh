@@ -39,6 +39,9 @@ for user in /var/home/*; do
       fi;
   done
 
+  #Not sure where these come from and I'm too lazy to figure it out so just delete them lol
+  echo "rm -f $user/Desktop/network.desktop $user/Desktop/user-home.desktop $user/Desktop/trash-can.desktop $user/Desktop/computer.desktop" >> $user/.config/autostart/bakeos-everyboot.sh
+
   #Add a line for the script to delete itself after being run
   echo "rm -f $user/.config/autostart/bakeos-everyboot.sh && rm -f $user/.config/autostart/bakeos-everyboot.desktop" >> $user/.config/autostart/bakeos-everyboot.sh
 
