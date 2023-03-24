@@ -39,6 +39,7 @@
                 "nvtop",
                 "firefox",
                 "firefox-langpacks",
+                "filezilla",
                 "keepassxc",
                 "glib2-devel"
             ]
