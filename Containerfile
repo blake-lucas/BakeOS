@@ -16,8 +16,8 @@ COPY usr /usr
 RUN rpm-ostree cliwrap install-to-root /
 #RUN wget https://copr.fedorainfracloud.org/coprs/gloriouseggroll/nobara/repo/fedora-"${FEDORA_MAJOR_VERSION}"/gloriouseggroll-nobara-fedora-"${FEDORA_MAJOR_VERSION}".repo -O /etc/yum.repos.d/nobara.repo
 #Only replace kernel for Main image since Nvidia driver builds are too much of a pain for me to figure out right now
-RUN if ! rpm -qa | grep -qw kmod-nvidia; then rpm-ostree override remove kernel-devel-matched kernel-modules-extra kernel-modules-core; fi
-RUN if ! rpm -qa | grep -qw kmod-nvidia; then rpm-ostree override --experimental replace kernel kernel-core kernel-modules kernel-modules-core kernel-modules-extra --from repo=nobara-baseos; fi
+#RUN if ! rpm -qa | grep -qw kmod-nvidia; then rpm-ostree override remove kernel-devel-matched kernel-modules-extra kernel-modules-core; fi
+#RUN if ! rpm -qa | grep -qw kmod-nvidia; then rpm-ostree override --experimental replace kernel kernel-core kernel-modules kernel-modules-core kernel-modules-extra --from repo=nobara-baseos; fi
 RUN rpm-ostree override --experimental replace mesa-libglapi mesa-libxatracker mesa-dri-drivers mesa-libgbm mesa-libEGL mesa-libGL \
     mesa-filesystem mesa-vdpau-drivers mesa-vulkan-drivers mesa-va-drivers-freeworld mutter --from repo=nobara-baseos
 
@@ -80,6 +80,7 @@ RUN /tmp/build.sh && \
     systemctl enable dconf-update.service && \
     systemctl enable rpm-ostree-countme.service && \
     systemctl enable bakeos-everyboot.service && \
+    systemctl enable sshd && \
     chmod +x /etc/profile.d/bakeos-everyboot.sh && \
     fc-cache -f /usr/share/fonts/ubuntu && \
     sed -i 's/#DefaultTimeoutStopSec.*/DefaultTimeoutStopSec=15s/' /etc/systemd/user.conf && \
