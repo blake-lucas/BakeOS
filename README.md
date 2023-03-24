@@ -45,7 +45,14 @@ Currently you'll need to have Fedora Silverblue installed to rebase to this imag
 
         sudo rpm-ostree rebase ostree-unverified-registry:ghcr.io/blake-lucas/bakeos-nvidia:37
         
-1. Reboot the system and you're done!
+1. AMD/Intel can reboot and be finished. If you're on Nvidia, reboot, login, and run:
+        
+        just set-kargs
+
+1. Last thing, I'd recommend running the following once your drivers are working:
+
+        just apx-init - Creates APX containers and tweaks a few things
+        just apx-nvidia (or apx-amd/apx-intel) - This sets up video accel in APX containers
 
 1. To revert back:
 
