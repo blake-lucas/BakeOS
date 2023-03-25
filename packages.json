@@ -43,7 +43,9 @@
                 "keepassxc",
                 "alacarte",
                 "glib2-devel",
-                "fuse-overlayfs"
+                "fuse-overlayfs",
+                "xinput",
+                "xrandr"
             ]
         },
         "exclude": {
