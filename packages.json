@@ -42,7 +42,8 @@
                 "filezilla",
                 "keepassxc",
                 "alacarte",
-                "glib2-devel"
+                "glib2-devel",
+                "fuse-overlayfs"
             ]
         },
         "exclude": {
