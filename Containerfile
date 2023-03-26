@@ -69,14 +69,11 @@ RUN git clone https://github.com/zsh-users/zsh-autosuggestions /etc/skel.d/.oh-m
 #Download latest gdu and move to /usr/bin per the instructions at https://github.com/dundee/gdu#installation
 RUN curl -L https://github.com/dundee/gdu/releases/latest/download/gdu_linux_amd64.tgz | tar xz && chmod +x gdu_linux_amd64 && mv gdu_linux_amd64 /usr/bin/gdu
 
-#Download latest Mullvad RPM and install it
-RUN mkdir /var/opt && \
-    wget https://mullvad.net/download/app/rpm/latest/ -O /tmp/mullvad.rpm && \
-    rpm-ostree install /tmp/mullvad.rpm && \
-    mv "/var/opt/Mullvad VPN" "/usr/lib/Mullvad VPN"
-
-#Set GDM theme/background - Doesn't actually work lol
-#RUN git clone --depth=1 --single-branch https://github.com/realmazharhussain/gdm-tools.git && cd gdm-tools && ./install.sh && set-gdm-theme -s default /usr/share/backgrounds/gnome/blobs-l.svg
+#Download latest Mullvad RPM and install it - This also doesn't work, install it manually
+#RUN mkdir /var/opt && \
+#    wget https://mullvad.net/download/app/rpm/latest/ -O /tmp/mullvad.rpm && \
+#    rpm-ostree install /tmp/mullvad.rpm && \
+#    mv "/var/opt/Mullvad VPN" "/usr/lib/Mullvad VPN"
 
 ADD packages.json /tmp/packages.json
 ADD build.sh /tmp/build.sh

@@ -45,7 +45,9 @@
                 "glib2-devel",
                 "fuse-overlayfs",
                 "xinput",
-                "xrandr"
+                "xrandr",
+                "libnsl2",
+                "libnsl"
             ]
         },
         "exclude": {
