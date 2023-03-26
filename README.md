@@ -5,13 +5,13 @@
 A customized Silverblue image built with the following tweaks:
  - APX package manager
  - Distrobox
- - Aliases for APX - ex. dnf install, apt install, dnf run, etc
+ - Aliases for APX - ex. ddnf install, aapt install, ddnf run, etc
  - Mesa drivers from Nobara
  - Kernel from Nobara (only on "main" build, thanks nvidia)
  - Mutter VRR patch from Nobara
  - Automatically installed and configured GNOME extensions (see list of extensions and settings below)
  - Multiple CLI utilities preinstalled - htop, btop, nvtop, gdu, iotop, sysstat, nethogs, net-tools, smem, screen, etc
- - Latest linux-frmware from git
+ - Latest linux-firmware from git
  - ZSH installed and preconfigured with plugins/theme (more similar to Manjaro's ZSH config)
  - Latest Nvidia driver installed on Nvidia image
  - RustDesk installed and configured to use my relay server (rustdesk.blakelucas.com)
