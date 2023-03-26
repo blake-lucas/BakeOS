@@ -44,29 +44,36 @@ RUN wget https://github.com/rustdesk/rustdesk/releases/download/nightly/rustdesk
 #RUN git clone https://github.com/vchlum/wireless-hid.git && cd wireless-hid && pwd && ls && glib-compile-schemas schemas && gnome-extensions pack --force --extra-source=LICENSE --extra-source=README.md --extra-source=CHANGELOG.md --extra-source=ui --extra-source=wirelesshid.js --extra-source=prefs.css && mv "wireless-hid@chlumskyvaclav.gmail.com.shell-extension.zip" "wireless-hid@chlumskyvaclav.gmail.com.zip" && gnome-extensions install wireless-hid@chlumskyvaclav.gmail.com.zip
 #Wireless HID
 #RUN wget https://github.com/brunelli/gnome-shell-extension-installer/releases/latest/download/gnome-shell-extension-installer && chmod +x ./gnome-shell-extension-installer && ./gnome-shell-extension-installer 4228 43 --yes
-ADD https://extensions.gnome.org/extension-data/arcmenuarcmenu.com.v43.shell-extension.zip                                  /tmp/extensions/arcmenu@arcmenu.com.zip
-ADD https://extensions.gnome.org/extension-data/appindicatorsupportrgcjonas.gmail.com.v46.shell-extension.zip               /tmp/extensions/appindicatorsupport@rgcjonas.gmail.com.zip
-ADD https://extensions.gnome.org/extension-data/wireless-hidchlumskyvaclav.gmail.com.v10.shell-extension.zip                /tmp/extensions/wireless-hid@chlumskyvaclav.gmail.com.zip
-ADD https://extensions.gnome.org/extension-data/dash-to-paneljderose9.github.com.v55.shell-extension.zip                    /tmp/extensions/dash-to-panel@jderose9.github.com.zip
-ADD https://extensions.gnome.org/extension-data/windowIsReady_Removernunofarrucagmail.com.v19.shell-extension.zip           /tmp/extensions/windowIsReady_Remover@nunofarruca@gmail.com.zip
-ADD https://extensions.gnome.org/extension-data/panoelhan.io.v19.shell-extension.zip                                        /tmp/extensions/clipboard-indicator@tudmotu.com.zip
-ADD https://extensions.gnome.org/extension-data/tiling-assistantleleat-on-github.v39.shell-extension.zip                    /tmp/extensions/tiling-assistant@leleat-on-github.zip
-ADD https://extensions.gnome.org/extension-data/dingrastersoft.com.v54.shell-extension.zip                                  /tmp/extensions/ding@rastersoft.com.zip
+RUN mkdir /tmp/extensions && \
+    wget https://extensions.gnome.org/extension-data/arcmenuarcmenu.com.v43.shell-extension.zip                          -O /tmp/extensions/arcmenu@arcmenu.com.zip                          && \
+    wget https://extensions.gnome.org/extension-data/appindicatorsupportrgcjonas.gmail.com.v46.shell-extension.zip       -O /tmp/extensions/appindicatorsupport@rgcjonas.gmail.com.zip       && \
+    wget https://extensions.gnome.org/extension-data/wireless-hidchlumskyvaclav.gmail.com.v10.shell-extension.zip        -O /tmp/extensions/wireless-hid@chlumskyvaclav.gmail.com.zip        && \
+    wget https://extensions.gnome.org/extension-data/dash-to-paneljderose9.github.com.v55.shell-extension.zip            -O /tmp/extensions/dash-to-panel@jderose9.github.com.zip            && \
+    wget https://extensions.gnome.org/extension-data/windowIsReady_Removernunofarrucagmail.com.v19.shell-extension.zip   -O /tmp/extensions/windowIsReady_Remover@nunofarruca@gmail.com.zip  && \
+    wget https://extensions.gnome.org/extension-data/panoelhan.io.v19.shell-extension.zip                                -O /tmp/extensions/clipboard-indicator@tudmotu.com.zip              && \
+    wget https://extensions.gnome.org/extension-data/tiling-assistantleleat-on-github.v39.shell-extension.zip            -O /tmp/extensions/tiling-assistant@leleat-on-github.zip            && \
+    wget https://extensions.gnome.org/extension-data/dingrastersoft.com.v54.shell-extension.zip                          -O /tmp/extensions/ding@rastersoft.com.zip
 
 RUN cd /tmp/extensions && mkdir /etc/gnome-extensions && \
     for EXTENSION in *.zip; do \
         unzip "${EXTENSION}" -d "/etc/gnome-extensions/${EXTENSION%.*}"; \
-    done
-RUN sudo rm -rf /tmp/extensions
-RUN chmod 755 /etc/gnome-extensions -R
+    done && \
+    sudo rm -rf /tmp/extensions && \
+    chmod 755 /etc/gnome-extensions -R
 
 #ZSH plugins. See /etc/skel.d/.oh-my-zsh/templates/zshrc.zsh-template for default zshrc
-RUN git clone https://github.com/zsh-users/zsh-autosuggestions /etc/skel.d/.oh-my-zsh/custom/plugins/zsh-autosuggestions
-RUN git clone https://github.com/zsh-users/zsh-syntax-highlighting.git /etc/skel.d/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
-RUN chmod 755 /etc/skel.d -R
+RUN git clone https://github.com/zsh-users/zsh-autosuggestions /etc/skel.d/.oh-my-zsh/custom/plugins/zsh-autosuggestions && \
+    git clone https://github.com/zsh-users/zsh-syntax-highlighting.git /etc/skel.d/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting && \
+    chmod 755 /etc/skel.d -R
 
 #Download latest gdu and move to /usr/bin per the instructions at https://github.com/dundee/gdu#installation
 RUN curl -L https://github.com/dundee/gdu/releases/latest/download/gdu_linux_amd64.tgz | tar xz && chmod +x gdu_linux_amd64 && mv gdu_linux_amd64 /usr/bin/gdu
+
+#Download latest Mullvad RPM and install it
+RUN mkdir /var/opt && \
+    wget https://mullvad.net/download/app/rpm/latest/ -O /tmp/mullvad.rpm && \
+    rpm-ostree install /tmp/mullvad.rpm && \
+    mv "/var/opt/Mullvad VPN" "/usr/lib/Mullvad VPN"
 
 #Set GDM theme/background - Doesn't actually work lol
 #RUN git clone --depth=1 --single-branch https://github.com/realmazharhussain/gdm-tools.git && cd gdm-tools && ./install.sh && set-gdm-theme -s default /usr/share/backgrounds/gnome/blobs-l.svg
