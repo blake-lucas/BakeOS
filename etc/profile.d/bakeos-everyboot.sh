@@ -10,8 +10,8 @@ for user in /var/home/*; do
   mkdir -p $user/.local/share/gnome-shell/extensions
 
   #If the user doesn't have a justfile, copy the one from /etc/skel.d
-  if [ ! -f "$user/justfile" ];
-    then cp -r "/etc/skel.d/justfile" "$user/justfile"
+  if [ ! -f "$user/.justfile" ];
+    then cp -r "/etc/skel.d/.justfile" "$user/.justfile"
   fi;
 
   #If a user doesn't have a .zshrc, change the default shell and copy ohmyzsh plugins and such
