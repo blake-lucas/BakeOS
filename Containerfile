@@ -40,6 +40,12 @@ COPY --from=docker.io/bketelsen/apx:latest /usr/share/apx /usr/share/apx
 #RustDesk download. Install is handled by build.sh and is at the top of the packages.json file.
 RUN wget https://github.com/rustdesk/rustdesk/releases/download/nightly/rustdesk-1.2.0-0.x86_64-fedora28-centos8.rpm -O /tmp/rustdesk.rpm
 
+#NextShot download and install
+RUN git clone -b master https://github.com/dshoreman/nextshot.git && \
+    cd nextshot && \
+    make install && \
+    rm -rf /nextshot
+
 #GNOME extensions
 #RUN git clone https://github.com/vchlum/wireless-hid.git && cd wireless-hid && pwd && ls && glib-compile-schemas schemas && gnome-extensions pack --force --extra-source=LICENSE --extra-source=README.md --extra-source=CHANGELOG.md --extra-source=ui --extra-source=wirelesshid.js --extra-source=prefs.css && mv "wireless-hid@chlumskyvaclav.gmail.com.shell-extension.zip" "wireless-hid@chlumskyvaclav.gmail.com.zip" && gnome-extensions install wireless-hid@chlumskyvaclav.gmail.com.zip
 #Wireless HID

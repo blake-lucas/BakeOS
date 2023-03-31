@@ -46,6 +46,12 @@
                 "fuse-overlayfs",
                 "xinput",
                 "xrandr",
+                "yad",
+                "wl-clipboard",
+                "xdotool",
+                "xclip",
+                "slop",
+                "ImageMagick",
                 "libnsl2",
                 "libnsl"
             ]
