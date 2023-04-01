@@ -52,6 +52,7 @@
                 "xclip",
                 "slop",
                 "ImageMagick",
+                "gparted",
                 "libnsl2",
                 "libnsl"
             ]
