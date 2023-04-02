@@ -49,7 +49,6 @@ screens:
           - Logs: org.gnome.Logs
           - Maps: org.gnome.Maps
           - Nautilus Preview: org.gnome.NautilusPreviewer
-          - Text Editor: org.gnome.TextEditor
           - Weather: org.gnome.Weather
           - Disk Usage Analyzer: org.gnome.baobab
           - Clocks: org.gnome.clocks
@@ -82,6 +81,7 @@ screens:
           packages:
           - LibreOffice: org.libreoffice.LibreOffice
           - Obsidian: md.obsidian.Obsidian
+          - Iotas: org.gnome.gitlab.cheywood.Iotas
           - OnlyOffice: org.onlyoffice.desktopeditors
           - Slack: com.slack.Slack
           - Standard Notes: org.standardnotes.standardnotes

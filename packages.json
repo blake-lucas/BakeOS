@@ -5,6 +5,7 @@
                 "/tmp/rustdesk.rpm",
                 "gnome-shell-extension-blur-my-shell",
                 "gnome-shell-extension-gsconnect",
+                "gnome-text-editor",
                 "nautilus-gsconnect",
                 "libgda",
                 "libgda-sqlite",
