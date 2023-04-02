@@ -14,6 +14,7 @@ primary-color='000000'
 secondary-color='FFFFFF'
 
 [org/gnome/desktop/interface]
+clock-format='12h'
 enable-hot-corners=true
 clock-show-weekday=true
 clock-show-seconds=true
