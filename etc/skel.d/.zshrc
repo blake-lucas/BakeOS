@@ -102,3 +102,10 @@ source $ZSH/oh-my-zsh.sh
 alias aapt='apx --apt'
 alias ddnf='apx --dnf'
 alias aur='apx --aur'
+
+# Export user specific environment
+if ! [[ "$PATH" =~ "$HOME/.local/bin:$HOME/bin:" ]]
+then
+    PATH="$HOME/.local/bin:$HOME/bin:$PATH"
+fi
+export PATH
