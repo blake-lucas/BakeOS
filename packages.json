@@ -49,6 +49,7 @@
                 "xrandr",
                 "yad",
                 "wl-clipboard",
+                "wlr-randr",
                 "xdotool",
                 "xclip",
                 "slop",
