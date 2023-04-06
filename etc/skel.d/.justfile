@@ -35,7 +35,7 @@ steam-mesa-git:
 apx-init:
   apx update
   apx upgrade -y
-  apx install nano wget curl zip unzip software-properties-common language-pack-en -y
+  apx install git nano wget curl zip unzip software-properties-common language-pack-en -y
   apx run sudo update-locale
   echo "Package: *" > /tmp/99mozillateam
   echo "Pin: release o=LP-PPA-mozillateam" >> /tmp/99mozillateam
@@ -44,7 +44,7 @@ apx-init:
   apx run sudo add-apt-repository ppa:mozillateam/ppa -y
   apx install firefox -y
   apx --dnf update -y
-  apx --dnf install nano zip unzip curl wget -y
+  apx --dnf install git nano zip unzip curl wget -y
   
 apx-nvidia:
   apx --dnf run sudo dnf install https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-37.noarch.rpm https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-37.noarch.rpm -y
