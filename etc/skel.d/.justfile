@@ -51,7 +51,7 @@ apx-nvidia:
   apx --dnf install xorg-x11-drv-nvidia-libs.i686 akmod-nvidia -y
   apx install software-properties-common -y
   apx run sudo add-apt-repository multiverse -y
-  apx install nvidia-driver-525 -y
+  apx install nvidia-driver-530 -y
   
 apx-amd:
   apx --dnf run sudo dnf install https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-37.noarch.rpm https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-37.noarch.rpm -y
