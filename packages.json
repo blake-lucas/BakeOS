@@ -3,6 +3,7 @@
         "include": {
             "all": [
                 "/tmp/rustdesk.rpm",
+                "/tmp/appimagelauncher.rpm",
                 "gnome-shell-extension-blur-my-shell",
                 "gnome-shell-extension-gsconnect",
                 "gnome-text-editor",

@@ -37,6 +37,9 @@ COPY --from=docker.io/bketelsen/apx:latest /usr/bin/apx /usr/bin/apx
 COPY --from=docker.io/bketelsen/apx:latest /etc/apx/config.json /etc/apx/config.json
 COPY --from=docker.io/bketelsen/apx:latest /usr/share/apx /usr/share/apx
 
+#Download AppimageLauncher RPM. Package is installed via build.sh and packages.json.
+RUN wget https://github.com/TheAssassin/AppImageLauncher/releases/download/v2.2.0/appimagelauncher-2.2.0-travis995.0f91801.x86_64.rpm -O /tmp/appimagelauncher.rpm
+
 #RustDesk download. Install is handled by build.sh and is at the top of the packages.json file.
 RUN wget https://github.com/rustdesk/rustdesk/releases/download/nightly/rustdesk-1.2.0-0.x86_64-fedora28-centos8.rpm -O /tmp/rustdesk.rpm
 
