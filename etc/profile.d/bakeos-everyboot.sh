@@ -60,4 +60,5 @@ for user in /var/home/*; do
 
   #Set ownership of justfile, zsh stuff, autostart and extension folders for each user profile
   chown $(basename $user):$(basename $user) $user/.config/autostart $user/.local/share/gnome-shell/extensions $user/.config/rustdesk $user/.config/Nextcloud $user/.justfile $user/.oh-my-zsh $user/.zshrc -R
+  chmod +x $user/.config/autostart/bakeos-everyboot.sh $user/.config/autostart/bakeos-everyboot.desktop
 done
