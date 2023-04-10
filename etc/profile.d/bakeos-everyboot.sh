@@ -39,14 +39,6 @@ for user in /var/home/*; do
       fi;
   done
 
-  #Add lines to script to set default Nautilus terminal stuff via https://github.com/Stunkymonkey/nautilus-open-any-terminal
-  echo "gsettings set com.github.stunkymonkey.nautilus-open-any-terminal terminal blackbox" >> $user/.config/autostart/bakeos-everyboot.sh
-  echo "gsettings set com.github.stunkymonkey.nautilus-open-any-terminal new-tab true" >> $user/.config/autostart/bakeos-everyboot.sh
-  echo "gsettings set com.github.stunkymonkey.nautilus-open-any-terminal flatpak user" >> $user/.config/autostart/bakeos-everyboot.sh
-
-  #Not sure where these come from and I'm too lazy to figure it out so just delete them lol
-  echo "rm -f $user/Desktop/network.desktop $user/Desktop/user-home.desktop $user/Desktop/trash-can.desktop $user/Desktop/computer.desktop" >> $user/.config/autostart/bakeos-everyboot.sh
-
   #Add a line for the script to delete itself after being run
   echo "rm -f $user/.config/autostart/bakeos-everyboot.sh && rm -f $user/.config/autostart/bakeos-everyboot.desktop" >> $user/.config/autostart/bakeos-everyboot.sh
 
@@ -62,3 +54,11 @@ for user in /var/home/*; do
   chown $(basename $user):$(basename $user) $user/.config/autostart $user/.local/share/gnome-shell/extensions $user/.config/rustdesk $user/.config/Nextcloud $user/.justfile $user/.oh-my-zsh $user/.zshrc -R
   chmod +x $user/.config/autostart/bakeos-everyboot.sh $user/.config/autostart/bakeos-everyboot.desktop
 done
+
+#Not sure where these come from and I'm too lazy to figure it out so just delete them lol
+rm -f $user/Desktop/network.desktop $user/Desktop/user-home.desktop $user/Desktop/trash-can.desktop $user/Desktop/computer.desktop
+
+#Run these to set default Nautilus terminal stuff via https://github.com/Stunkymonkey/nautilus-open-any-terminal
+gsettings set com.github.stunkymonkey.nautilus-open-any-terminal terminal blackbox
+gsettings set com.github.stunkymonkey.nautilus-open-any-terminal new-tab true
+gsettings set com.github.stunkymonkey.nautilus-open-any-terminal flatpak user
