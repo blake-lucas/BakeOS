@@ -93,7 +93,7 @@ RUN /tmp/build.sh && \
     pip install --prefix=/usr yafti && \
     #Install nautilus-open-any-terminal system wide.
     #The gnome-terminal-nautilus package is removed via the excluded packages section of packages.json. 
-    pip install nautilus-open-any-terminal && \
+    pip install --prefix=/usr nautilus-open-any-terminal && \
     glib-compile-schemas /usr/share/glib-2.0/schemas && \
     systemctl unmask dconf-update.service && \
     systemctl enable dconf-update.service && \
