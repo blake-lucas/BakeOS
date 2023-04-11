@@ -59,7 +59,7 @@ RUN mkdir /tmp/extensions && \
     wget https://extensions.gnome.org/extension-data/wireless-hidchlumskyvaclav.gmail.com.v10.shell-extension.zip        -O /tmp/extensions/wireless-hid@chlumskyvaclav.gmail.com.zip        && \
     wget https://extensions.gnome.org/extension-data/dash-to-paneljderose9.github.com.v55.shell-extension.zip            -O /tmp/extensions/dash-to-panel@jderose9.github.com.zip            && \
     wget https://extensions.gnome.org/extension-data/windowIsReady_Removernunofarrucagmail.com.v19.shell-extension.zip   -O /tmp/extensions/windowIsReady_Remover@nunofarruca@gmail.com.zip  && \
-    wget https://extensions.gnome.org/extension-data/panoelhan.io.v19.shell-extension.zip                                -O /tmp/extensions/clipboard-indicator@tudmotu.com.zip              && \
+    wget https://extensions.gnome.org/extension-data/panoelhan.io.v19.shell-extension.zip                                -O /tmp/extensions/pano@elhan.io.zip                                && \
     wget https://extensions.gnome.org/extension-data/tiling-assistantleleat-on-github.v39.shell-extension.zip            -O /tmp/extensions/tiling-assistant@leleat-on-github.zip            && \
     wget https://extensions.gnome.org/extension-data/quick-settings-tweaksqwreey.v17.shell-extension.zip                 -O /tmp/extensions/quick-settings-tweaks@qwreey.zip                 && \
     wget https://extensions.gnome.org/extension-data/dingrastersoft.com.v54.shell-extension.zip                          -O /tmp/extensions/ding@rastersoft.com.zip
