@@ -4,7 +4,7 @@
 #Create folders that don't exist by default
 mkdir -p ~/.config/autostart
 mkdir -p ~/.config/rustdesk
-mkdir -p ~/.config/Nextcloud
+#mkdir -p ~/.config/Nextcloud
 mkdir -p ~/.local/share/gnome-shell/extensions
 
 #If the user doesn't have a justfile, copy the one from /etc/skel.d
@@ -23,9 +23,9 @@ if [ ! -f "~/.config/rustdesk/RustDesk2.toml" ];
 fi;
 
 #Copy NextCloud config to each users profile. This disables crash reporting and enables monochrome icons
-if [ ! -f "~/.config/Nextcloud/nextcloud.cfg" ];
-  then cp -r "/etc/skel.d/.config/Nextcloud/nextcloud.cfg" ~/.config/Nextcloud/nextcloud.cfg
-fi;
+#if [ ! -f "~/.config/Nextcloud/nextcloud.cfg" ];
+#  then cp -r "/etc/skel.d/.config/Nextcloud/nextcloud.cfg" ~/.config/Nextcloud/nextcloud.cfg
+#fi;
 
 #Copy GNOME extensions if they don't exist for the user. If the user disables the extension, the folder is still present and won't be automatically enabled again.
 #Uninstalling extensions will probably force enable it again though
