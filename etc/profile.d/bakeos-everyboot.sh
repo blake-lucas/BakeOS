@@ -14,7 +14,7 @@ fi;
 
 #If a user doesn't have a .zshrc, change the default shell and copy ohmyzsh plugins and such
 if [ ! -f "~/.zshrc" ];
-  then cp -r "/etc/skel.d/.oh-my-zsh" ~/ && cp "/etc/skel.d/.zshrc" ~/.zshrc && usermod -s /usr/bin/zsh $USER
+  then cp -r "/etc/skel.d/.oh-my-zsh" ~/ && cp "/etc/skel.d/.zshrc" ~/.zshrc && usermod -s /usr/bin/zsh $USER > /dev/null
 fi;
 
 #Copy rustdesk server config to each users profile
@@ -38,7 +38,6 @@ done
 
 #Set ownership of justfile, zsh stuff, autostart and extension folders for each user profile
 chown $USER:$USER ~/.config/autostart ~/.local/share/gnome-shell/extensions ~/.config/rustdesk ~/.config/Nextcloud ~/.justfile ~/.oh-my-zsh ~/.zshrc -R
-chmod +x ~/.config/autostart/bakeos-everyboot.sh ~/.config/autostart/bakeos-everyboot.desktop
 
 #Not sure where these come from and I'm too lazy to figure it out so just delete them lol
 rm -f ~/Desktop/network.desktop ~/Desktop/user-home.desktop ~/Desktop/trash-can.desktop ~/Desktop/computer.desktop
