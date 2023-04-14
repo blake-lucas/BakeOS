@@ -8,17 +8,17 @@ mkdir -p ~/.config/rustdesk
 mkdir -p ~/.local/share/gnome-shell/extensions
 
 #If the user doesn't have a justfile, copy the one from /etc/skel.d
-if [ ! -f "~/.justfile" ];
+if [ ! -f ~/.justfile ];
   then cp -r "/etc/skel.d/.justfile" ~/.justfile
 fi;
 
 #If a user doesn't have a .zshrc, change the default shell and copy ohmyzsh plugins and such
-if [ ! -f "~/.zshrc" ];
+if [ ! -f ~/.zshrc ];
   then cp -r "/etc/skel.d/.oh-my-zsh" ~/ && cp "/etc/skel.d/.zshrc" ~/.zshrc && usermod -s /usr/bin/zsh $USER > /dev/null
 fi;
 
 #Copy rustdesk server config to each users profile
-if [ ! -f "~/.config/rustdesk/RustDesk2.toml" ];
+if [ ! -f ~/.config/rustdesk/RustDesk2.toml ];
   then cp -r "/etc/skel.d/.config/rustdesk/RustDesk2.toml" ~/.config/rustdesk/RustDesk2.toml
 fi;
 
@@ -30,7 +30,7 @@ fi;
 #Copy GNOME extensions if they don't exist for the user. If the user disables the extension, the folder is still present and won't be automatically enabled again.
 #Uninstalling extensions will probably force enable it again though
 for ext in /etc/gnome-extensions/*; do
-    if [ ! -d "~/.local/share/gnome-shell/extensions/$(basename $ext)" ];
+    if [ ! -d ~/.local/share/gnome-shell/extensions/$(basename $ext) ];
       then cp -r "$ext" ~/.local/share/gnome-shell/extensions/
       gnome-extensions enable $(basename $ext)
     fi;
