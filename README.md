@@ -4,7 +4,9 @@
 
 A customized Silverblue image built with the following tweaks:
  - APX package manager
- - Distrobox
+ - AppimageLauncher installed
+ - Black Box terminal as default (including Nautilus "Open Terminal here" right click menu) 
+ - Distrobox installed
  - Aliases for APX - ex. ddnf install, aapt install, ddnf run, etc
  - Mesa drivers from Nobara (for F37 image)
  - Mutter VRR patch from Nobara
@@ -15,6 +17,7 @@ A customized Silverblue image built with the following tweaks:
  - Latest Nvidia driver installed on Nvidia image
  - RustDesk installed and configured to use my relay server (rustdesk.blakelucas.com)
  - NextCloud client and Nautilus extension installed - Monochrome icons used by default
+ - NextShot installed and bound to print (GNOME screenshot bound to shift+print)
  - Ubuntu's Yaru theme/fonts installed and configured
  - Automatic Flatpak and system updates daily
  
