@@ -58,6 +58,11 @@ Currently you'll need to have Fedora Silverblue installed to rebase to this imag
 
         sudo rpm-ostree rebase fedora:fedora/37/x86_64/silverblue
 
+1. [Testing, not recommended] Fedora 38 image is available. Note that this doesn't include Nobara's Mesa drivers or Mutter VRR patch yet:
+
+        sudo rpm-ostree rebase ostree-unverified-registry:ghcr.io/blake-lucas/bakeos:38
+        sudo rpm-ostree rebase ostree-unverified-registry:ghcr.io/blake-lucas/bakeos-nvidia:38
+
 Check the [Silverblue documentation](https://docs.fedoraproject.org/en-US/fedora-silverblue/) for instructions on how to use rpm-ostree. 
 I build date tags as well, so if you want to rebase to a particular day's release you can use the version number and date to boot off of that specific image:
   

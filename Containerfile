@@ -46,10 +46,10 @@ COPY --from=docker.io/bketelsen/apx:latest /etc/apx/config.json /etc/apx/config.
 COPY --from=docker.io/bketelsen/apx:latest /usr/share/apx /usr/share/apx
 
 #Download AppimageLauncher RPM. Package is installed via build.sh and packages.json.
-RUN wget https://github.com/TheAssassin/AppImageLauncher/releases/download/v2.2.0/appimagelauncher-2.2.0-travis995.0f91801.x86_64.rpm -O /tmp/appimagelauncher.rpm
+RUN wget https://github.com/TheAssassin/AppImageLauncher/releases/download/v2.2.0/appimagelauncher-2.2.0-travis995.0f91801.x86_64.rpm -qO /tmp/appimagelauncher.rpm
 
 #RustDesk download. Install is handled by build.sh and is at the top of the packages.json file.
-RUN wget https://github.com/rustdesk/rustdesk/releases/download/nightly/rustdesk-1.2.0-0.x86_64-fedora28-centos8.rpm -O /tmp/rustdesk.rpm
+RUN wget https://github.com/rustdesk/rustdesk/releases/download/nightly/rustdesk-1.2.0-0.x86_64-fedora28-centos8.rpm -qO /tmp/rustdesk.rpm
 
 #NextShot download and install
 RUN git clone -b master https://github.com/dshoreman/nextshot.git && \
@@ -62,15 +62,15 @@ RUN git clone -b master https://github.com/dshoreman/nextshot.git && \
 #Wireless HID
 #RUN wget https://github.com/brunelli/gnome-shell-extension-installer/releases/latest/download/gnome-shell-extension-installer && chmod +x ./gnome-shell-extension-installer && ./gnome-shell-extension-installer 4228 43 --yes
 RUN mkdir /tmp/extensions && \
-    wget https://extensions.gnome.org/extension-data/arcmenuarcmenu.com.v43.shell-extension.zip                          -O /tmp/extensions/arcmenu@arcmenu.com.zip                          && \
-    wget https://extensions.gnome.org/extension-data/appindicatorsupportrgcjonas.gmail.com.v46.shell-extension.zip       -O /tmp/extensions/appindicatorsupport@rgcjonas.gmail.com.zip       && \
-    wget https://extensions.gnome.org/extension-data/wireless-hidchlumskyvaclav.gmail.com.v10.shell-extension.zip        -O /tmp/extensions/wireless-hid@chlumskyvaclav.gmail.com.zip        && \
-    wget https://extensions.gnome.org/extension-data/dash-to-paneljderose9.github.com.v55.shell-extension.zip            -O /tmp/extensions/dash-to-panel@jderose9.github.com.zip            && \
-    wget https://extensions.gnome.org/extension-data/windowIsReady_Removernunofarrucagmail.com.v19.shell-extension.zip   -O /tmp/extensions/windowIsReady_Remover@nunofarruca@gmail.com.zip  && \
-    wget https://extensions.gnome.org/extension-data/panoelhan.io.v19.shell-extension.zip                                -O /tmp/extensions/pano@elhan.io.zip                                && \
-    wget https://extensions.gnome.org/extension-data/tiling-assistantleleat-on-github.v39.shell-extension.zip            -O /tmp/extensions/tiling-assistant@leleat-on-github.zip            && \
-    wget https://extensions.gnome.org/extension-data/quick-settings-tweaksqwreey.v17.shell-extension.zip                 -O /tmp/extensions/quick-settings-tweaks@qwreey.zip                 && \
-    wget https://extensions.gnome.org/extension-data/dingrastersoft.com.v54.shell-extension.zip                          -O /tmp/extensions/ding@rastersoft.com.zip
+    wget https://extensions.gnome.org/extension-data/arcmenuarcmenu.com.v43.shell-extension.zip                          -qO /tmp/extensions/arcmenu@arcmenu.com.zip                          && \
+    wget https://extensions.gnome.org/extension-data/appindicatorsupportrgcjonas.gmail.com.v46.shell-extension.zip       -qO /tmp/extensions/appindicatorsupport@rgcjonas.gmail.com.zip       && \
+    wget https://extensions.gnome.org/extension-data/wireless-hidchlumskyvaclav.gmail.com.v10.shell-extension.zip        -qO /tmp/extensions/wireless-hid@chlumskyvaclav.gmail.com.zip        && \
+    wget https://extensions.gnome.org/extension-data/dash-to-paneljderose9.github.com.v55.shell-extension.zip            -qO /tmp/extensions/dash-to-panel@jderose9.github.com.zip            && \
+    wget https://extensions.gnome.org/extension-data/windowIsReady_Removernunofarrucagmail.com.v19.shell-extension.zip   -qO /tmp/extensions/windowIsReady_Remover@nunofarruca@gmail.com.zip  && \
+    wget https://extensions.gnome.org/extension-data/panoelhan.io.v19.shell-extension.zip                                -qO /tmp/extensions/pano@elhan.io.zip                                && \
+    wget https://extensions.gnome.org/extension-data/tiling-assistantleleat-on-github.v39.shell-extension.zip            -qO /tmp/extensions/tiling-assistant@leleat-on-github.zip            && \
+    wget https://extensions.gnome.org/extension-data/quick-settings-tweaksqwreey.v17.shell-extension.zip                 -qO /tmp/extensions/quick-settings-tweaks@qwreey.zip                 && \
+    wget https://extensions.gnome.org/extension-data/dingrastersoft.com.v54.shell-extension.zip                          -qO /tmp/extensions/ding@rastersoft.com.zip
 
 RUN cd /tmp/extensions && mkdir /etc/gnome-extensions && \
     for EXTENSION in *.zip; do \
