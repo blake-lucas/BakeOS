@@ -58,9 +58,6 @@ RUN git clone -b master https://github.com/dshoreman/nextshot.git && \
     rm -rf /nextshot
 
 #GNOME extensions
-#RUN git clone https://github.com/vchlum/wireless-hid.git && cd wireless-hid && pwd && ls && glib-compile-schemas schemas && gnome-extensions pack --force --extra-source=LICENSE --extra-source=README.md --extra-source=CHANGELOG.md --extra-source=ui --extra-source=wirelesshid.js --extra-source=prefs.css && mv "wireless-hid@chlumskyvaclav.gmail.com.shell-extension.zip" "wireless-hid@chlumskyvaclav.gmail.com.zip" && gnome-extensions install wireless-hid@chlumskyvaclav.gmail.com.zip
-#Wireless HID
-#RUN wget https://github.com/brunelli/gnome-shell-extension-installer/releases/latest/download/gnome-shell-extension-installer && chmod +x ./gnome-shell-extension-installer && ./gnome-shell-extension-installer 4228 43 --yes
 RUN mkdir /tmp/extensions && \
     wget https://extensions.gnome.org/extension-data/arcmenuarcmenu.com.v43.shell-extension.zip                          -qO /tmp/extensions/arcmenu@arcmenu.com.zip                          && \
     wget https://extensions.gnome.org/extension-data/appindicatorsupportrgcjonas.gmail.com.v46.shell-extension.zip       -qO /tmp/extensions/appindicatorsupport@rgcjonas.gmail.com.zip       && \
