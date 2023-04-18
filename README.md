@@ -39,11 +39,11 @@ Currently you'll need to have Fedora Silverblue installed to rebase to this imag
 1. After you reboot you should [pin the working deployment](https://docs.fedoraproject.org/en-US/fedora-silverblue/faq/#_about_using_silverblue) so you can safely rollback. (sudo ostree admin pin 0)
 1. [AMD/Intel GPU users only] Open a terminal and rebase the OS to this image:
 
-        sudo rpm-ostree rebase ostree-unverified-registry:ghcr.io/blake-lucas/bakeos:37
+        sudo rpm-ostree rebase ostree-unverified-registry:ghcr.io/blake-lucas/bakeos:stable
 
 1. [Nvidia GPU users only] Open a terminal and rebase the OS to this image:
 
-        sudo rpm-ostree rebase ostree-unverified-registry:ghcr.io/blake-lucas/bakeos-nvidia:37
+        sudo rpm-ostree rebase ostree-unverified-registry:ghcr.io/blake-lucas/bakeos-nvidia:stable
         
 1. AMD/Intel can reboot and be finished. If you're on Nvidia, reboot, login, and run:
         
@@ -58,10 +58,11 @@ Currently you'll need to have Fedora Silverblue installed to rebase to this imag
 
         sudo rpm-ostree rebase fedora:fedora/37/x86_64/silverblue
 
-1. [Testing, not recommended] Fedora 38 image is available. Note that this doesn't include Nobara's Mesa drivers or Mutter VRR patch yet:
+1. [Test image, not recommended] The "latest" tag follows the latest Fedora release (currently 38) and may lack full testing. Note that this doesn't include Nobara's Mutter VRR patch yet:
 
-        sudo rpm-ostree rebase ostree-unverified-registry:ghcr.io/blake-lucas/bakeos:38
-        sudo rpm-ostree rebase ostree-unverified-registry:ghcr.io/blake-lucas/bakeos-nvidia:38
+        sudo rpm-ostree rebase ostree-unverified-registry:ghcr.io/blake-lucas/bakeos:latest
+        OR
+        sudo rpm-ostree rebase ostree-unverified-registry:ghcr.io/blake-lucas/bakeos-nvidia:latest
 
 Check the [Silverblue documentation](https://docs.fedoraproject.org/en-US/fedora-silverblue/) for instructions on how to use rpm-ostree. 
 I build date tags as well, so if you want to rebase to a particular day's release you can use the version number and date to boot off of that specific image:

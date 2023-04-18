@@ -74,10 +74,23 @@ jobs:
 
           BUILD_TAGS=("${MAJOR_VERSION}" "${MAJOR_VERSION}-${TIMESTAMP}")
 
-          if [[ "${{ matrix.is_latest_version }}" == "true" ]] && \
-             [[ "${{ matrix.is_stable_version }}" == "true" ]]; then
+          #If both latest and stable = true then mark as "latest" tag
+          #if [[ "${{ matrix.is_latest_version }}" == "true" ]] && \
+          #   [[ "${{ matrix.is_stable_version }}" == "true" ]]; then
+          #    BUILD_TAGS+=("${TIMESTAMP}")
+          #    BUILD_TAGS+=("latest")
+          #fi
+
+          # If image is marked as latest, set the tag to "latest"
+          if [[ "${{ matrix.is_latest_version }}" == "true" ]]; then
               BUILD_TAGS+=("${TIMESTAMP}")
               BUILD_TAGS+=("latest")
+          fi
+
+          # If image is marked as stable, set the tag to "stable"
+          if [[ "${{ matrix.is_stable_version }}" == "true" ]]; then
+              BUILD_TAGS+=("${TIMESTAMP}")
+              BUILD_TAGS+=("stable")
           fi
 
           if [[ "${{ github.event_name }}" == "pull_request" ]]; then
