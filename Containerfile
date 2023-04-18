@@ -74,7 +74,7 @@ RUN mkdir /tmp/extensions && \
 
 RUN cd /tmp/extensions && mkdir /etc/gnome-extensions && \
     for EXTENSION in *.zip; do \
-        unzip "${EXTENSION}" -d "/etc/gnome-extensions/${EXTENSION%.*}"; \
+        unzip "${EXTENSION}" -qd "/etc/gnome-extensions/${EXTENSION%.*}"; \
     done && \
     sudo rm -rf /tmp/extensions && \
     chmod 755 /etc/gnome-extensions -R
