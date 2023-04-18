@@ -20,9 +20,13 @@ RUN rpm-ostree cliwrap install-to-root /
 #RUN if ! rpm -qa | grep -qw kmod-nvidia; then rpm-ostree override --experimental replace kernel kernel-core kernel-modules kernel-modules-core kernel-modules-extra --from repo=nobara-baseos; fi
 
 #Only replace stuff with Nobara versions if image is F37 or lower
-RUN if [ "${FEDORA_MAJOR_VERSION}" -lt 38 ]; then \
+RUN if [ "${FEDORA_MAJOR_VERSION}" -le 37 ]; then \
         rpm-ostree override --experimental replace mesa-libglapi mesa-libxatracker mesa-dri-drivers mesa-libgbm mesa-libEGL mesa-libGL \
         mesa-filesystem mesa-vdpau-drivers mesa-vulkan-drivers mesa-va-drivers-freeworld mutter --from repo=nobara-baseos; \
+    fi
+#Delete /etc/yum.repos.d/nobara.repo if image is F38 or higher
+RUN if [ "${FEDORA_MAJOR_VERSION}" -ge 38 ]; then \
+        rm -f /etc/yum.repos.d/nobara.repo; \
     fi
 
 #Latest linux-firmware
