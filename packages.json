@@ -11,7 +11,6 @@
                 "libgda",
                 "libgda-sqlite",
                 "libratbag-ratbagd",
-                "podman-docker",
                 "podman-compose",
                 "python3-pip",
                 "wireguard-tools",

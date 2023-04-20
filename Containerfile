@@ -82,12 +82,6 @@ RUN git clone https://github.com/zsh-users/zsh-autosuggestions /etc/skel.d/.oh-m
 #Download latest gdu and move to /usr/bin per the instructions at https://github.com/dundee/gdu#installation
 RUN curl -L https://github.com/dundee/gdu/releases/latest/download/gdu_linux_amd64.tgz | tar xz && chmod +x gdu_linux_amd64 && mv gdu_linux_amd64 /usr/bin/gdu
 
-#Maybe fix F38+ build complaining about podman versions
-RUN if [ "${FEDORA_MAJOR_VERSION}" -ge 38 ]; then \
-        rpm-ostree override remove podman podman-docker && \
-        rpm-ostree install podman podman-docker; \
-    fi
-
 ADD packages.json /tmp/packages.json
 ADD build.sh /tmp/build.sh
 
