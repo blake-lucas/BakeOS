@@ -103,7 +103,7 @@ RUN /tmp/build.sh && \
     systemctl enable dconf-update.service && \
     systemctl enable rpm-ostree-countme.service && \
     systemctl enable bakeos-everyboot.service && \
-    systemctl enable rustdesk && \
+    systemctl disable rustdesk && \
     systemctl enable sshd && \
     chmod +x /etc/profile.d/bakeos-everyboot.sh && \
     fc-cache -f /usr/share/fonts/ubuntu && \

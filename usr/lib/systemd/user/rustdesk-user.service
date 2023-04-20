@@ -1,0 +1,9 @@
+[Unit]
+Description=RustDesk User Service
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/rustdesk --service
+
+[Install]
+WantedBy=default.target
