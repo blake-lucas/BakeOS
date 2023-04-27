@@ -16,7 +16,7 @@ COPY usr /usr
 RUN rpm-ostree cliwrap install-to-root /
 RUN wget https://copr.fedorainfracloud.org/coprs/gloriouseggroll/nobara/repo/fedora-"${FEDORA_MAJOR_VERSION}"/gloriouseggroll-nobara-fedora-"${FEDORA_MAJOR_VERSION}".repo -O /etc/yum.repos.d/nobara.repo
 #Only replace kernel for Main image since Nvidia driver builds are too much of a pain for me to figure out right now
-RUN if ! rpm -qa | grep -qw kmod-nvidia; then rpm-ostree override remove kernel-core kernel-modules kernel-devel-matched kernel-modules-extra kernel-modules-core kernel-modules-core-uname-r; fi
+RUN if ! rpm -qa | grep -qw kmod-nvidia; then rpm-ostree override remove kernel kernel-core kernel-modules kernel-devel-matched kernel-modules-extra kernel-modules-core kernel-modules-core-uname-r; fi
 RUN if ! rpm -qa | grep -qw kmod-nvidia; then rpm-ostree override --experimental replace kernel kernel-core kernel-modules kernel-modules-core kernel-modules-extra --from repo=copr:copr.fedorainfracloud.org:gloriouseggroll:nobara; fi
 
 #Only replace stuff with Nobara versions if image is F38 or lower
@@ -59,15 +59,15 @@ RUN git clone -b master https://github.com/dshoreman/nextshot.git && \
 
 #GNOME extensions
 RUN mkdir /tmp/extensions && \
-    wget https://extensions.gnome.org/extension-data/arcmenuarcmenu.com.v43.shell-extension.zip                          -qO /tmp/extensions/arcmenu@arcmenu.com.zip                          && \
-    wget https://extensions.gnome.org/extension-data/appindicatorsupportrgcjonas.gmail.com.v46.shell-extension.zip       -qO /tmp/extensions/appindicatorsupport@rgcjonas.gmail.com.zip       && \
-    wget https://extensions.gnome.org/extension-data/wireless-hidchlumskyvaclav.gmail.com.v10.shell-extension.zip        -qO /tmp/extensions/wireless-hid@chlumskyvaclav.gmail.com.zip        && \
-    wget https://extensions.gnome.org/extension-data/dash-to-paneljderose9.github.com.v55.shell-extension.zip            -qO /tmp/extensions/dash-to-panel@jderose9.github.com.zip            && \
+    wget https://extensions.gnome.org/extension-data/arcmenuarcmenu.com.v44.shell-extension.zip                          -qO /tmp/extensions/arcmenu@arcmenu.com.zip                          && \
+    wget https://extensions.gnome.org/extension-data/appindicatorsupportrgcjonas.gmail.com.v53.shell-extension.zip       -qO /tmp/extensions/appindicatorsupport@rgcjonas.gmail.com.zip       && \
+    wget https://extensions.gnome.org/extension-data/wireless-hidchlumskyvaclav.gmail.com.v11.shell-extension.zip        -qO /tmp/extensions/wireless-hid@chlumskyvaclav.gmail.com.zip        && \
+    wget https://extensions.gnome.org/extension-data/dash-to-paneljderose9.github.com.v56.shell-extension.zip            -qO /tmp/extensions/dash-to-panel@jderose9.github.com.zip            && \
     wget https://extensions.gnome.org/extension-data/windowIsReady_Removernunofarrucagmail.com.v19.shell-extension.zip   -qO /tmp/extensions/windowIsReady_Remover@nunofarruca@gmail.com.zip  && \
     wget https://extensions.gnome.org/extension-data/panoelhan.io.v19.shell-extension.zip                                -qO /tmp/extensions/pano@elhan.io.zip                                && \
-    wget https://extensions.gnome.org/extension-data/tiling-assistantleleat-on-github.v39.shell-extension.zip            -qO /tmp/extensions/tiling-assistant@leleat-on-github.zip            && \
+    wget https://extensions.gnome.org/extension-data/tiling-assistantleleat-on-github.v40.shell-extension.zip            -qO /tmp/extensions/tiling-assistant@leleat-on-github.zip            && \
     wget https://extensions.gnome.org/extension-data/quick-settings-tweaksqwreey.v17.shell-extension.zip                 -qO /tmp/extensions/quick-settings-tweaks@qwreey.zip                 && \
-    wget https://extensions.gnome.org/extension-data/dingrastersoft.com.v54.shell-extension.zip                          -qO /tmp/extensions/ding@rastersoft.com.zip
+    wget https://extensions.gnome.org/extension-data/dingrastersoft.com.v56.shell-extension.zip                          -qO /tmp/extensions/ding@rastersoft.com.zip
 
 RUN cd /tmp/extensions && mkdir /etc/gnome-extensions && \
     for EXTENSION in *.zip; do \
