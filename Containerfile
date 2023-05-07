@@ -58,10 +58,12 @@ RUN wget https://github.com/TheAssassin/AppImageLauncher/releases/download/v2.2.
 RUN wget https://github.com/rustdesk/rustdesk/releases/download/nightly/rustdesk-1.2.0-0.x86_64-fedora28-centos8.rpm -qO /tmp/rustdesk.rpm
 
 #NextShot download and install
-RUN git clone -b master https://github.com/dshoreman/nextshot.git && \
-    cd nextshot && \
-    make install && \
-    rm -rf /nextshot
+#RUN git clone -b master https://github.com/dshoreman/nextshot.git && \
+#    cd nextshot && \
+#    make install && \
+#    rm -rf /nextshot
+#Make install seems to be broken so just download the latest binary instead
+RUN wget https://github.com/dshoreman/nextshot/releases/latest/download/nextshot -qO /usr/bin/nextshot && chmod +x /usr/bin/nextshot
 
 #GNOME extensions
 RUN mkdir /tmp/extensions && \
