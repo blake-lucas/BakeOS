@@ -59,7 +59,8 @@
                 "libnsl",
                 "p7zip",
                 "p7zip-plugins",
-                "wimlib"
+                "wimlib",
+                "wimlib-utils"
             ]
         },
         "exclude": {
