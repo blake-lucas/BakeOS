@@ -25,8 +25,8 @@ RUN if [ "${FEDORA_MAJOR_VERSION}" -le 37 ]; then \
         mesa-filesystem mesa-vdpau-drivers mesa-vulkan-drivers mesa-va-drivers-freeworld --from repo=nobara-baseos; \
     fi
 
-#Use Nobara's patched mutter if running 38 or lower
-RUN if [ "${FEDORA_MAJOR_VERSION}" -le 38 ]; then \
+#Use Nobara's patched mutter if running 37 or lower
+RUN if [ "${FEDORA_MAJOR_VERSION}" -le 37 ]; then \
         rpm-ostree override --experimental replace mutter --from repo=nobara-baseos; \
     fi
 
@@ -58,10 +58,12 @@ RUN wget https://github.com/TheAssassin/AppImageLauncher/releases/download/v2.2.
 RUN wget https://github.com/rustdesk/rustdesk/releases/download/nightly/rustdesk-1.2.0-0.x86_64-fedora28-centos8.rpm -qO /tmp/rustdesk.rpm
 
 #NextShot download and install
-RUN git clone -b master https://github.com/dshoreman/nextshot.git && \
-    cd nextshot && \
-    make install && \
-    rm -rf /nextshot
+#RUN git clone -b master https://github.com/dshoreman/nextshot.git && \
+#    cd nextshot && \
+#    make install && \
+#    rm -rf /nextshot
+#Make install seems to be broken so just download the latest binary instead
+RUN wget https://github.com/dshoreman/nextshot/releases/latest/download/nextshot -qO /usr/bin/nextshot && chmod +x /usr/bin/nextshot
 
 #GNOME extensions
 RUN mkdir /tmp/extensions && \
