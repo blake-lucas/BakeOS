@@ -92,14 +92,15 @@ RUN git clone https://github.com/zsh-users/zsh-autosuggestions /etc/skel.d/.oh-m
 #Download latest gdu and move to /usr/bin per the instructions at https://github.com/dundee/gdu#installation
 RUN curl -L https://github.com/dundee/gdu/releases/latest/download/gdu_linux_amd64.tgz | tar xz && chmod +x gdu_linux_amd64 && mv gdu_linux_amd64 /usr/bin/gdu
 
+#Download WoeUSB binary and dump to /usr/bin/woeusb
+RUN wget https://github.com/WoeUSB/WoeUSB/releases/download/v5.2.4/woeusb-5.2.4.bash -qO /usr/bin/woeusb && chmod +x /usr/bin/woeusb
+
 ADD packages.json /tmp/packages.json
 ADD build.sh /tmp/build.sh
 
 RUN /tmp/build.sh && \
     #Install yafti setup thing
     pip install --prefix=/usr yafti && \
-    pip install --prefix=/usr wheel && \
-    pip install --prefix=/usr WoeUSB-ng && \
     #Remove the gnome-terminal-nautilus package.
     rpm-ostree override remove gnome-terminal-nautilus && \
     #Install nautilus-open-any-terminal system wide.

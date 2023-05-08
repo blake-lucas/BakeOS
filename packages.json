@@ -59,7 +59,7 @@
                 "libnsl",
                 "p7zip",
                 "p7zip-plugins",
-                "python3-wxpython4"
+                "wimlib"
             ]
         },
         "exclude": {
