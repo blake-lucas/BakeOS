@@ -56,7 +56,10 @@
                 "ImageMagick",
                 "gparted",
                 "libnsl2",
-                "libnsl"
+                "libnsl",
+                "p7zip",
+                "p7zip-plugins",
+                "python3-wxpython4"
             ]
         },
         "exclude": {
