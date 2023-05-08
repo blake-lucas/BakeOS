@@ -98,6 +98,7 @@ ADD build.sh /tmp/build.sh
 RUN /tmp/build.sh && \
     #Install yafti setup thing
     pip install --prefix=/usr yafti && \
+    pip install --prefix=/usr wheel && \
     pip install --prefix=/usr WoeUSB-ng && \
     #Remove the gnome-terminal-nautilus package.
     rpm-ostree override remove gnome-terminal-nautilus && \
