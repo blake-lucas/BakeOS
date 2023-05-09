@@ -47,7 +47,7 @@ RUN if [ "${IMAGE_TYPE}" == "lts" ]; then \
         #cliwarp needed for kernel replacement
         rpm-ostree cliwrap install-to-root /; \
         #Remove current kernel
-        rpm-ostree override remove kernel kernel-core kernel-modules kernel-modules-extra kernel-devel kernel-devel-matched kernel-headers kernel-modules-core; \
+        rpm-ostree override remove kernel kernel-core kernel-modules kernel-modules-extra kernel-devel kernel-devel-matched kernel-headers kernel-modules-core kernel-debug-modules-core kernel-debug-core; \
         #Yeah I couldn't get this stupid firmware thing working so the image ships with Fedora's firmware for now
         #rpm-ostree override remove linux-firmware linux-firmware-whence $(rpm -qa | grep firmware | cut -d '-' -f 1 | awk '{print $0"-firmware"}'); \
         #rm -rf /usr/lib/firmware/*; \
