@@ -47,7 +47,7 @@ RUN if [ "${IMAGE_TYPE}" == "lts" ]; then \
         #cliwarp needed for kernel replacement
         rpm-ostree cliwrap install-to-root /; \
         #Remove current kernel
-        rpm-ostree override remove kernel kernel-core kernel-modules kernel-modules-extra kernel-devel kernel-devel-matched kernel-headers kernel-modules-core kernel-debug-modules-core kernel-debug-core; \
+        rpm-ostree override remove kernel kernel-core kernel-modules kernel-modules-core kernel-modules-extra kernel-devel kernel-devel-matched kernel-headers; \
         #Yeah I couldn't get this stupid firmware thing working so the image ships with Fedora's firmware for now
         #rpm-ostree override remove linux-firmware linux-firmware-whence $(rpm -qa | grep firmware | cut -d '-' -f 1 | awk '{print $0"-firmware"}'); \
         #rm -rf /usr/lib/firmware/*; \
@@ -55,7 +55,7 @@ RUN if [ "${IMAGE_TYPE}" == "lts" ]; then \
         echo "After kernel/firmware removal:"; \
         rpm -qa | grep kernel; \
         rpm -qa | grep firmware; \
-        rpm-ostree override --experimental replace kernel-longterm kernel-longterm-core kernel-longterm-modules kernel-longterm-modules-extra --from repo=copr:copr.fedorainfracloud.org:kwizart:kernel-longterm-5.15; \
+        rpm-ostree install kernel-longterm kernel-longterm-core kernel-longterm-modules kernel-longterm-modules-extra; \
     fi
 
 #Delete /etc/yum.repos.d/nobara.repo if image is F38 or higher
