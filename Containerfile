@@ -42,12 +42,19 @@ RUN if [ "$IMAGE_TYPE" != "lts" ] && [ "${FEDORA_MAJOR_VERSION}" -le 37 ]; then 
 #Use Rocky Linux Kernel, firmware, and mesa if "lts" image
 RUN if [ "${IMAGE_TYPE}" == "lts" ]; then \
         rpm -qa | grep firmware; \
+        rpm -qa | grep kernel; \
         rm -f /etc/yum.repos.d/nobara.repo; \
         #cliwarp needed for kernel replacement
         rpm-ostree cliwrap install-to-root /; \
-        #Kernel
-        rpm-ostree override remove kernel kernel-core kernel-modules kernel-devel-matched kernel-modules-extra kernel-modules-core linux-firmware linux-firmware-whence amd-gpu-firmware intel-gpu-firmware iwlax2xx-firmware iwl7260-firmware nvidia-gpu-firmware iwl100-firmware iwl1000-firmware iwl105-firmware iwl135-firmware iwl2000-firmware iwl2030-firmware iwl3160-firmware iwl3945-firmware iwl4965-firmware iwl5000-firmware iwl5150-firmware iwl6000-firmware iwl6000g2a-firmare iwl6000g2b-firmware iwl6050-firmware libertas-usb8388-firmware zd1211-firmware atmel-firmware alsa-sof-firmware; \
-        rpm-ostree override --experimental replace kernel kernel-core kernel-modules kernel-modules-extra linux-firmware --from repo=rocky-baseos; \
+        #Remove current kernel and firmware packages (yes you really need to specify each firmware package)
+        rpm-ostree override remove kernel kernel-core kernel-modules kernel-devel-matched kernel-modules-extra kernel-modules-core linux-firmware linux-firmware-whence amd-gpu-firmware \
+        intel-gpu-firmware iwlax2xx-firmware iwl7260-firmware nvidia-gpu-firmware iwl100-firmware iwl1000-firmware iwl105-firmware iwl135-firmware iwl2000-firmware iwl2030-firmware \
+        iwl3160-firmware iwl3945-firmware iwl4965-firmware iwl5000-firmware iwl5150-firmware iwl6000-firmware iwl6000g2a-firmare iwl6000g2b-firmware \
+        iwl6050-firmware libertas-usb8388-firmware zd1211-firmware atmel-firmware alsa-sof-firmware; \
+        #List kernel packages after removal, install lts kernel, and Rocky Linux firmware package
+        rpm -qa | grep kernel; \
+        rpm-ostree override replace kernel-longterm kernel-longterm-core kernel-longterm-modules kernel-longterm-modules-extra --from repo=copr:copr.fedorainfracloud.org:kwizart:kernel-longterm-5.15; \
+        rpm-ostree override --experimental replace linux-firmware --from repo=rocky-baseos; \
         #Mesa drivers
         #rpm-ostree override remove mesa-libglapi mesa-libxatracker mesa-dri-drivers mesa-libgbm mesa-libEGL mesa-libGL \
         #mesa-filesystem mesa-vdpau-drivers mesa-vulkan-drivers mesa-va-drivers-freeworld
