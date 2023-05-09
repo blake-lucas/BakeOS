@@ -48,14 +48,14 @@ RUN if [ "${IMAGE_TYPE}" == "lts" ]; then \
         rpm-ostree cliwrap install-to-root /; \
         #Remove current kernel and firmware packages (thanks BingGPT for the stupid awk thing to get all present firmware packages)
         rpm-ostree override remove kernel kernel-core kernel-modules kernel-devel-matched kernel-modules-extra kernel-modules-core; \
-        rpm-ostree override remove linux-firmware linux-firmware-whence $(rpm -qa | grep firmware | cut -d '-' -f 1 | awk '{print $0"-firmware"}'); \
+        #rpm-ostree override remove linux-firmware linux-firmware-whence $(rpm -qa | grep firmware | cut -d '-' -f 1 | awk '{print $0"-firmware"}'); \
         rm -rf /usr/lib/firmware/*; \
         #List kernel packages after removal, install lts kernel, and Rocky Linux firmware package
         echo "After kernel/firmware removal:"; \
         rpm -qa | grep kernel; \
         rpm -qa | grep firmware; \
         rpm-ostree override --experimental replace kernel-longterm kernel-longterm-core kernel-longterm-modules kernel-longterm-modules-extra --from repo=copr:copr.fedorainfracloud.org:kwizart:kernel-longterm-5.15; \
-        rpm-ostree override --experimental replace linux-firmware --from repo=rocky-baseos; \
+        #rpm-ostree override --experimental replace linux-firmware --from repo=rocky-baseos; \
         #Mesa drivers
         #rpm-ostree override remove mesa-libglapi mesa-libxatracker mesa-dri-drivers mesa-libgbm mesa-libEGL mesa-libGL \
         #mesa-filesystem mesa-vdpau-drivers mesa-vulkan-drivers mesa-va-drivers-freeworld
