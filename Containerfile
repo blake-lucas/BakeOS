@@ -48,6 +48,9 @@ RUN if [ "${IMAGE_TYPE}" == "lts" ]; then \
         rpm-ostree cliwrap install-to-root /; \
         #Remove current kernel
         rpm-ostree override remove kernel kernel-core kernel-modules kernel-modules-core kernel-modules-extra kernel-devel kernel-devel-matched kernel-headers; \
+    fi
+#Split this into two RUNs since GitHub wasn't throwing errors on fails
+RUN if [ "${IMAGE_TYPE}" == "lts" ]; then \
         #Yeah I couldn't get this stupid firmware thing working so the image ships with Fedora's firmware for now
         #rpm-ostree override remove linux-firmware linux-firmware-whence $(rpm -qa | grep firmware | cut -d '-' -f 1 | awk '{print $0"-firmware"}'); \
         #rm -rf /usr/lib/firmware/*; \
