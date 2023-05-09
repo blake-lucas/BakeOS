@@ -46,11 +46,9 @@ RUN if [ "${IMAGE_TYPE}" == "lts" ]; then \
         rm -f /etc/yum.repos.d/nobara.repo; \
         #cliwarp needed for kernel replacement
         rpm-ostree cliwrap install-to-root /; \
-        #Remove current kernel and firmware packages (yes you really need to specify each firmware package)
-        rpm-ostree override remove kernel kernel-core kernel-modules kernel-devel-matched kernel-modules-extra kernel-modules-core linux-firmware linux-firmware-whence amd-gpu-firmware \
-        intel-gpu-firmware iwlax2xx-firmware iwl7260-firmware nvidia-gpu-firmware iwl100-firmware iwl1000-firmware iwl105-firmware iwl135-firmware iwl2000-firmware iwl2030-firmware \
-        iwl3160-firmware iwl3945-firmware iwl4965-firmware iwl5000-firmware iwl5150-firmware iwl6000-firmware iwl6000g2a-firmare iwl6000g2b-firmware \
-        iwl6050-firmware libertas-usb8388-firmware zd1211-firmware atmel-firmware alsa-sof-firmware; \
+        #Remove current kernel and firmware packages (thanks BingGPT for the stupid awk thing to get all present firmware packages)
+        rpm-ostree override remove kernel kernel-core kernel-modules kernel-devel-matched kernel-modules-extra kernel-modules-core linux-firmware linux-firmware-whence; \
+        rpm-ostree override remove $(rpm -qa | grep firmware | cut -d '-' -f 1 | awk '{print $0"-firmware"}'); \
         rm -rf /usr/lib/firmware/*; \
         #List kernel packages after removal, install lts kernel, and Rocky Linux firmware package
         echo "After kernel/firmware removal:"; \
