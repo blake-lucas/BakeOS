@@ -7,6 +7,7 @@ ARG FEDORA_MAJOR_VERSION="${FEDORA_MAJOR_VERSION:-37}"
 FROM ${BASE_IMAGE}:${FEDORA_MAJOR_VERSION} AS builder
 
 ARG IMAGE_NAME="${IMAGE_NAME}"
+ARG IMAGE_TYPE="${IMAGE_TYPE}"
 ARG FEDORA_MAJOR_VERSION="${FEDORA_MAJOR_VERSION}"
 
 COPY etc /etc
@@ -56,9 +57,9 @@ RUN if [ "$IMAGE_TYPE" != *"lts"* ]; then \
 
 #Latest linux-firmware on images other than lts
 RUN if [ "$IMAGE_TYPE" != *"lts"* ]; then \
-        cd /tmp
-        git clone git://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-firmware.git
-        rm -rf /lib/firmware/*
+        cd /tmp; \
+        git clone git://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-firmware.git; \
+        rm -rf /lib/firmware/*; \
         mv /tmp/linux-firmware/* /lib/firmware/; \
     fi
 
