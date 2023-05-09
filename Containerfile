@@ -42,6 +42,8 @@ RUN if [ "$IMAGE_TYPE" != "lts" ] && [ "${FEDORA_MAJOR_VERSION}" -le 37 ]; then 
 #Use Rocky Linux Kernel, firmware, and mesa if "lts" image
 RUN if [ "${IMAGE_TYPE}" == "lts" ]; then \
         rm -f /etc/yum.repos.d/nobara.repo; \
+        #cliwarp needed for kernel replacement
+        rpm-ostree cliwrap install-to-root /; \
         #Kernel
         rpm-ostree override remove kernel kernel-core kernel-modules kernel-devel-matched kernel-modules-extra kernel-modules-core linux-firmware; \
         rpm-ostree override --experimental replace kernel kernel-core kernel-modules kernel-modules-extra linux-firmware --from repo=rocky-baseos; \
