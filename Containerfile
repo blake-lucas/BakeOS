@@ -17,10 +17,10 @@ COPY etc /etc
 COPY usr /usr
 
 #Nobara kernel, mesa, and mutter (vrr patch)
-RUN rpm-ostree cliwrap install-to-root /
 #RUN wget https://copr.fedorainfracloud.org/coprs/gloriouseggroll/nobara/repo/fedora-"${FEDORA_MAJOR_VERSION}"/gloriouseggroll-nobara-fedora-"${FEDORA_MAJOR_VERSION}".repo -O /etc/yum.repos.d/nobara.repo
 #Only replace kernel for Main image since Nvidia driver builds are too much of a pain for me to figure out right now
 #RUN if [ "$IMAGE_TYPE" != *"lts"* ] && [ "$IMAGE_FLAVOR" != *"nvidia"* ]; then \
+#        rpm-ostree cliwrap install-to-root /; \
 #        rpm-ostree override remove kernel kernel-core kernel-modules kernel-devel-matched kernel-modules-extra kernel-modules-core; \
 #        rpm-ostree override --experimental replace kernel kernel-core kernel-modules kernel-modules-core kernel-modules-extra --from repo=nobara-baseos; \
 #    fi
@@ -29,13 +29,13 @@ RUN rpm-ostree cliwrap install-to-root /
 #    fi
 
 #Only replace mesa stuff with Nobara versions if image is F37 or lower and not "lts" image
-RUN if [ "$IMAGE_TYPE" != *"lts"* ] && [ "${FEDORA_MAJOR_VERSION}" -le 37 ]; then \
+RUN if [ "$IMAGE_TYPE" != "lts" ] && [ "${FEDORA_MAJOR_VERSION}" -le 37 ]; then \
         rpm-ostree override --experimental replace mesa-libglapi mesa-libxatracker mesa-dri-drivers mesa-libgbm mesa-libEGL mesa-libGL \
         mesa-filesystem mesa-vdpau-drivers mesa-vulkan-drivers mesa-va-drivers-freeworld --from repo=nobara-baseos; \
     fi
 
 #Use Nobara's patched mutter if running 37 or lower and not "lts" image
-RUN if [ "$IMAGE_TYPE" != *"lts"* ] && [ "${FEDORA_MAJOR_VERSION}" -le 37 ]; then \
+RUN if [ "$IMAGE_TYPE" != "lts" ] && [ "${FEDORA_MAJOR_VERSION}" -le 37 ]; then \
         rpm-ostree override --experimental replace mutter --from repo=nobara-baseos; \
     fi
 
@@ -52,7 +52,7 @@ RUN if [ "${IMAGE_TYPE}" == "lts" ]; then \
     fi
 
 #Delete Rocky Linux repo for images other than lts
-RUN if [ "$IMAGE_TYPE" != *"lts"* ]; then \
+RUN if [ "$IMAGE_TYPE" != "lts" ]; then \
         rm -f /etc/yum.repos.d/rocky.repo; \
     fi
 
@@ -62,7 +62,7 @@ RUN if [ "$IMAGE_TYPE" != *"lts"* ]; then \
 #    fi
 
 #Latest linux-firmware on images other than lts
-RUN if [ "$IMAGE_TYPE" != *"lts"* ]; then \
+RUN if [ "$IMAGE_TYPE" != "lts" ]; then \
         cd /tmp; \
         git clone git://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-firmware.git; \
         rm -rf /lib/firmware/*; \
