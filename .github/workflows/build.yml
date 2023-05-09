@@ -52,6 +52,7 @@ jobs:
               echo "IMAGE_NAME=bakeos" >> $GITHUB_ENV
           elif [[ "${{ matrix.image_flavor }}" == "lts" ]]; then
               echo "IMAGE_NAME=bakeos-lts" >> $GITHUB_ENV
+              echo "IMAGE_FLAVOR=main" >> $GITHUB_ENV
           else
               echo "IMAGE_NAME=${{ format('{0}-{1}', env.IMAGE_BASE_NAME, matrix.image_flavor) }}" >> $GITHUB_ENV
           fi
