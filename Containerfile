@@ -31,7 +31,7 @@ RUN if [ "$IMAGE_TYPE" != *"lts"* ] && [ "${FEDORA_MAJOR_VERSION}" -le 37 ]; the
     fi
 
 #Use Rocky Linux Kernel, firmware, and mesa if "lts" image
-RUN if [ "${IMAGE_TYPE}" -eq "lts" ]; then \
+RUN if [ "${IMAGE_TYPE}" = "lts" ]; then \
         #Kernel
         rpm-ostree override remove kernel kernel-core kernel-modules kernel-devel-matched kernel-modules-extra kernel-modules-core
         rpm-ostree override --experimental replace kernel kernel-core kernel-modules kernel-modules-core kernel-modules-extra --from repo=rocky-baseos; \
