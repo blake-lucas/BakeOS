@@ -20,18 +20,18 @@ RUN if ! rpm -qa | grep -qw kmod-nvidia; then rpm-ostree override remove kernel 
 RUN if ! rpm -qa | grep -qw kmod-nvidia; then rpm-ostree override --experimental replace kernel kernel-core kernel-modules kernel-modules-core kernel-modules-extra --from repo=nobara-baseos; fi
 
 #Only replace mesa stuff with Nobara versions if image is F37 or lower and not "lts" image
-RUN if [ "$IMAGE_NAME" != *"lts"* ] && [ "${FEDORA_MAJOR_VERSION}" -le 37 ]; then \
+RUN if [ "$IMAGE_NAME" != *"bakeos-lts"* ] && [ "${FEDORA_MAJOR_VERSION}" -le 37 ]; then \
         rpm-ostree override --experimental replace mesa-libglapi mesa-libxatracker mesa-dri-drivers mesa-libgbm mesa-libEGL mesa-libGL \
         mesa-filesystem mesa-vdpau-drivers mesa-vulkan-drivers mesa-va-drivers-freeworld --from repo=nobara-baseos; \
     fi
 
 #Use Nobara's patched mutter if running 37 or lower and not "lts" image
-RUN if [ "$IMAGE_NAME" != *"lts"* ] && [ "${FEDORA_MAJOR_VERSION}" -le 37 ]; then \
+RUN if [ "$IMAGE_NAME" != *"bakeos-lts"* ] && [ "${FEDORA_MAJOR_VERSION}" -le 37 ]; then \
         rpm-ostree override --experimental replace mutter --from repo=nobara-baseos; \
     fi
 
 #Use Rocky Linux Kernel, firmware, and mesa if "lts" image
-RUN if [ "${IMAGE_NAME}" -eq "lts" ]; then \
+RUN if [ "${IMAGE_NAME}" -eq "bakeos-lts" ]; then \
         #Kernel
         rpm-ostree override remove kernel kernel-core kernel-modules kernel-devel-matched kernel-modules-extra kernel-modules-core
         rpm-ostree override --experimental replace kernel kernel-core kernel-modules kernel-modules-core kernel-modules-extra --from repo=rocky-baseos; \
@@ -45,7 +45,7 @@ RUN if [ "${IMAGE_NAME}" -eq "lts" ]; then \
     fi
 
 #Delete Rocky Linux repo for images other than lts
-RUN if [ "$IMAGE_NAME" != *"lts"* ]; then \
+RUN if [ "$IMAGE_NAME" != *"bakeos-lts"* ]; then \
         rm -f /etc/yum.repos.d/rocky.repo;
     fi
 
@@ -55,7 +55,7 @@ RUN if [ "$IMAGE_NAME" != *"lts"* ]; then \
 #    fi
 
 #Latest linux-firmware on images other than lts
-RUN if [ "$IMAGE_NAME" != *"lts"* ]; then \
+RUN if [ "$IMAGE_NAME" != *"bakeos-lts"* ]; then \
         cd /tmp
         git clone git://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-firmware.git
         rm -rf /lib/firmware/*
