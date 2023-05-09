@@ -43,14 +43,12 @@ RUN if [ "$IMAGE_TYPE" != *"lts"* ] && [ "${FEDORA_MAJOR_VERSION}" -le 37 ]; the
 RUN if [ "${IMAGE_TYPE}" == "lts" ]; then \
         #Kernel
         rpm-ostree override remove kernel kernel-core kernel-modules kernel-devel-matched kernel-modules-extra kernel-modules-core; \
-        rpm-ostree override --experimental replace kernel kernel-core kernel-modules kernel-modules-core kernel-modules-extra --from repo=rocky-baseos; \
+        rpm-ostree override --experimental replace kernel kernel-core kernel-modules kernel-modules-core kernel-modules-extra linux-firmware --from repo=rocky-baseos; \
         #Mesa drivers
         #rpm-ostree override remove mesa-libglapi mesa-libxatracker mesa-dri-drivers mesa-libgbm mesa-libEGL mesa-libGL \
         #mesa-filesystem mesa-vdpau-drivers mesa-vulkan-drivers mesa-va-drivers-freeworld
         #rpm-ostree override --experimental replace mesa-libglapi mesa-libxatracker mesa-dri-drivers mesa-libgbm mesa-libEGL mesa-libGL \
         #mesa-filesystem mesa-vulkan-drivers --from repo=rocky-baseos
-        #Firmware
-        rpm-ostree override replace linux-firmware --from repo=rocky-baseos; \
     fi
 
 #Delete Rocky Linux repo for images other than lts
