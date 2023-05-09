@@ -25,8 +25,8 @@ RUN if [ "${FEDORA_MAJOR_VERSION}" -le 37 ]; then \
         mesa-filesystem mesa-vdpau-drivers mesa-vulkan-drivers mesa-va-drivers-freeworld --from repo=nobara-baseos; \
     fi
 
-#Use Nobara's patched mutter if running 37 or lower
-RUN if [ "${FEDORA_MAJOR_VERSION}" -le 37 ]; then \
+#Use Nobara's patched mutter if running 38 or lower
+RUN if [ "${FEDORA_MAJOR_VERSION}" -le 38 ]; then \
         rpm-ostree override --experimental replace mutter --from repo=nobara-baseos; \
     fi
 
