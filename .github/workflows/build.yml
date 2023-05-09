@@ -51,7 +51,7 @@ jobs:
           if [[ "${{ matrix.image_flavor }}" == "main" ]]; then
               echo "IMAGE_NAME=bakeos" >> $GITHUB_ENV
           else
-              echo "IMAGE_NAME=${{ format('{0}-{1}', env.IMAGE_BASE_NAME, matrix.image_flavor) }}" >> $GITHUB_ENV
+              echo "IMAGE_NAME=${{ format('{0}-{1}-{2}', env.IMAGE_BASE_NAME, matrix.image_flavor, matrix.image_type) }}" >> $GITHUB_ENV
           fi
 
       - name: Generate tags
@@ -67,6 +67,7 @@ jobs:
           SHA_SHORT="$(git rev-parse --short HEAD)"
 
           if [[ "${{ matrix.image_type }}" == "lts" ]]; then
+              BUILD_TAGS+=("latest")
               COMMIT_TAGS+=("pr-${{ github.event.number }}-${MAJOR_VERSION}-lts")
               COMMIT_TAGS+=("${SHA_SHORT}")
           fi
