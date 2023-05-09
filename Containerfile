@@ -20,10 +20,10 @@ COPY usr /usr
 RUN rpm-ostree cliwrap install-to-root /
 #RUN wget https://copr.fedorainfracloud.org/coprs/gloriouseggroll/nobara/repo/fedora-"${FEDORA_MAJOR_VERSION}"/gloriouseggroll-nobara-fedora-"${FEDORA_MAJOR_VERSION}".repo -O /etc/yum.repos.d/nobara.repo
 #Only replace kernel for Main image since Nvidia driver builds are too much of a pain for me to figure out right now
-RUN if [ "$IMAGE_TYPE" != *"lts"* ] && [ "$IMAGE_TYPE" != *"nvidia"* ]; then \
+RUN if [ "$IMAGE_TYPE" != *"lts"* ] && [ "$IMAGE_FLAVOR" != *"nvidia"* ]; then \
         rpm-ostree override remove kernel kernel-core kernel-modules kernel-devel-matched kernel-modules-extra kernel-modules-core; \
     fi
-RUN if [ "$IMAGE_TYPE" != *"lts"* ] && [ "$IMAGE_TYPE" != *"nvidia"* ]; then \
+RUN if [ "$IMAGE_TYPE" != *"lts"* ] && [ "$IMAGE_FLAVOR" != *"nvidia"* ]; then \
         rpm-ostree override --experimental replace kernel kernel-core kernel-modules kernel-modules-core kernel-modules-extra --from repo=nobara-baseos; \
     fi
 
