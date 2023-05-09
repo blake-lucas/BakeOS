@@ -19,15 +19,34 @@ RUN rpm-ostree cliwrap install-to-root /
 RUN if ! rpm -qa | grep -qw kmod-nvidia; then rpm-ostree override remove kernel kernel-core kernel-modules kernel-devel-matched kernel-modules-extra kernel-modules-core; fi
 RUN if ! rpm -qa | grep -qw kmod-nvidia; then rpm-ostree override --experimental replace kernel kernel-core kernel-modules kernel-modules-core kernel-modules-extra --from repo=nobara-baseos; fi
 
-#Only replace mesa stuff with Nobara versions if image is F37 or lower
-RUN if [ "${FEDORA_MAJOR_VERSION}" -le 37 ]; then \
+#Only replace mesa stuff with Nobara versions if image is F37 or lower and not "lts" image
+RUN if [ "$IMAGE_NAME" != *"lts"* ] && [ "${FEDORA_MAJOR_VERSION}" -le 37 ]; then \
         rpm-ostree override --experimental replace mesa-libglapi mesa-libxatracker mesa-dri-drivers mesa-libgbm mesa-libEGL mesa-libGL \
         mesa-filesystem mesa-vdpau-drivers mesa-vulkan-drivers mesa-va-drivers-freeworld --from repo=nobara-baseos; \
     fi
 
-#Use Nobara's patched mutter if running 37 or lower
-RUN if [ "${FEDORA_MAJOR_VERSION}" -le 37 ]; then \
+#Use Nobara's patched mutter if running 37 or lower and not "lts" image
+RUN if [ "$IMAGE_NAME" != *"lts"* ] && [ "${FEDORA_MAJOR_VERSION}" -le 37 ]; then \
         rpm-ostree override --experimental replace mutter --from repo=nobara-baseos; \
+    fi
+
+#Use Rocky Linux Kernel, firmware, and mesa if "lts" image
+RUN if [ "${IMAGE_NAME}" -eq "lts" ]; then \
+        #Kernel
+        rpm-ostree override remove kernel kernel-core kernel-modules kernel-devel-matched kernel-modules-extra kernel-modules-core
+        rpm-ostree override --experimental replace kernel kernel-core kernel-modules kernel-modules-core kernel-modules-extra --from repo=rocky-baseos; \
+        #Mesa drivers
+        #rpm-ostree override remove mesa-libglapi mesa-libxatracker mesa-dri-drivers mesa-libgbm mesa-libEGL mesa-libGL \
+        #mesa-filesystem mesa-vdpau-drivers mesa-vulkan-drivers mesa-va-drivers-freeworld
+        #rpm-ostree override --experimental replace mesa-libglapi mesa-libxatracker mesa-dri-drivers mesa-libgbm mesa-libEGL mesa-libGL \
+        #mesa-filesystem mesa-vulkan-drivers --from repo=rocky-baseos
+        #Firmware
+        rpm-ostree override replace linux-firmware --from repo=rocky-baseos; \
+    fi
+
+#Delete Rocky Linux repo for images other than lts
+RUN if [ "$IMAGE_NAME" != *"lts"* ]; then \
+        rm -f /etc/yum.repos.d/rocky.repo;
     fi
 
 #Delete /etc/yum.repos.d/nobara.repo if image is F38 or higher
@@ -35,8 +54,13 @@ RUN if [ "${FEDORA_MAJOR_VERSION}" -le 37 ]; then \
 #        rm -f /etc/yum.repos.d/nobara.repo; \
 #    fi
 
-#Latest linux-firmware
-RUN cd /tmp && git clone git://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-firmware.git && rm -rf /lib/firmware/* && mv /tmp/linux-firmware/* /lib/firmware/
+#Latest linux-firmware on images other than lts
+RUN if [ "$IMAGE_NAME" != *"lts"* ]; then \
+        cd /tmp
+        git clone git://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-firmware.git
+        rm -rf /lib/firmware/*
+        mv /tmp/linux-firmware/* /lib/firmware/; \
+    fi
 
 #Manual download of APX instead maybe
 #RUN wget https://github.com/Vanilla-OS/apx/releases/latest/download/apx_Linux_x86_64.tar.gz -O /tmp/apx_Linux_x86_64.tar.gz
