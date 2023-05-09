@@ -65,7 +65,12 @@ jobs:
           BUILD_TAGS=()
           # Have tags for tracking builds during pull request
           SHA_SHORT="$(git rev-parse --short HEAD)"
-          COMMIT_TAGS+=("pr-${{ github.event.number }}-${MAJOR_VERSION}")
+
+          if [[ "${{ matrix.image_type }}" == "lts" ]]; then
+              COMMIT_TAGS+=("pr-${{ github.event.number }}-${MAJOR_VERSION}-lts")
+              COMMIT_TAGS+=("${SHA_SHORT}")
+          fi
+
           COMMIT_TAGS+=("${SHA_SHORT}-${MAJOR_VERSION}")
           if [[ "${{ matrix.is_latest_version }}" == "true" ]] && \
              [[ "${{ matrix.is_stable_version }}" == "true" ]]; then
