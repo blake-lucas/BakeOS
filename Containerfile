@@ -46,7 +46,7 @@ RUN if [ "${IMAGE_TYPE}" == "lts" ]; then \
 
 #Delete Rocky Linux repo for images other than lts
 RUN if [ "$IMAGE_TYPE" != *"lts"* ]; then \
-        rm -f /etc/yum.repos.d/rocky.repo;
+        rm -f /etc/yum.repos.d/rocky.repo; \
     fi
 
 #Delete /etc/yum.repos.d/nobara.repo if image is F38 or higher
