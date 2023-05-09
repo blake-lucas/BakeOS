@@ -47,7 +47,7 @@ RUN if [ "${IMAGE_TYPE}" == "lts" ]; then \
         #cliwarp needed for kernel replacement
         rpm-ostree cliwrap install-to-root /; \
         #Remove current kernel
-        rpm-ostree override remove kernel kernel-core kernel-modules kernel-modules-core kernel-modules-extra kernel-devel kernel-devel-matched kernel-headers --replace kernel-longterm kernel-longterm-core kernel-longterm-modules kernel-longterm-modules-extra --from repo=copr:copr.fedorainfracloud.org:kwizart:kernel-longterm-5.15; \
+        #rpm-ostree override --experimental replace kernel kernel-core kernel-modules kernel-modules-core kernel-modules-extra kernel-devel kernel-devel-matched kernel-headers --replace kernel-longterm kernel-longterm-core kernel-longterm-modules kernel-longterm-modules-extra --from repo='copr:copr.fedorainfracloud.org:kwizart:kernel-longterm-5.15'; \
     fi
 #Split this into two RUNs since GitHub wasn't throwing errors on fails
 RUN if [ "${IMAGE_TYPE}" == "lts" ]; then \
