@@ -56,7 +56,11 @@
                 "ImageMagick",
                 "gparted",
                 "libnsl2",
-                "libnsl"
+                "libnsl",
+                "p7zip",
+                "p7zip-plugins",
+                "wimlib",
+                "wimlib-utils"
             ]
         },
         "exclude": {
