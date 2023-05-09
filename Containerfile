@@ -8,9 +8,10 @@ FROM ${BASE_IMAGE}:${FEDORA_MAJOR_VERSION} AS builder
 
 ARG IMAGE_NAME="${IMAGE_NAME}"
 ARG IMAGE_TYPE="${IMAGE_TYPE}"
+ARG IMAGE_FLAVOR="${IMAGE_TYPE}"
 ARG FEDORA_MAJOR_VERSION="${FEDORA_MAJOR_VERSION}"
 
-RUN echo $IMAGE_TYPE
+RUN echo flavor: $IMAGE_FLAVOR type: $IMAGE_TYPE name: $IMAGE_NAME
 
 COPY etc /etc
 COPY usr /usr
@@ -19,10 +20,10 @@ COPY usr /usr
 RUN rpm-ostree cliwrap install-to-root /
 #RUN wget https://copr.fedorainfracloud.org/coprs/gloriouseggroll/nobara/repo/fedora-"${FEDORA_MAJOR_VERSION}"/gloriouseggroll-nobara-fedora-"${FEDORA_MAJOR_VERSION}".repo -O /etc/yum.repos.d/nobara.repo
 #Only replace kernel for Main image since Nvidia driver builds are too much of a pain for me to figure out right now
-RUN if [ "$IMAGE_TYPE" != *"lts"* ] && [! rpm -qa | grep -qw kmod-nvidia]; then \
+RUN if [ "$IMAGE_TYPE" != *"lts"* ] && [ "$IMAGE_TYPE" != *"nvidia"* ]; then \
         rpm-ostree override remove kernel kernel-core kernel-modules kernel-devel-matched kernel-modules-extra kernel-modules-core; \
     fi
-RUN if [ "$IMAGE_TYPE" != *"lts"* ] && [! rpm -qa | grep -qw kmod-nvidia]; then \
+RUN if [ "$IMAGE_TYPE" != *"lts"* ] && [ "$IMAGE_TYPE" != *"nvidia"* ]; then \
         rpm-ostree override --experimental replace kernel kernel-core kernel-modules kernel-modules-core kernel-modules-extra --from repo=nobara-baseos; \
     fi
 
