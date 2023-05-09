@@ -53,7 +53,7 @@ RUN if [ "${IMAGE_TYPE}" == "lts" ]; then \
         iwl6050-firmware libertas-usb8388-firmware zd1211-firmware atmel-firmware alsa-sof-firmware; \
         #List kernel packages after removal, install lts kernel, and Rocky Linux firmware package
         rpm -qa | grep kernel; \
-        rpm-ostree override replace kernel-longterm kernel-longterm-core kernel-longterm-modules kernel-longterm-modules-extra --from repo=copr:copr.fedorainfracloud.org:kwizart:kernel-longterm-5.15; \
+        rpm-ostree override --experimental replace kernel-longterm kernel-longterm-core kernel-longterm-modules kernel-longterm-modules-extra --from repo=copr:copr.fedorainfracloud.org:kwizart:kernel-longterm-5.15; \
         rpm-ostree override --experimental replace linux-firmware --from repo=rocky-baseos; \
         #Mesa drivers
         #rpm-ostree override remove mesa-libglapi mesa-libxatracker mesa-dri-drivers mesa-libgbm mesa-libEGL mesa-libGL \
