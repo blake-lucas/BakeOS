@@ -43,7 +43,7 @@ RUN if [ "$IMAGE_TYPE" != "lts" ] && [ "${FEDORA_MAJOR_VERSION}" -le 37 ]; then 
 RUN if [ "${IMAGE_TYPE}" == "lts" ]; then \
         rm -f /etc/yum.repos.d/nobara.repo; \
         #Kernel
-        rpm-ostree override remove kernel kernel-core kernel-modules kernel-devel-matched kernel-modules-extra kernel-modules-core; \
+        rpm-ostree override remove kernel kernel-core kernel-modules kernel-devel-matched kernel-modules-extra kernel-modules-core linux-firmware; \
         rpm-ostree override --experimental replace kernel kernel-core kernel-modules kernel-modules-extra linux-firmware --from repo=rocky-baseos; \
         #Mesa drivers
         #rpm-ostree override remove mesa-libglapi mesa-libxatracker mesa-dri-drivers mesa-libgbm mesa-libEGL mesa-libGL \
