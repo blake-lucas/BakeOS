@@ -30,7 +30,8 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        image_flavor: [main, nvidia, lts]
+        image_flavor: [main, nvidia]
+        image_type: [standard, lts]
         major_version: [37, 38]
         include:
           - major_version: 37
@@ -50,9 +51,8 @@ jobs:
         run: |
           if [[ "${{ matrix.image_flavor }}" == "main" ]]; then
               echo "IMAGE_NAME=bakeos" >> $GITHUB_ENV
-          elif [[ "${{ matrix.image_flavor }}" == "lts" ]]; then
+          elif [[ "${{ matrix.image_type }}" == "lts" ]]; then
               echo "IMAGE_NAME=bakeos-lts" >> $GITHUB_ENV
-              echo "IMAGE_FLAVOR=main" >> $GITHUB_ENV
           else
               echo "IMAGE_NAME=${{ format('{0}-{1}', env.IMAGE_BASE_NAME, matrix.image_flavor) }}" >> $GITHUB_ENV
           fi
