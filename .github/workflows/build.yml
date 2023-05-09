@@ -48,7 +48,9 @@ jobs:
 
       - name: Matrix Variables
         run: |
-          if [[ "${{ matrix.image_flavor }}" == "main" ]]; then
+          if [[ "${{ matrix.image_flavor }}" == "main" ]] && [[ "${{ matrix.image_type }}" == "lts" ]]; then
+              echo "IMAGE_NAME=bakeos-lts" >> $GITHUB_ENV
+          elif [[ "${{ matrix.image_flavor }}" == "main" ]] && [[ "${{ matrix.image_type }}" == "std" ]]; then
               echo "IMAGE_NAME=bakeos" >> $GITHUB_ENV
           else
               echo "IMAGE_NAME=${{ format('{0}-{1}-{2}', env.IMAGE_BASE_NAME, matrix.image_flavor, matrix.image_type) }}" >> $GITHUB_ENV

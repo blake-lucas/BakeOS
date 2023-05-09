@@ -46,32 +46,22 @@ RUN if [ "${IMAGE_TYPE}" == "lts" ]; then \
         rm -f /etc/yum.repos.d/nobara.repo; \
         #cliwarp needed for kernel replacement
         rpm-ostree cliwrap install-to-root /; \
-        #Remove current kernel and firmware packages (thanks BingGPT for the stupid awk thing to get all present firmware packages)
+        #Remove current kernel
         rpm-ostree override remove kernel kernel-core kernel-modules kernel-modules-extra kernel-devel kernel-devel-matched kernel-headers kernel-modules-core; \
+        #Yeah I couldn't get this stupid firmware thing working so the image ships with Fedora's firmware for now
         #rpm-ostree override remove linux-firmware linux-firmware-whence $(rpm -qa | grep firmware | cut -d '-' -f 1 | awk '{print $0"-firmware"}'); \
         #rm -rf /usr/lib/firmware/*; \
-        #List kernel packages after removal, install lts kernel, and Rocky Linux firmware package
+        #List kernel packages after removal, install LTS kernel
         echo "After kernel/firmware removal:"; \
         rpm -qa | grep kernel; \
         rpm -qa | grep firmware; \
         rpm-ostree override --experimental replace kernel-longterm kernel-longterm-core kernel-longterm-modules kernel-longterm-modules-extra --from repo=copr:copr.fedorainfracloud.org:kwizart:kernel-longterm-5.15; \
-        #rpm-ostree override --experimental replace linux-firmware --from repo=rocky-baseos; \
-        #Mesa drivers
-        #rpm-ostree override remove mesa-libglapi mesa-libxatracker mesa-dri-drivers mesa-libgbm mesa-libEGL mesa-libGL \
-        #mesa-filesystem mesa-vdpau-drivers mesa-vulkan-drivers mesa-va-drivers-freeworld
-        #rpm-ostree override --experimental replace mesa-libglapi mesa-libxatracker mesa-dri-drivers mesa-libgbm mesa-libEGL mesa-libGL \
-        #mesa-filesystem mesa-vulkan-drivers --from repo=rocky-baseos
-    fi
-
-#Delete Rocky Linux repo for images other than lts
-RUN if [ "$IMAGE_TYPE" != "lts" ]; then \
-        rm -f /etc/yum.repos.d/rocky.repo; \
     fi
 
 #Delete /etc/yum.repos.d/nobara.repo if image is F38 or higher
-#RUN if [ "${FEDORA_MAJOR_VERSION}" -ge 38 ]; then \
-#        rm -f /etc/yum.repos.d/nobara.repo; \
-#    fi
+RUN if [ "${FEDORA_MAJOR_VERSION}" -ge 38 ]; then \
+        rm -f /etc/yum.repos.d/nobara.repo; \
+    fi
 
 #Latest linux-firmware on images other than lts
 RUN if [ "$IMAGE_TYPE" != "lts" ]; then \
