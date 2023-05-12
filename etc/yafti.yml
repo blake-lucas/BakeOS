@@ -55,6 +55,8 @@ screens:
           - Picture Viewer: org.gnome.eog
           - Font Viewer: org.gnome.font-viewer
           - Font Downloader: org.gustavoperedo.FontDownloader
+          - GTK3 Adawait Theme: org.gtk.Gtk3theme.adw-gtk3
+          - GTK3 Adawait Theme (dark): org.gtk.Gtk3theme.adw-gtk3-dark
         Browsers:
           description: Surf the Web
           default: false

@@ -136,6 +136,10 @@ RUN curl -L https://github.com/dundee/gdu/releases/latest/download/gdu_linux_amd
 #Download WoeUSB binary and dump to /usr/bin/woeusb
 RUN wget https://github.com/WoeUSB/WoeUSB/releases/download/v5.2.4/woeusb-5.2.4.bash -qO /usr/bin/woeusb && chmod +x /usr/bin/woeusb
 
+#GTK3 Adawait theme
+RUN wget https://github.com/lassekongo83/adw-gtk3/releases/download/v4.6/adw-gtk3v4-6.tar.xz -O /tmp/adw-gtk3.tar.xz && \
+    sudo tar -xvf /tmp/adw-gtk3.tar.xz -C /usr/share/themes
+
 COPY packages.json /tmp/packages.json
 COPY build.sh /tmp/build.sh
 
