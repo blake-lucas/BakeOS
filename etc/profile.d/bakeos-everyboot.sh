@@ -37,7 +37,7 @@ for ext in /etc/gnome-extensions/*; do
 done
 
 #Set ownership of justfile, zsh stuff, autostart and extension folders for each user profile
-chown $USER:$USER ~/.config/autostart ~/.local/share/gnome-shell/extensions ~/.config/rustdesk ~/.config/Nextcloud ~/.justfile ~/.oh-my-zsh ~/.zshrc -R
+chown $USER:$USER ~/.config/autostart ~/.local/share/gnome-shell/extensions ~/.config/rustdesk ~/.justfile ~/.oh-my-zsh ~/.zshrc -R
 
 #Not sure where these come from and I'm too lazy to figure it out so just delete them lol
 rm -f ~/Desktop/network.desktop ~/Desktop/user-home.desktop ~/Desktop/trash-can.desktop ~/Desktop/computer.desktop
