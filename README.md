@@ -66,6 +66,13 @@ Currently you'll need to have Fedora Silverblue installed to rebase to this imag
         OR
         sudo rpm-ostree rebase ostree-unverified-registry:ghcr.io/blake-lucas/bakeos-nvidia:latest
 
+1. [LTS image, older PC/VM use only really] -lts images use Rocky Linux's firmware and kernel (on Main image once I finish testing). Firmware from linux-firmware git is used for images missing in Rocky's firmware package.
+
+        sudo rpm-ostree rebase ostree-unverified-registry:ghcr.io/blake-lucas/bakeos-lts:latest
+        sudo rpm-ostree rebase ostree-unverified-registry:ghcr.io/blake-lucas/bakeos-lts:stable
+        sudo rpm-ostree rebase ostree-unverified-registry:ghcr.io/blake-lucas/bakeos-nvidia-lts:latest
+        sudo rpm-ostree rebase ostree-unverified-registry:ghcr.io/blake-lucas/bakeos-nvidia-lts:stable
+
 Check the [Silverblue documentation](https://docs.fedoraproject.org/en-US/fedora-silverblue/) for instructions on how to use rpm-ostree. 
 I build date tags as well, so if you want to rebase to a particular day's release you can use the version number and date to boot off of that specific image:
   
