@@ -9,6 +9,7 @@ if [ $(stat -c%s "/tmp/linux-firmware.rpm") -lt 100000000 ]; then \
 fi
 mkdir /tmp/rocky-firmware
 rpm2cpio /tmp/linux-firmware.rpm | cpio -idmv -D /tmp/rocky-firmware
-rm -rf /usr/lib/firmware/*
-mv /tmp/rocky-firmware/usr/lib/firmware/* /usr/lib/firmware/
-echo "After rocky-firmware.sh: $(sha256sum /usr/lib/firmware/amd-ucode/microcode_amd.bin)"
+rm -rf /lib/firmware/*
+mv /tmp/rocky-firmware/usr/lib/firmware/* /lib/firmware/
+ls /lib/firmware
+echo "After rocky-firmware.sh: $(sha256sum /lib/firmware/amd-ucode/microcode_amd.bin)"
