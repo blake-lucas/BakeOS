@@ -153,7 +153,7 @@ RUN /tmp/build.sh && \
     sed -i 's/#DefaultTimeoutStopSec.*/DefaultTimeoutStopSec=15s/' /etc/systemd/user.conf && \
     sed -i 's/#DefaultTimeoutStopSec.*/DefaultTimeoutStopSec=15s/' /etc/systemd/system.conf && \
     rm -rf /tmp/* /var/* && \
-    echo "After build.sh: $(sha256sum /usr/lib/firmware/amd-ucode/microcode_amd.bin)" && \
+    echo "After build.sh: $(sha256sum /lib/firmware/amd-ucode/microcode_amd.bin.xz)" && \
     ostree container commit && \
     mkdir -p /var/tmp && \
     chmod -R 1777 /var/tmp

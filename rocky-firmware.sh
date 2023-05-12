@@ -12,4 +12,4 @@ rpm2cpio /tmp/linux-firmware.rpm | cpio -idmv -D /tmp/rocky-firmware
 rm -rf /lib/firmware/*
 mv /tmp/rocky-firmware/usr/lib/firmware/* /lib/firmware/
 ls /lib/firmware
-echo "After rocky-firmware.sh: $(sha256sum /lib/firmware/amd-ucode/microcode_amd.bin)"
+echo "After rocky-firmware.sh: $(sha256sum /lib/firmware/amd-ucode/microcode_amd.bin.xz)"
