@@ -63,7 +63,10 @@ RUN if [ "${IMAGE_TYPE}" == "lts" ]; then \
         cd /tmp \
         python3 /tmp/download-firmware.py \
         #If downloaded firmware is less than 100mb throw an error and quit bash
-        [ $(stat -c%s "/tmp/linux-firmware.rpm") -lt 100000000 ] && { echo "Error: File size of /tmp/linux-firmware.rpm is less than 100MB. The download likely failed or something else is wrong."; exit 1; } \
+        if [[ $(stat -c%s "/tmp/linux-firmware.rpm") -lt 100000000 ]]; then \
+            echo "Error: File size of /tmp/linux-firmware.rpm is less than 100MB. The download likely failed or something else is wrong." \
+            exit 1 \
+        fi \
         mkdir /tmp/rocky-firmware \
         rpm2cpio /tmp/linux-firmware.rpm | cpio -idmv -D /tmp/rocky-firmware \
         rm -rf /usr/lib/firmware/*; \
@@ -130,7 +133,7 @@ RUN cd /tmp/extensions && mkdir /etc/gnome-extensions && \
     for EXTENSION in *.zip; do \
         unzip -q "${EXTENSION}" -d "/etc/gnome-extensions/${EXTENSION%.*}"; \
     done && \
-    sudo rm -rf /tmp/extensions && \
+    rm -rf /tmp/extensions && \
     chmod 755 /etc/gnome-extensions -R
 
 #ZSH plugins. See /etc/skel.d/.oh-my-zsh/templates/zshrc.zsh-template for default zshrc
@@ -144,8 +147,8 @@ RUN curl -L https://github.com/dundee/gdu/releases/latest/download/gdu_linux_amd
 #Download WoeUSB binary and dump to /usr/bin/woeusb
 RUN wget https://github.com/WoeUSB/WoeUSB/releases/download/v5.2.4/woeusb-5.2.4.bash -qO /usr/bin/woeusb && chmod +x /usr/bin/woeusb
 
-ADD packages.json /tmp/packages.json
-ADD build.sh /tmp/build.sh
+COPY packages.json /tmp/packages.json
+COPY build.sh /tmp/build.sh
 
 RUN /tmp/build.sh && \
     #Install yafti setup thing
