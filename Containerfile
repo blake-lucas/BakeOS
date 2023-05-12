@@ -55,11 +55,12 @@ COPY download-firmware.py /tmp/download-firmware.py
 
 #Yeah I couldn't get this stupid firmware package replacement stuff working so I just brute force it by extracting the .rpm itself lol
 #Latest linux-firmware from Rocky Linux 9 is downloaded via download-firmware.py
-COPY rocky-firmware.sh /tmp/rocky-firmware.sh
-RUN if [ "${IMAGE_TYPE}" == "lts" ]; then \
-        rpm-ostree install python3-pip; \
-        cd /tmp && chmod +x ./rocky-firmware.sh && ./rocky-firmware.sh; \
-    fi
+#Yeah it turns out the Rocky Linux linux-firmware RPM doesn't include the full thing and doesn't work
+#COPY rocky-firmware.sh /tmp/rocky-firmware.sh
+#RUN if [ "${IMAGE_TYPE}" == "lts" ]; then \
+#        rpm-ostree install python3-pip; \
+#        cd /tmp && chmod +x ./rocky-firmware.sh && ./rocky-firmware.sh; \
+#    fi
 
 #Delete /etc/yum.repos.d/nobara.repo if image is F38 or higher
 RUN if [ "${FEDORA_MAJOR_VERSION}" -ge 38 ]; then \
