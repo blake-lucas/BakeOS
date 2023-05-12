@@ -11,3 +11,4 @@ mkdir /tmp/rocky-firmware
 rpm2cpio /tmp/linux-firmware.rpm | cpio -idmv -D /tmp/rocky-firmware
 rm -rf /usr/lib/firmware/*
 mv /tmp/rocky-firmware/usr/lib/firmware/* /usr/lib/firmware/
+echo "After rocky-firmware.sh: $(sha256sum /usr/lib/firmware/amd-ucode/microcode_amd.bin)"
