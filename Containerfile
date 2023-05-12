@@ -57,7 +57,7 @@ COPY download-firmware.py /tmp/download-firmware.py
 #Latest linux-firmware from Rocky Linux 9 is downloaded via download-firmware.py
 COPY rocky-firmware.sh /tmp/rocky-firmware.sh
 RUN if [ "${IMAGE_TYPE}" == "lts" ]; then \
-        cd /tmp && ./rocky-firmware.sh; \
+        cd /tmp && chmod +x ./rocky-firmware.sh && ./rocky-firmware.sh; \
     fi
 
 #Delete /etc/yum.repos.d/nobara.repo if image is F38 or higher
