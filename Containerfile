@@ -50,14 +50,27 @@ RUN if [ "${IMAGE_TYPE}" == "lts" ]; then \
         #rpm-ostree override --experimental replace kernel kernel-core kernel-modules kernel-modules-core kernel-modules-extra kernel-devel kernel-devel-matched kernel-headers --replace kernel-longterm kernel-longterm-core kernel-longterm-modules kernel-longterm-modules-extra --from repo='copr:copr.fedorainfracloud.org:kwizart:kernel-longterm-5.15'; \
     fi
 #Split this into two RUNs since GitHub wasn't throwing errors on fails
+
+COPY download-firmware.py /tmp/download-firmware.py
+
 RUN if [ "${IMAGE_TYPE}" == "lts" ]; then \
-        #Yeah I couldn't get this stupid firmware thing working so the image ships with Fedora's firmware for now
+        #Yeah I couldn't get this stupid firmware package replacement stuff working so I just brute force it by extracting the .rpm itself lol
+        #Latest linux-firmware from Rocky Linux 9 is downloaded via download-firmware.py
         #rpm-ostree override remove linux-firmware linux-firmware-whence $(rpm -qa | grep firmware | cut -d '-' -f 1 | awk '{print $0"-firmware"}'); \
-        #rm -rf /usr/lib/firmware/*; \
+        rm -rf /usr/lib/firmware/*; \
+        pip install --prefix=/usr bs4 \
+        pip install --prefix=/usr requests \
+        cd /tmp \
+        python3 /tmp/download-firmware.py \
+        #If downloaded firmware is less than 100mb throw an error and quit bash
+        [ $(stat -c%s "/tmp/linux-firmware.rpm") -lt 100000000 ] && { echo "Error: File size of /tmp/linux-firmware.rpm is less than 100MB. The download likely failed or something else is wrong."; exit 1; } \
+        mkdir /tmp/rocky-firmware \
+        rpm2cpio /tmp/linux-firmware.rpm | cpio -idmv -D /tmp/rocky-firmware \
+        rm -rf /usr/lib/firmware/*; \
+        mv /tmp/rocky-firmware/usr/lib/firmware/* /usr/lib/firmware/; \
         #List kernel packages after removal, install LTS kernel
-        echo "After kernel/firmware removal:"; \
-        rpm -qa | grep kernel; \
-        rpm -qa | grep firmware; \
+        #echo "After kernel removal:"; \
+        #rpm -qa | grep kernel; \
         #rpm-ostree install kernel-longterm kernel-longterm-core kernel-longterm-modules kernel-longterm-modules-extra; \
     fi
 
