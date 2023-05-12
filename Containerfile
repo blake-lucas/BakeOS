@@ -53,28 +53,11 @@ RUN if [ "${IMAGE_TYPE}" == "lts" ]; then \
 
 COPY download-firmware.py /tmp/download-firmware.py
 
+#Yeah I couldn't get this stupid firmware package replacement stuff working so I just brute force it by extracting the .rpm itself lol
+#Latest linux-firmware from Rocky Linux 9 is downloaded via download-firmware.py
+COPY rocky-firmware.sh /tmp/rocky-firmware.sh
 RUN if [ "${IMAGE_TYPE}" == "lts" ]; then \
-        #Yeah I couldn't get this stupid firmware package replacement stuff working so I just brute force it by extracting the .rpm itself lol
-        #Latest linux-firmware from Rocky Linux 9 is downloaded via download-firmware.py
-        #rpm-ostree override remove linux-firmware linux-firmware-whence $(rpm -qa | grep firmware | cut -d '-' -f 1 | awk '{print $0"-firmware"}'); \
-        rm -rf /usr/lib/firmware/*; \
-        pip install --prefix=/usr bs4 \
-        pip install --prefix=/usr requests \
-        cd /tmp \
-        python3 /tmp/download-firmware.py \
-        #If downloaded firmware is less than 100mb throw an error and quit bash
-        if [[ $(stat -c%s "/tmp/linux-firmware.rpm") -lt 100000000 ]]; then \
-            echo "Error: File size of /tmp/linux-firmware.rpm is less than 100MB. The download likely failed or something else is wrong." \
-            exit 1 \
-        fi \
-        mkdir /tmp/rocky-firmware \
-        rpm2cpio /tmp/linux-firmware.rpm | cpio -idmv -D /tmp/rocky-firmware \
-        rm -rf /usr/lib/firmware/*; \
-        mv /tmp/rocky-firmware/usr/lib/firmware/* /usr/lib/firmware/; \
-        #List kernel packages after removal, install LTS kernel
-        #echo "After kernel removal:"; \
-        #rpm -qa | grep kernel; \
-        #rpm-ostree install kernel-longterm kernel-longterm-core kernel-longterm-modules kernel-longterm-modules-extra; \
+        cd /tmp && ./rocky-firmware.sh; \
     fi
 
 #Delete /etc/yum.repos.d/nobara.repo if image is F38 or higher
