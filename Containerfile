@@ -119,7 +119,7 @@ RUN mkdir /tmp/extensions && \
     git clone https://github.com/nunofarruca/WindowIsReady_Remover.git                                                       /tmp/WindowIsReady_Remover
 
 RUN cd /tmp/extensions && mkdir /etc/gnome-extensions && \
-    rm -f /tmp/WindowIsReady_Remover/README.md && mkdir -p /etc/gnome-extensions/windowIsReady_Remover@nunofarruca@gmail.com && mv /tmp/WindowIsReady_Remover/windowIsReady_Remover@nunofarruca@gmail.com /etc/gnome-extensions/windowIsReady_Remover@nunofarruca@gmail.com && \
+    rm -f /tmp/WindowIsReady_Remover/README.md && mv /tmp/WindowIsReady_Remover/windowIsReady_Remover@nunofarruca@gmail.com /etc/gnome-extensions/ && \
     for EXTENSION in *.zip; do \
         unzip -q "${EXTENSION}" -d "/etc/gnome-extensions/${EXTENSION%.*}"; \
     done && \
