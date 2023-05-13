@@ -58,7 +58,7 @@ Currently you'll need to have Fedora Silverblue installed to rebase to this imag
 
 1. To revert back:
 
-        sudo rpm-ostree rebase fedora:fedora/37/x86_64/silverblue
+        sudo rpm-ostree rebase fedora:fedora/38/x86_64/silverblue
 
 1. [Test image, not recommended] The "latest" tag follows the latest Fedora release (currently 38) and may lack full testing. Note that this doesn't include Nobara's Mutter VRR patch yet:
 
@@ -76,7 +76,7 @@ Currently you'll need to have Fedora Silverblue installed to rebase to this imag
 Check the [Silverblue documentation](https://docs.fedoraproject.org/en-US/fedora-silverblue/) for instructions on how to use rpm-ostree. 
 I build date tags as well, so if you want to rebase to a particular day's release you can use the version number and date to boot off of that specific image:
   
-    sudo rpm-ostree rebase ostree-unverified-registry:ghcr.io/blake-lucas/bakeos:37-20230310 
+    sudo rpm-ostree rebase ostree-unverified-registry:ghcr.io/blake-lucas/bakeos:38-20230510 
 
 The `latest` tag will automatically point to the latest build. 
 
