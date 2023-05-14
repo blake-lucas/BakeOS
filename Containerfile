@@ -80,9 +80,9 @@ RUN if [ "$IMAGE_TYPE" != "lts" ]; then \
     fi
 
 #APX install - https://github.com/Vanilla-OS/apx
-RUN wget https://github.com/Vanilla-OS/apx/releases/latest/download/apx_Linux_x86_64.tar.gz -O /tmp/apx_Linux_x86_64.tar.gz
-RUN tar xzvf /tmp/apx_Linux_x86_64.tar.gz --directory /tmp/
-RUN mv /tmp/apx /usr/bin/apx
+RUN wget https://github.com/Vanilla-OS/apx/releases/latest/download/apx_Linux_x86_64.tar.gz -qO /tmp/apx_Linux_x86_64.tar.gz && \
+    tar xzvf /tmp/apx_Linux_x86_64.tar.gz --directory /tmp/ && \
+    mv /tmp/apx /usr/bin/apx
 #APX config.json is copied from /etc earlier. Only modification to the cfg is to point distroboxpath to /usr/bin/distrobox.
 #COPY --from=docker.io/bketelsen/apx:latest /usr/bin/apx /usr/bin/apx
 #COPY --from=docker.io/bketelsen/apx:latest /etc/apx/config.json /etc/apx/config.json
