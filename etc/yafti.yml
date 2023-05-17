@@ -35,6 +35,7 @@ screens:
           packages:
           - Backup: org.gnome.World.PikaBackup
           - Black Box Terminal: com.raggesilver.BlackBox
+          - Signal: org.signal.Signal
           - FSearch: io.github.cboxdoerfer.FSearch
           - Calculator: org.gnome.Calculator
           - Calendar: org.gnome.Calendar
@@ -74,9 +75,10 @@ screens:
           - Discord: com.discordapp.Discord
           - Heroic Games Launcher: com.heroicgameslauncher.hgl
           - MangoHUD: org.freedesktop.Platform.VulkanLayer.MangoHud//22.08
-          - Steam: com.valvesoftware.Steam
-          - Gamescope for Steam: com.valvesoftware.Steam.Utility.gamescope
+          - Steam (flatpak): com.valvesoftware.Steam
+          - Gamescope for Steam (flatpak): com.valvesoftware.Steam.Utility.gamescope
           - Proton Updater for Steam: net.davidotek.pupgui2
+          - TeamSpeak 3: com.teamspeak.TeamSpeak
         Office:
           description: Bow to Capitalism
           default: false
@@ -97,11 +99,6 @@ screens:
           - Gstreamer for OBS: com.obsproject.Studio.Plugin.Gstreamer
           - Gstreamer VAAPI for OBS: com.obsproject.Studio.Plugin.GStreamerVaapi
           - Boatswain for Streamdeck: com.feaneron.Boatswain
-        Overlay:
-          description: Already installed, these are the flatpaks
-          default: false
-          packages:
-          - Mozilla Firefox: org.mozilla.firefox
           
   final-screen:
     source: yafti.screen.title

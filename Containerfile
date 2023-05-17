@@ -79,18 +79,14 @@ RUN if [ "$IMAGE_TYPE" != "lts" ]; then \
         mv /tmp/linux-firmware/* /lib/firmware/; \
     fi
 
-#Manual download of APX instead maybe
-#RUN wget https://github.com/Vanilla-OS/apx/releases/latest/download/apx_Linux_x86_64.tar.gz -O /tmp/apx_Linux_x86_64.tar.gz
-#RUN tar xzvf /tmp/apx_Linux_x86_64.tar.gz --directory /tmp/
-#RUN mv /tmp/apx /usr/bin/apx
-#RUN ln -s /usr/bin/apx /usr/share/apx
-#RUN mkdir /etc/apx
-#RUN wget https://raw.githubusercontent.com/Vanilla-OS/apx/main/config/config.json -O /etc/apx/config.json
-#Doesn't work lol. Lets just use the dudes build for now
 #APX install - https://github.com/Vanilla-OS/apx
-COPY --from=docker.io/bketelsen/apx:latest /usr/bin/apx /usr/bin/apx
-COPY --from=docker.io/bketelsen/apx:latest /etc/apx/config.json /etc/apx/config.json
-COPY --from=docker.io/bketelsen/apx:latest /usr/share/apx /usr/share/apx
+RUN wget https://github.com/Vanilla-OS/apx/releases/latest/download/apx_Linux_x86_64.tar.gz -qO /tmp/apx_Linux_x86_64.tar.gz && \
+    tar xzvf /tmp/apx_Linux_x86_64.tar.gz --directory /tmp/ && \
+    mv /tmp/apx /usr/bin/apx
+#APX config.json is copied from /etc earlier. Only modification to the cfg is to point distroboxpath to /usr/bin/distrobox.
+#COPY --from=docker.io/bketelsen/apx:latest /usr/bin/apx /usr/bin/apx
+#COPY --from=docker.io/bketelsen/apx:latest /etc/apx/config.json /etc/apx/config.json
+#COPY --from=docker.io/bketelsen/apx:latest /usr/share/apx /usr/share/apx
 
 #Download AppimageLauncher RPM. Package is installed via build.sh and packages.json.
 RUN wget https://github.com/TheAssassin/AppImageLauncher/releases/download/v2.2.0/appimagelauncher-2.2.0-travis995.0f91801.x86_64.rpm -qO /tmp/appimagelauncher.rpm
@@ -112,13 +108,14 @@ RUN mkdir /tmp/extensions && \
     wget https://extensions.gnome.org/extension-data/appindicatorsupportrgcjonas.gmail.com.v53.shell-extension.zip       -qO /tmp/extensions/appindicatorsupport@rgcjonas.gmail.com.zip       && \
     wget https://extensions.gnome.org/extension-data/wireless-hidchlumskyvaclav.gmail.com.v11.shell-extension.zip        -qO /tmp/extensions/wireless-hid@chlumskyvaclav.gmail.com.zip        && \
     wget https://extensions.gnome.org/extension-data/dash-to-paneljderose9.github.com.v56.shell-extension.zip            -qO /tmp/extensions/dash-to-panel@jderose9.github.com.zip            && \
-    wget https://extensions.gnome.org/extension-data/grand-theft-focuszalckos.github.com.v3.shell-extension.zip          -qO /tmp/extensions/grand-theft-focus@zalckos.github.com             && \
     wget https://extensions.gnome.org/extension-data/panoelhan.io.v19.shell-extension.zip                                -qO /tmp/extensions/pano@elhan.io.zip                                && \
     wget https://extensions.gnome.org/extension-data/tiling-assistantleleat-on-github.v40.shell-extension.zip            -qO /tmp/extensions/tiling-assistant@leleat-on-github.zip            && \
     wget https://extensions.gnome.org/extension-data/quick-settings-tweaksqwreey.v17.shell-extension.zip                 -qO /tmp/extensions/quick-settings-tweaks@qwreey.zip                 && \
-    wget https://extensions.gnome.org/extension-data/dingrastersoft.com.v56.shell-extension.zip                          -qO /tmp/extensions/ding@rastersoft.com.zip
+    wget https://extensions.gnome.org/extension-data/dingrastersoft.com.v56.shell-extension.zip                          -qO /tmp/extensions/ding@rastersoft.com.zip                          && \
+    git clone https://github.com/nunofarruca/WindowIsReady_Remover.git                                                       /tmp/WindowIsReady_Remover
 
 RUN cd /tmp/extensions && mkdir /etc/gnome-extensions && \
+    rm -f /tmp/WindowIsReady_Remover/README.md && mv /tmp/WindowIsReady_Remover/windowIsReady_Remover@nunofarruca@gmail.com /etc/gnome-extensions/ && \
     for EXTENSION in *.zip; do \
         unzip -q "${EXTENSION}" -d "/etc/gnome-extensions/${EXTENSION%.*}"; \
     done && \
