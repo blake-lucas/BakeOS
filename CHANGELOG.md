@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.2](https://github.com/blake-lucas/BakeOS/compare/v1.0.1...v1.0.2) (2023-05-17)
+
+
+### Bug Fixes
+
+* use custom isogenerator repo ([220f377](https://github.com/blake-lucas/BakeOS/commit/220f3774572515f9cd53555cfdd82e5b3909061d))
+
 ## [1.0.1](https://github.com/blake-lucas/BakeOS/compare/v1.0.0...v1.0.1) (2023-05-17)
 
 
