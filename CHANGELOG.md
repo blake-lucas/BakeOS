@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.1](https://github.com/blake-lucas/BakeOS/compare/v1.0.0...v1.0.1) (2023-05-17)
+
+
+### Bug Fixes
+
+* surely pushing a new build will generate a working ISO ([aea8c8c](https://github.com/blake-lucas/BakeOS/commit/aea8c8c6382c1e674077074f55df2473f4bba648))
+
 ## 1.0.0 (2023-05-17)
 
 
