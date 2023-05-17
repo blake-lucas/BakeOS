@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.1](https://github.com/blake-lucas/BakeOS/compare/v1.1.0...v1.1.1) (2023-05-17)
+
+
+### Bug Fixes
+
+* Separate LTS builds in ISO boot menu to pull correct imageurl ([c901592](https://github.com/blake-lucas/BakeOS/commit/c901592f08f0bdcbc64e0161e0f0d295047bf1d1))
+
 ## [1.1.0](https://github.com/blake-lucas/BakeOS/compare/v1.0.2...v1.1.0) (2023-05-17)
 
 
