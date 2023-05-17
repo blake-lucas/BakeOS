@@ -1,13 +1,20 @@
 ublue_variants:
   - label: blake-lucas/bakeos
     ks: /kickstart/ublue-os.ks
+    subvariants:
+      - label: latest
+      - label: LTS release
+        suffix: -lts
     flavors:
       - label: bakeos
         info: BakeOS
+
   - label: blake-lucas/bakeos-nvidia
     ks: /kickstart/ublue-os-nvidia.ks
     subvariants:
       - label: latest driver
+      - label: LTS release
+        suffix: -lts
     flavors:
       - label: bakeos-nvidia
-        info: BakeOS
+        info: BakeOS Nvidia
