@@ -2,33 +2,33 @@ on:
     push:
       branches:
         - main
-
+  
   permissions:
     contents: write
     checks: write
     actions: read
     packages: write
     pull-requests: write
-
-  name: Release ISO
+        
+  name: Release Please
   jobs:
-    release-iso:
+    release-please:
       runs-on: ubuntu-latest
       outputs:
-        releases_created: ${{ steps.release-iso.outputs.releases_created }}
-        tag: ${{ steps.release-iso.outputs.tag_name }}
-        upload_url: ${{ steps.release-iso.outputs.upload_url }}
+        releases_created: ${{ steps.release-please.outputs.releases_created }}
+        tag: ${{ steps.release-please.outputs.tag_name }}
+        upload_url: ${{ steps.release-please.outputs.upload_url }}
       steps:
-        - uses: google-github-actions/release-iso-action@v3
-          id: release-iso
+        - uses: google-github-actions/release-please-action@v3
+          id: release-please
           with:
             release-type: node
-            package-name: release-iso-action
+            package-name: release-please-action
     build-iso:
       name: Generate and Release ISOs
       runs-on: ubuntu-latest
-      needs: release-iso
-      if: needs.release-iso.outputs.releases_created
+      needs: release-please
+      if: needs.release-please.outputs.releases_created
       container:
         image: fedora:38
         options: --privileged
@@ -54,7 +54,7 @@ on:
             GITHUB_TOKEN: ${{ github.token }}
           run: |
             gh release upload \
-              ${{ needs.release-iso.outputs.tag }} \
+              ${{ needs.release-please.outputs.tag }} \
               ./${{ steps.isogenerator.outputs.iso-path }} \
               --repo ${{ github.repository_owner }}/${{ github.event.repository.name }} \
               --clobber
@@ -64,7 +64,7 @@ on:
             GITHUB_TOKEN: ${{ github.token }}
           run: |
             gh release upload \
-              ${{ needs.release-iso.outputs.tag }} \
+              ${{ needs.release-please.outputs.tag }} \
               ./${{ steps.isogenerator.outputs.sha256sum-path }} \
               --repo ${{ github.repository_owner }}/${{ github.event.repository.name }} \
               --clobber
