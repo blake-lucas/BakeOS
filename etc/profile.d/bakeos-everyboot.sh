@@ -13,9 +13,19 @@ if [ ! -f ~/.justfile ];
 fi;
 
 #If a user doesn't have a .zshrc, change the default shell and copy ohmyzsh plugins and such
-if [ ! -f ~/.zshrc ];
-  then cp -r "/etc/skel.d/.oh-my-zsh" ~/ && cp "/etc/skel.d/.zshrc" ~/.zshrc && usermod -s /usr/bin/zsh $USER > /dev/null
+if [ ! -f ~/.oh-my-zsh ];
+  then cp -r "/etc/skel.d/.oh-my-zsh" ~/ && cp "/etc/skel.d/.zshrc" ~/.zshrc
 fi;
+
+#If users shell isn't found to be ZSH according to /etc/passwd, ask to change it
+
+if [ ! -f ~/.disablezsh ]; then
+  if [ ! $(cat /etc/passwd | grep $USER | grep zsh) ]; then
+    echo "$USER's default shell is not ZSH according to /etc/passwd." && echo "You can disable this check with: touch ~/.disablezsh" && chsh -s $(which zsh) && echo "You may need to sign out and back in for this to apply."
+  fi;
+fi;
+
+
 
 #Copy rustdesk server config to each users profile
 if [ ! -f ~/.config/rustdesk/RustDesk2.toml ];

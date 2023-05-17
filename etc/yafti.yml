@@ -30,10 +30,10 @@ screens:
       package_manager: yafti.plugin.flatpak
       groups:
         Core:
-          description: Core Applications
+          description:
           default: true
           packages:
-          - Backup: org.gnome.World.PikaBackup
+          - Pika Backup: org.gnome.World.PikaBackup
           - Black Box Terminal: com.raggesilver.BlackBox
           - Signal: org.signal.Signal
           - FSearch: io.github.cboxdoerfer.FSearch
@@ -59,14 +59,14 @@ screens:
           - GTK3 Adawait Theme: org.gtk.Gtk3theme.adw-gtk3
           - GTK3 Adawait Theme (dark): org.gtk.Gtk3theme.adw-gtk3-dark
         Browsers:
-          description: Surf the Web
+          description: Firefox is already on host
           default: false
           packages:
           - Ungoogled Chromium: com.github.Eloston.UngoogledChromium
           - Google Chrome: com.google.Chrome
           - Microsoft Edge: com.microsoft.Edge
         Gaming:
-          description: "Rock and Stone!"
+          description:
           default: false
           packages:
           - Bottles: com.usebottles.bottles
@@ -80,25 +80,24 @@ screens:
           - Proton Updater for Steam: net.davidotek.pupgui2
           - TeamSpeak 3: com.teamspeak.TeamSpeak
         Office:
-          description: Bow to Capitalism
+          description:
           default: false
           packages:
           - LibreOffice: org.libreoffice.LibreOffice
-          - Obsidian: md.obsidian.Obsidian
-          - Iotas: org.gnome.gitlab.cheywood.Iotas
           - OnlyOffice: org.onlyoffice.desktopeditors
+          - Iotas: org.gnome.gitlab.cheywood.Iotas
           - Slack: com.slack.Slack
+          - Teams for Linux: com.github.IsmaelMartinez.teams_for_linux
           - Standard Notes: org.standardnotes.standardnotes
           - Thunderbird Email: org.mozilla.Thunderbird
         Streaming:
-          description: Stream to the Internet
+          description:
           default: false
           packages:
           - OBS Studio: com.obsproject.Studio
           - VkCapture for OBS: com.obsproject.Studio.OBSVkCapture 
           - Gstreamer for OBS: com.obsproject.Studio.Plugin.Gstreamer
           - Gstreamer VAAPI for OBS: com.obsproject.Studio.Plugin.GStreamerVaapi
-          - Boatswain for Streamdeck: com.feaneron.Boatswain
           
   final-screen:
     source: yafti.screen.title
