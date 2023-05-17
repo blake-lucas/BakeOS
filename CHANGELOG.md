@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.0](https://github.com/blake-lucas/BakeOS/compare/v1.0.2...v1.1.0) (2023-05-17)
+
+
+### Features
+
+* Add LTS image to ISO ([b5d0d00](https://github.com/blake-lucas/BakeOS/commit/b5d0d00ab67808d7b159c025ae867d86b8426496))
+
 ## [1.0.2](https://github.com/blake-lucas/BakeOS/compare/v1.0.1...v1.0.2) (2023-05-17)
 
 
