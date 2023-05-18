@@ -27,15 +27,12 @@ COPY usr /usr
 #         \
 #    fi
 
-#Only replace mesa stuff with Nobara versions if image is F37 or lower and not "lts" image
-RUN if [ "$IMAGE_TYPE" != "lts" ] && [ "${FEDORA_MAJOR_VERSION}" -le 37 ]; then \
+#Replace mesa stuff with git versions for images other than lts
+RUN if [ "$IMAGE_TYPE" != "lts" ]; then \
+        rpm-ostree override remove mesa-va-drivers-freeworld mesa-libglapi mesa-libxatracker mesa-dri-drivers mesa-libgbm mesa-libEGL mesa-libGL \
+        mesa-filesystem mesa-vdpau-drivers mesa-vulkan-drivers; \
         rpm-ostree override --experimental replace mesa-libglapi mesa-libxatracker mesa-dri-drivers mesa-libgbm mesa-libEGL mesa-libGL \
-        mesa-filesystem mesa-vdpau-drivers mesa-vulkan-drivers mesa-va-drivers-freeworld --from repo=nobara-baseos; \
-    fi
-
-#Use Nobara's patched mutter if running 37 or lower and not "lts" image
-RUN if [ "$IMAGE_TYPE" != "lts" ] && [ "${FEDORA_MAJOR_VERSION}" -le 37 ]; then \
-        rpm-ostree override --experimental replace mutter --from repo=nobara-baseos; \
+        mesa-filesystem mesa-vdpau-drivers mesa-vulkan-drivers mesa-va-drivers --from repo=mesa-git; \
     fi
 
 #Use Rocky Linux Kernel, firmware, and mesa if "lts" image
