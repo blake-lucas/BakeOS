@@ -6,5 +6,5 @@ skip_if_unavailable=True
 gpgcheck=1
 gpgkey=https://download.copr.fedorainfracloud.org/results/kwizart/kernel-longterm-5.15/pubkey.gpg
 repo_gpgcheck=0
-enabled=1
+enabled=0
 enabled_metadata=1
