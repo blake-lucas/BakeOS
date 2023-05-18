@@ -12,8 +12,8 @@ if [ ! -f ~/.justfile ];
   then cp -r "/etc/skel.d/.justfile" ~/.justfile
 fi;
 
-#If a user doesn't have a .zshrc, change the default shell and copy ohmyzsh plugins and such
-if [ ! -f ~/.oh-my-zsh ];
+#If a user doesn't have ~/.oh-my-zsy, change the default shell and copy ohmyzsh plugins and such
+if [ ! -d ~/.oh-my-zsh ];
   then cp -r "/etc/skel.d/.oh-my-zsh" ~/ && cp "/etc/skel.d/.zshrc" ~/.zshrc
 fi;
 
