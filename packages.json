@@ -60,7 +60,8 @@
                 "p7zip",
                 "p7zip-plugins",
                 "wimlib",
-                "wimlib-utils"
+                "wimlib-utils",
+                "duperemove"
             ]
         },
         "exclude": {
