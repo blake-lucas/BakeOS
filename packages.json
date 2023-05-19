@@ -61,7 +61,8 @@
                 "p7zip-plugins",
                 "wimlib",
                 "wimlib-utils",
-                "duperemove"
+                "duperemove",
+                "pavucontrol"
             ]
         },
         "exclude": {
