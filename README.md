@@ -8,15 +8,14 @@ A customized Silverblue image built with the following tweaks:
  - Black Box terminal as default (including Nautilus "Open Terminal here" right click menu) 
  - Distrobox installed
  - Aliases for APX - ex. ddnf install, aapt install, ddnf run, etc
- - Mesa drivers from Nobara (for F37 image)
- - Mutter VRR patch from Nobara
+ - Mesa drivers from git (xxmitsu's COPR)
  - Automatically installed and configured GNOME extensions (see list of extensions and settings below)
  - Multiple CLI utilities preinstalled - htop, btop, nvtop, gdu, iotop, sysstat, nethogs, net-tools, smem, screen, etc
  - Latest linux-firmware from git
  - ZSH installed and preconfigured with plugins/theme (more similar to Manjaro's ZSH config)
  - Latest Nvidia driver installed on Nvidia image
  - RustDesk installed and configured to use my relay server (rustdesk.blakelucas.com)
- - NextCloud client and Nautilus extension installed - Monochrome icons used by default
+ - NextCloud client and Nautilus extension installed
  - NextShot installed and bound to print (GNOME screenshot bound to shift+print)
  - Ubuntu's Yaru theme/fonts installed and configured
  - Automatic Flatpak and system updates daily
