@@ -25,8 +25,6 @@ if [ ! -f ~/.disablezsh ]; then
   fi;
 fi;
 
-
-
 #Copy rustdesk server config to each users profile
 if [ ! -f ~/.config/rustdesk/RustDesk2.toml ];
   then cp -r "/etc/skel.d/.config/rustdesk/RustDesk2.toml" ~/.config/rustdesk/RustDesk2.toml
