@@ -20,7 +20,7 @@ fi;
 #If users shell isn't found to be ZSH according to /etc/passwd, ask to change it
 
 if [ ! -f ~/.disablezsh ]; then
-  if [ ! $(cat /etc/passwd | grep $USER | grep zsh) ]; then
+  if [ -z $(cat /etc/passwd | grep $USER | grep zsh) ]; then
     echo "$USER's default shell is not ZSH according to /etc/passwd." && echo "You can disable this check with: touch ~/.disablezsh" && chsh -s $(which zsh) && echo "You may need to sign out and back in for this to apply."
   fi;
 fi;
