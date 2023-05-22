@@ -62,13 +62,13 @@ download-updates-notify=false
 
 [com/raggesilver/BlackBox]
 command-as-login-shell=true
-use-custom-command=true
-custom-shell-command=''
-theme-dark="Yaru"
-style-preference=2
 font="Ubuntu Mono 16"
-window-width=975
-window-height=650
+style-preference=2
+theme-dark='Pencil Dark'
+window-height=720
+window-width=1280
+was-maximized=false
+remember-window-size=true
 
 [org/gnome/shell]
 favorite-apps=['firefox.desktop', 'org.gnome.Nautilus.desktop']
