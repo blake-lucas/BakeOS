@@ -48,10 +48,15 @@ Currently you'll need to have Fedora Silverblue installed to rebase to this imag
 
        just set-kargs
 
-7. Finally, setup APX with:
+7. Setup APX with:
        
        just apx-init
        just apx-nvidia (or apx-amd/apx-intel) - This sets up video accel in APX containers
+
+8. If you need Steam, usually installing it to your Fedora APX container is best:
+
+       apx --dnf install steam
+       apx --dnf export steam
 
 # Rebasing from existing Silverblue install
 
