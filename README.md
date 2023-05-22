@@ -34,28 +34,47 @@ A customized Silverblue image built with the following tweaks:
 
 Currently you'll need to have Fedora Silverblue installed to rebase to this image (see below). Premade ISOs will be provided as soon as the custom image feature lands in the Fedora installer.
 
-# Usage
+# Installation
+
+1. Download the latest ISO from the [releases](https://github.com/blake-lucas/BakeOS/releases) section
+2. Flash it to a USB using something like [balenaEtcher](https://etcher.balena.io/) or [Rufus](https://rufus.ie/en/) (use DD mode). NOTE: Currently Ventoy will not work with these ISOs. It just boots to a black screen.
+3. Select the image you'd like to install. Ex. bakeos-nvidia for PCs with Nvidia GPUs, bakeos-main for all others. LTS images should be used on PCs with older hardware or VMs.
+4. If you are using Wi-Fi only, be sure to join your network in the Network section of the installer. If you do not have a valid internet connection, the installer will fail to grab the BakeOS image.
+5. Once the install is finished and you've verified things are working, pin the deployment:
+
+        sudo ostree admin pin 0
+
+6. If you're running an Nvidia GPU, set your kernel args to use the Nvidia driver:
+
+       just set-kargs
+
+7. Finally, setup APX with:
+       
+       just apx-init
+       just apx-nvidia (or apx-amd/apx-intel) - This sets up video accel in APX containers
+
+# Rebasing from existing Silverblue install
 
 1. Download and install [Fedora Silverblue](https://silverblue.fedoraproject.org/download)
-1. After you reboot you should [pin the working deployment](https://docs.fedoraproject.org/en-US/fedora-silverblue/faq/#_about_using_silverblue) so you can safely rollback. (sudo ostree admin pin 0)
-1. [AMD/Intel GPU users only] Open a terminal and rebase the OS to this image:
+2. After you reboot you should [pin the working deployment](https://docs.fedoraproject.org/en-US/fedora-silverblue/faq/#_about_using_silverblue) so you can safely rollback. (sudo ostree admin pin 0)
+3. [AMD/Intel GPU users only] Open a terminal and rebase the OS to this image:
 
         sudo rpm-ostree rebase ostree-unverified-registry:ghcr.io/blake-lucas/bakeos:stable
 
-1. [Nvidia GPU users only] Open a terminal and rebase the OS to this image:
+4. [Nvidia GPU users only] Open a terminal and rebase the OS to this image:
 
         sudo rpm-ostree rebase ostree-unverified-registry:ghcr.io/blake-lucas/bakeos-nvidia:stable
         
-1. AMD/Intel can reboot and be finished. If you're on Nvidia, reboot, login, and run:
+5. AMD/Intel can reboot and be finished. If you're on Nvidia, reboot, login, and run:
         
         just set-kargs
 
-1. Last thing, I'd recommend running the following once your drivers are working:
+6. Last thing, I'd recommend running the following once your drivers are working:
 
         just apx-init - Creates APX containers and tweaks a few things
         just apx-nvidia (or apx-amd/apx-intel) - This sets up video accel in APX containers
 
-1. To revert back:
+7. To revert back:
 
         sudo rpm-ostree rebase fedora:fedora/38/x86_64/silverblue
 
