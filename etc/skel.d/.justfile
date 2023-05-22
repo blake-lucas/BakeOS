@@ -47,21 +47,21 @@ apx-init:
   apx --dnf install git nano zip unzip curl wget -y
   
 apx-nvidia:
-  apx --dnf run sudo dnf install https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-38.noarch.rpm https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-38.noarch.rpm -y
+  apx --dnf run sudo dnf install https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(cat /etc/fedora-release | awk '{print $3}').noarch.rpm https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(cat /etc/fedora-release | awk '{print $3}').noarch.rpm -y
   apx --dnf install xorg-x11-drv-nvidia-libs.i686 akmod-nvidia -y
   apx install software-properties-common -y
   apx run sudo add-apt-repository multiverse -y
   apx install nvidia-driver-530 -y
   
 apx-amd:
-  apx --dnf run sudo dnf install https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-38.noarch.rpm https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-38.noarch.rpm -y
+  apx --dnf run sudo dnf install https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(cat /etc/fedora-release | awk '{print $3}').noarch.rpm https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(cat /etc/fedora-release | awk '{print $3}').noarch.rpm -y
   apx --dnf install xorg-x11-drv-amdgpu mesa-libGL.i686 mesa-dri-drivers.i686 -y
   apx install software-properties-common -y
   apx run sudo add-apt-repository multiverse -y
   apx install mesa-utils mesa-utils-extra -y
   
 apx-intel:
-  apx --dnf run sudo dnf install https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-38.noarch.rpm https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-38.noarch.rpm -y
+  apx --dnf run sudo dnf install https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(cat /etc/fedora-release | awk '{print $3}').noarch.rpm https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(cat /etc/fedora-release | awk '{print $3}').noarch.rpm -y
   apx --dnf install xorg-x11-drv-intel mesa-libGL.i686 mesa-dri-drivers.i686 -y
   apx install software-properties-common -y
   apx run sudo add-apt-repository multiverse -y
@@ -74,7 +74,7 @@ set-kargs:
         --append=nvidia-drm.modeset=1
 
 enroll-secure-boot-key:
-    sudo mokutil --import /etc/pki/akmods/certs/akmods-nvidia.der
+    sudo mokutil --import /etc/pki/akmods/certs/akmods-ublue.der
 
 test-cuda:
     podman run \
