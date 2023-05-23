@@ -62,7 +62,8 @@
                 "wimlib",
                 "wimlib-utils",
                 "duperemove",
-                "pavucontrol"
+                "pavucontrol",
+                "lm_sensors"
             ]
         },
         "exclude": {
