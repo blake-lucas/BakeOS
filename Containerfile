@@ -15,6 +15,7 @@ RUN echo flavor: $IMAGE_FLAVOR type: $IMAGE_TYPE name: $IMAGE_NAME
 
 COPY etc /etc
 COPY usr /usr
+COPY tmp /tmp
 
 #Nobara kernel, mesa, and mutter (vrr patch)
 #RUN wget https://copr.fedorainfracloud.org/coprs/gloriouseggroll/nobara/repo/fedora-"${FEDORA_MAJOR_VERSION}"/gloriouseggroll-nobara-fedora-"${FEDORA_MAJOR_VERSION}".repo -O /etc/yum.repos.d/nobara.repo
@@ -23,9 +24,12 @@ COPY usr /usr
 #        rpm-ostree override remove kernel kernel-core kernel-modules kernel-devel-matched kernel-modules-extra kernel-modules-core; \
 #        rpm-ostree override --experimental replace kernel kernel-core kernel-modules kernel-modules-core kernel-modules-extra --from repo=nobara-baseos; \
 #    fi
-#RUN if [ "$IMAGE_TYPE" != *"lts"* ] && [ "$IMAGE_FLAVOR" != *"nvidia"* ]; then \
-#         \
-#    fi
+
+#If nvidia image, copy gdm.conf to disable Wayland
+RUN if [ "$IMAGE_FLAVOR" == *"nvidia"* ]; then \
+        echo "Disabling Wayland via gdm custom.conf"; \
+        cp -f /tmp/gdm.conf /etc/gdm/custom.conf; \
+    fi
 
 #Replace mesa stuff with git versions for images other than lts
 RUN if [ "$IMAGE_TYPE" != "lts" ]; then \
