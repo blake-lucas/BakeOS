@@ -63,7 +63,8 @@
                 "wimlib-utils",
                 "duperemove",
                 "pavucontrol",
-                "lm_sensors"
+                "lm_sensors",
+                "tailscale"
             ]
         },
         "exclude": {
