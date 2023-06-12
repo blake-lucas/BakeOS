@@ -33,6 +33,7 @@ steam-mesa-git:
   FLATPAK_GL_DRIVERS=mesa-git flatpak run com.valvesoftware.Steam
 
 apx-init:
+  apx init
   apx update
   apx upgrade -y
   apx run sudo apt install git nano wget curl zip unzip software-properties-common language-pack-en -y
@@ -43,6 +44,7 @@ apx-init:
   apx run sudo cp /tmp/99mozillateam /etc/apt/preferences.d/99mozillateam
   apx run sudo add-apt-repository ppa:mozillateam/ppa -y
   apx run sudo apt install firefox -y
+  apx --dnf init
   apx --dnf update -y
   apx --dnf run sudo dnf install git nano zip unzip curl wget -y
   
