@@ -1,5 +1,29 @@
 # Changelog
 
+## [1.2.0](https://github.com/blake-lucas/BakeOS/compare/v1.1.1...v1.2.0) (2023-06-12)
+
+
+### Features
+
+* add apx init to apx-init just entry ([4f05785](https://github.com/blake-lucas/BakeOS/commit/4f0578538284c38dccb17e1241152cd0e8fb5bb6))
+* add duperemove package ([653071d](https://github.com/blake-lucas/BakeOS/commit/653071d7b30c964f96f797e78238a31c97a3e6f6))
+* add lm_sensors package ([4eadde9](https://github.com/blake-lucas/BakeOS/commit/4eadde9635eeb24d7290993ee9a81f2b67b87715))
+* add pavucontrol package ([ebd77a8](https://github.com/blake-lucas/BakeOS/commit/ebd77a869935f24a5acf33c867b9db52090bd13c))
+* add tailscale VPN ([64b3083](https://github.com/blake-lucas/BakeOS/commit/64b308370554851de494953ba37ae91f101ccb14))
+* Disable Wayland on Nvidia image by default ([61b85a7](https://github.com/blake-lucas/BakeOS/commit/61b85a7a18dbf91116b4624b6d0f37566b384f47))
+* Set new default theme for black box ([7b8aa45](https://github.com/blake-lucas/BakeOS/commit/7b8aa45e49084c8c028bbdc2f426d62cd164c5b6))
+* Use Mesa git ([be08889](https://github.com/blake-lucas/BakeOS/commit/be08889e84c0e16ad0f1039368b5f577d5d6b655))
+
+
+### Bug Fixes
+
+* Disable kernel LTS repo and maybe fix mesa-git install ([43799d3](https://github.com/blake-lucas/BakeOS/commit/43799d3f94ce5a84c57454c1d70e71767f44ad5c))
+* fix oh-my-zsh check on boot script ([61d131e](https://github.com/blake-lucas/BakeOS/commit/61d131e9217928d11154d7559abab0f8ff02c3b2))
+* maybe fix zsh check ([b7c87ed](https://github.com/blake-lucas/BakeOS/commit/b7c87edaa88260c5601fa9be418071c08c55a037))
+* update justfile to grab current fedora version ([63460ce](https://github.com/blake-lucas/BakeOS/commit/63460ce0e7dee9a4f1bcb252b4a0dd4304b90d56))
+* use apx run instead of install to avoid export questions ([1d0220b](https://github.com/blake-lucas/BakeOS/commit/1d0220b66677977807e24e1adbd9ed0607da21d6))
+* Yafti needs empty quotes for descriptions ([4fc23ae](https://github.com/blake-lucas/BakeOS/commit/4fc23aee7499f05da7ffe62abcc1a15945b6249b))
+
 ## [1.1.1](https://github.com/blake-lucas/BakeOS/compare/v1.1.0...v1.1.1) (2023-05-17)
 
 
