@@ -72,13 +72,13 @@ RUN if [ "${FEDORA_MAJOR_VERSION}" -ge 38 ]; then \
         rm -f /etc/yum.repos.d/nobara.repo; \
     fi
 
-#Latest linux-firmware on images other than lts
-RUN if [ "$IMAGE_TYPE" != "lts" ]; then \
-        cd /tmp; \
-        git clone git://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-firmware.git; \
-        rm -rf /lib/firmware/*; \
-        mv /tmp/linux-firmware/* /lib/firmware/; \
-    fi
+##Latest linux-firmware on images other than lts
+#RUN if [ "$IMAGE_TYPE" != "lts" ]; then \
+#        cd /tmp; \
+#        git clone git://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-firmware.git; \
+#        rm -rf /lib/firmware/*; \
+#        mv /tmp/linux-firmware/* /lib/firmware/; \
+#    fi
 
 #APX install - https://github.com/Vanilla-OS/apx
 RUN wget https://github.com/Vanilla-OS/apx/releases/latest/download/apx_Linux_x86_64.tar.gz -qO /tmp/apx_Linux_x86_64.tar.gz && \
