@@ -46,14 +46,16 @@ jobs:
 
       - name: Matrix Variables
         run: |
-          if [[ "${{ matrix.image_flavor }}" == "main" ]] && [[ "${{ matrix.image_type }}" == "lts" ]]; then
-              echo "IMAGE_NAME=bakeos-lts" >> $GITHUB_ENV
-          elif [[ "${{ matrix.image_flavor }}" == "main" ]] && [[ "${{ matrix.image_type }}" == "std" ]]; then
+          if [[ "${{ matrix.image_type }}" == "lts" ]]; then
+              echo "IMAGE_NAME=${{ format('{0}-{1}-{2}-{3}', env.IMAGE_BASE_NAME, matrix.base_image_name, matrix.image_flavor, matrix.image_type) }}" >> $GITHUB_ENV
+          elif [[ "${{ matrix.image_type }}" == "std" ]]; then
+              echo "IMAGE_NAME=${{ format('{0}-{1}-{2}', env.IMAGE_BASE_NAME, matrix.base_image_name, matrix.image_flavor) }}" >> $GITHUB_ENV
+          elif [[ "${{ matrix.base_image_name }}" == "silverblue" ]] && [[ "${{ matrix.image_flavor }}" == "main" ]] && [[ "${{ matrix.image_type }}" == "std" ]]; then
               echo "IMAGE_NAME=bakeos" >> $GITHUB_ENV
-          elif [[ "${{ matrix.image_flavor }}" == "nvidia" ]] && [[ "${{ matrix.image_type }}" == "std" ]]; then
+          elif [[ "${{ matrix.base_image_name }}" == "silverblue" ]] && [[ "${{ matrix.image_flavor }}" == "nvidia" ]] && [[ "${{ matrix.image_type }}" == "std" ]]; then
               echo "IMAGE_NAME=bakeos-nvidia" >> $GITHUB_ENV
           else
-              echo "IMAGE_NAME=${{ format('{0}-{1}-{2}', env.IMAGE_BASE_NAME, matrix.image_flavor, matrix.image_type) }}" >> $GITHUB_ENV
+              echo "IMAGE_NAME=${{ format('{0}-{1}-{2}-{3}', env.IMAGE_BASE_NAME, matrix.base_image_name, matrix.image_flavor, matrix.image_type) }}" >> $GITHUB_ENV
           fi
 
       - name: Generate tags
