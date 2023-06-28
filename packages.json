@@ -4,10 +4,6 @@
             "all": [
                 "/tmp/rustdesk.rpm",
                 "/tmp/appimagelauncher.rpm",
-                "gnome-shell-extension-blur-my-shell",
-                "gnome-shell-extension-gsconnect",
-                "gnome-text-editor",
-                "nautilus-gsconnect",
                 "libgda",
                 "libgda-sqlite",
                 "libratbag-ratbagd",
@@ -15,10 +11,6 @@
                 "python3-pip",
                 "wireguard-tools",
                 "xprop",
-                "yaru-theme",
-                "gnome-shell-extension-appindicator",
-                "gnome-shell-extension-blur-my-shell",
-                "gnome-shell-extension-caffeine",
                 "openssl",
                 "qemu-guest-agent",
                 "nextcloud-client-nautilus",
@@ -65,15 +57,27 @@
                 "pavucontrol",
                 "lm_sensors",
                 "tailscale"
+            ],
+            "silverblue": [
+                "adw-gtk3-theme",
+                "gnome-tweaks",
+                "raw-thumbnailer",
+                "yaru-theme",
+                "gnome-shell-extension-appindicator",
+                "gnome-shell-extension-blur-my-shell",
+                "gnome-shell-extension-caffeine",
+                "gnome-shell-extension-blur-my-shell",
+                "gnome-shell-extension-gsconnect",
+                "gnome-text-editor",
+                "nautilus-gsconnect"
+            ],
+            "kinoite": [
+                "icoutils",
+                "kate",
+                "kcron",
+                "kio-admin",
+                "ksshaskpass"
             ]
-        },
-        "exclude": {
-            "all": []
-        }
-    },
-    "37": {
-        "include": {
-            "all": []
         },
         "exclude": {
             "all": []

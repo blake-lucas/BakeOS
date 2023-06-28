@@ -30,7 +30,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        image_flavor: [main, nvidia]
+        image_flavor: [main, nvidia, kinoite-main, kinoite-nvidia, vauxite-main, vauxite-nvidia]
         image_type: [std, lts]
         major_version: [38]
         include:
