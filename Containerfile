@@ -26,7 +26,7 @@ COPY tmp /tmp
 #    fi
 
 #If nvidia image, copy gdm.conf to disable Wayland
-RUN if [ "$IMAGE_FLAVOR" == "nvidia" ]; then \
+RUN if [ "$IMAGE_FLAVOR" == "nvidia" ] && [ "$BASE_IMAGE_NAME" == "silverblue" ]; then \
         echo "Disabling Wayland via gdm custom.conf"; \
         cat /tmp/gdm.conf; \
         cp -f /tmp/gdm.conf /etc/gdm/custom.conf; \
@@ -104,24 +104,30 @@ RUN wget https://github.com/rustdesk/rustdesk/releases/download/nightly/rustdesk
 RUN wget https://github.com/dshoreman/nextshot/releases/latest/download/nextshot -qO /usr/bin/nextshot && chmod +x /usr/bin/nextshot
 
 #GNOME extensions
-RUN mkdir /tmp/extensions && \
-    wget https://extensions.gnome.org/extension-data/arcmenuarcmenu.com.v44.shell-extension.zip                          -qO /tmp/extensions/arcmenu@arcmenu.com.zip                          && \
-    wget https://extensions.gnome.org/extension-data/appindicatorsupportrgcjonas.gmail.com.v53.shell-extension.zip       -qO /tmp/extensions/appindicatorsupport@rgcjonas.gmail.com.zip       && \
-    wget https://extensions.gnome.org/extension-data/wireless-hidchlumskyvaclav.gmail.com.v11.shell-extension.zip        -qO /tmp/extensions/wireless-hid@chlumskyvaclav.gmail.com.zip        && \
-    wget https://extensions.gnome.org/extension-data/dash-to-paneljderose9.github.com.v56.shell-extension.zip            -qO /tmp/extensions/dash-to-panel@jderose9.github.com.zip            && \
-    wget https://extensions.gnome.org/extension-data/panoelhan.io.v19.shell-extension.zip                                -qO /tmp/extensions/pano@elhan.io.zip                                && \
-    wget https://extensions.gnome.org/extension-data/tiling-assistantleleat-on-github.v40.shell-extension.zip            -qO /tmp/extensions/tiling-assistant@leleat-on-github.zip            && \
-    wget https://extensions.gnome.org/extension-data/quick-settings-tweaksqwreey.v17.shell-extension.zip                 -qO /tmp/extensions/quick-settings-tweaks@qwreey.zip                 && \
-    wget https://extensions.gnome.org/extension-data/dingrastersoft.com.v56.shell-extension.zip                          -qO /tmp/extensions/ding@rastersoft.com.zip                          && \
-    git clone https://github.com/nunofarruca/WindowIsReady_Remover.git                                                       /tmp/WindowIsReady_Remover
-
-RUN cd /tmp/extensions && mkdir /etc/gnome-extensions && \
-    rm -f /tmp/WindowIsReady_Remover/README.md && mv /tmp/WindowIsReady_Remover/windowIsReady_Remover@nunofarruca@gmail.com /etc/gnome-extensions/ && \
-    for EXTENSION in *.zip; do \
-        unzip -q "${EXTENSION}" -d "/etc/gnome-extensions/${EXTENSION%.*}"; \
-    done && \
-    rm -rf /tmp/extensions && \
-    chmod 755 /etc/gnome-extensions -R
+RUN if [ "${BASE_IMAGE_NAME}" == "silverblue" ]; then \
+        mkdir /tmp/extensions && \
+        wget https://extensions.gnome.org/extension-data/arcmenuarcmenu.com.v44.shell-extension.zip                          -qO /tmp/extensions/arcmenu@arcmenu.com.zip                          ; \
+        wget https://extensions.gnome.org/extension-data/appindicatorsupportrgcjonas.gmail.com.v53.shell-extension.zip       -qO /tmp/extensions/appindicatorsupport@rgcjonas.gmail.com.zip       ; \
+        wget https://extensions.gnome.org/extension-data/wireless-hidchlumskyvaclav.gmail.com.v11.shell-extension.zip        -qO /tmp/extensions/wireless-hid@chlumskyvaclav.gmail.com.zip        ; \
+        wget https://extensions.gnome.org/extension-data/dash-to-paneljderose9.github.com.v56.shell-extension.zip            -qO /tmp/extensions/dash-to-panel@jderose9.github.com.zip            ; \
+        wget https://extensions.gnome.org/extension-data/panoelhan.io.v19.shell-extension.zip                                -qO /tmp/extensions/pano@elhan.io.zip                                ; \
+        wget https://extensions.gnome.org/extension-data/tiling-assistantleleat-on-github.v40.shell-extension.zip            -qO /tmp/extensions/tiling-assistant@leleat-on-github.zip            ; \
+        wget https://extensions.gnome.org/extension-data/quick-settings-tweaksqwreey.v17.shell-extension.zip                 -qO /tmp/extensions/quick-settings-tweaks@qwreey.zip                 ; \
+        wget https://extensions.gnome.org/extension-data/dingrastersoft.com.v56.shell-extension.zip                          -qO /tmp/extensions/ding@rastersoft.com.zip                          ; \
+        git clone https://github.com/nunofarruca/WindowIsReady_Remover.git                                                       /tmp/WindowIsReady_Remover                                       ; \
+    fi
+#Part 2
+RUN if [ "${BASE_IMAGE_NAME}" == "silverblue" ]; then \
+        cd /tmp/extensions; \
+        mkdir /etc/gnome-extensions; \
+        rm -f /tmp/WindowIsReady_Remover/README.md; \
+        mv /tmp/WindowIsReady_Remover/windowIsReady_Remover@nunofarruca@gmail.com /etc/gnome-extensions/; \
+        for EXTENSION in *.zip; do \
+            unzip -q "${EXTENSION}" -d "/etc/gnome-extensions/${EXTENSION%.*}"; \
+        done; \
+        rm -rf /tmp/extensions; \
+        chmod 755 /etc/gnome-extensions -R; \
+    fi
 
 #ZSH plugins. See /etc/skel.d/.oh-my-zsh/templates/zshrc.zsh-template for default zshrc
 RUN git clone https://github.com/zsh-users/zsh-autosuggestions /etc/skel.d/.oh-my-zsh/custom/plugins/zsh-autosuggestions && \
@@ -138,16 +144,18 @@ RUN wget https://github.com/WoeUSB/WoeUSB/releases/download/v5.2.4/woeusb-5.2.4.
 RUN wget https://github.com/lassekongo83/adw-gtk3/releases/download/v4.6/adw-gtk3v4-6.tar.xz -O /tmp/adw-gtk3.tar.xz && \
     sudo tar -xvf /tmp/adw-gtk3.tar.xz -C /usr/share/themes
 
+#If building silverblue image, install nautilus open terminal deal thing
+RUN if [ "${BASE_IMAGE_NAME}" == "silverblue" ]; then \
+        rpm-ostree override remove gnome-terminal-nautilus; \
+        pip install --prefix=/usr nautilus-open-any-terminal; \
+    fi
+
 COPY packages.json /tmp/packages.json
 COPY build.sh /tmp/build.sh
 
 RUN /tmp/build.sh && \
     #Install yafti setup thing
     pip install --prefix=/usr yafti && \
-    #Remove the gnome-terminal-nautilus package.
-    rpm-ostree override remove gnome-terminal-nautilus && \
-    #Install nautilus-open-any-terminal system wide.
-    pip install --prefix=/usr nautilus-open-any-terminal && \
     glib-compile-schemas /usr/share/glib-2.0/schemas && \
     systemctl unmask dconf-update.service && \
     systemctl enable dconf-update.service && \
