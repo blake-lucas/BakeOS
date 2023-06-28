@@ -46,8 +46,14 @@ jobs:
 
       - name: Matrix Variables
         run: |
+          #For main silverblue image: bakeos
+          if [[ "${{ matrix.base_image_name }}" == "silverblue" ]] && [[ "${{ matrix.image_flavor }}" == "main" ]] && [[ "${{ matrix.image_type }}" == "std" ]]; then
+              echo "IMAGE_NAME=bakeos" >> $GITHUB_ENV
+          #For main silverblue nvidia image: bakeos-nvidia
+          elif [[ "${{ matrix.base_image_name }}" == "silverblue" ]] && [[ "${{ matrix.image_flavor }}" == "nvidia" ]] && [[ "${{ matrix.image_type }}" == "std" ]]; then
+              echo "IMAGE_NAME=bakeos-nvidia" >> $GITHUB_ENV
           #For images like: bakeos-vauxite-lts
-          if [[ "${{ matrix.image_type }}" == "lts" ]] && [[ "${{ matrix.image_flavor }}" == "main" ]]; then
+          elif [[ "${{ matrix.image_type }}" == "lts" ]] && [[ "${{ matrix.image_flavor }}" == "main" ]]; then
               echo "IMAGE_NAME=${{ format('{0}-{1}-{2}', env.IMAGE_BASE_NAME, matrix.base_image_name, matrix.image_type) }}" >> $GITHUB_ENV
           #For images like: bakeos-vauxite
           elif [[ "${{ matrix.image_type }}" == "std" ]] && [[ "${{ matrix.image_flavor }}" == "main" ]]; then
@@ -55,12 +61,6 @@ jobs:
           #For images like: bakeos-vauxite-nvidia
           elif [[ "${{ matrix.image_type }}" == "std" ]]; then
               echo "IMAGE_NAME=${{ format('{0}-{1}-{2}', env.IMAGE_BASE_NAME, matrix.base_image_name, matrix.image_flavor) }}" >> $GITHUB_ENV
-          #For main silverblue image: bakeos
-          elif [[ "${{ matrix.base_image_name }}" == "silverblue" ]] && [[ "${{ matrix.image_flavor }}" == "main" ]] && [[ "${{ matrix.image_type }}" == "std" ]]; then
-              echo "IMAGE_NAME=bakeos" >> $GITHUB_ENV
-          #For main silverblue nvidia image: bakeos-nvidia
-          elif [[ "${{ matrix.base_image_name }}" == "silverblue" ]] && [[ "${{ matrix.image_flavor }}" == "nvidia" ]] && [[ "${{ matrix.image_type }}" == "std" ]]; then
-              echo "IMAGE_NAME=bakeos-nvidia" >> $GITHUB_ENV
           #For everything else: bakeos-kinoite-nvidia-lts, bakeos-vauxite-nvidia-lts
           else
               echo "IMAGE_NAME=${{ format('{0}-{1}-{2}-{3}', env.IMAGE_BASE_NAME, matrix.base_image_name, matrix.image_flavor, matrix.image_type) }}" >> $GITHUB_ENV
