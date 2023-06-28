@@ -37,12 +37,14 @@ fi;
 
 #Copy GNOME extensions if they don't exist for the user. If the user disables the extension, the folder is still present and won't be automatically enabled again.
 #Uninstalling extensions will probably force enable it again though
-for ext in /etc/gnome-extensions/*; do
-    if [ ! -d ~/.local/share/gnome-shell/extensions/$(basename $ext) ];
-      then cp -r "$ext" ~/.local/share/gnome-shell/extensions/
-      gnome-extensions enable $(basename $ext)
-    fi;
-done
+if [ -n "$(gnome-shell --version)" ];
+    then for ext in /etc/gnome-extensions/*; do
+        if [ ! -d ~/.local/share/gnome-shell/extensions/$(basename $ext) ];
+          then cp -r "$ext" ~/.local/share/gnome-shell/extensions/
+          gnome-extensions enable $(basename $ext)
+        fi;
+    done
+fi;
 
 #Set ownership of justfile, zsh stuff, autostart and extension folders for each user profile
 chown $USER:$USER ~/.config/autostart ~/.local/share/gnome-shell/extensions ~/.config/rustdesk ~/.justfile ~/.oh-my-zsh ~/.zshrc -R
