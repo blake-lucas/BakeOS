@@ -56,7 +56,9 @@
                 "duperemove",
                 "pavucontrol",
                 "lm_sensors",
-                "tailscale"
+                "tailscale",
+                "grim",
+                "slurp"
             ],
             "silverblue": [
                 "adw-gtk3-theme",
