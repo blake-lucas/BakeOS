@@ -55,6 +55,9 @@ jobs:
           #For nvidia silverblue lts: bakeos-nvidia-lts
           elif [[ "${{ matrix.base_image_name }}" == "silverblue" ]] && [[ "${{ matrix.image_flavor }}" == "nvidia" ]] && [[ "${{ matrix.image_type }}" == "lts" ]]; then
               echo "IMAGE_NAME=bakeos-nvidia-lts" >> $GITHUB_ENV
+          #For images like: bakeos-lts (main lts image)
+          elif [[ "${{ matrix.base_image_name }}" == "silverblue" ]] && [[ "${{ matrix.image_type }}" == "lts" ]] && [[ "${{ matrix.image_flavor }}" == "main" ]]; then
+              echo "IMAGE_NAME=bakeos-lts" >> $GITHUB_ENV
           #For images like: bakeos-vauxite-lts
           elif [[ "${{ matrix.image_type }}" == "lts" ]] && [[ "${{ matrix.image_flavor }}" == "main" ]]; then
               echo "IMAGE_NAME=${{ format('{0}-{1}-{2}', env.IMAGE_BASE_NAME, matrix.base_image_name, matrix.image_type) }}" >> $GITHUB_ENV
