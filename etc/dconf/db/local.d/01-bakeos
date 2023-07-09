@@ -132,3 +132,8 @@ primary-monitor=0
 status-icon-padding=-1
 tray-padding=8
 window-preview-title-position='TOP'
+
+[com/github/stunkymonkey/nautilus-open-any-terminal]
+flatpak='user'
+new-tab=true
+terminal='blackbox'
