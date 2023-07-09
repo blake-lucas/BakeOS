@@ -150,6 +150,7 @@ COPY build.sh /tmp/build.sh
 RUN /tmp/build.sh && \
     #Install yafti setup thing
     pip install --prefix=/usr yafti && \
+    rpm-ostree override remove gnome-terminal-nautilus && \
     pip install --prefix=/usr nautilus-open-any-terminal && \
     glib-compile-schemas /usr/share/glib-2.0/schemas && \
     systemctl unmask dconf-update.service && \

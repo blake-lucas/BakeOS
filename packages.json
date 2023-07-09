@@ -82,7 +82,7 @@
             ]
         },
         "exclude": {
-            "all": ["gnome-terminal-nautilus"]
+            "all": []
         }
     },
     "38": {
