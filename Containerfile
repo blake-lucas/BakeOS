@@ -144,13 +144,17 @@ RUN wget https://github.com/WoeUSB/WoeUSB/releases/download/v5.2.4/woeusb-5.2.4.
 RUN wget https://github.com/lassekongo83/adw-gtk3/releases/download/v4.6/adw-gtk3v4-6.tar.xz -O /tmp/adw-gtk3.tar.xz && \
     sudo tar -xvf /tmp/adw-gtk3.tar.xz -C /usr/share/themes
 
+#If building silverblue image, remove default nautilus open terminal deal thing
+RUN if [ "${BASE_IMAGE_NAME}" == "silverblue" ]; then \
+        rpm-ostree override remove gnome-terminal-nautilus; \
+    fi
+
 COPY packages.json /tmp/packages.json
 COPY build.sh /tmp/build.sh
 
 RUN /tmp/build.sh && \
     #Install yafti setup thing
     pip install --prefix=/usr yafti && \
-    rpm-ostree override remove gnome-terminal-nautilus && \
     pip install --prefix=/usr nautilus-open-any-terminal && \
     glib-compile-schemas /usr/share/glib-2.0/schemas && \
     systemctl unmask dconf-update.service && \
