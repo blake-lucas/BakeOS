@@ -20,7 +20,7 @@ fi;
 #If users shell isn't found to be ZSH according to /etc/passwd, ask to change it
 
 if [ ! -f ~/.disablezsh ]; then
-  if [ -z $(cat /etc/passwd | grep $USER | grep zsh) ]; then
+  if [ -z "$(cat /etc/passwd | grep "$USER" | grep zsh)" ]; then
     echo "$USER's default shell is not ZSH according to /etc/passwd." && echo "You can disable this check with: touch ~/.disablezsh" && chsh -s $(which zsh) && echo "You may need to sign out and back in for this to apply."
   fi;
 fi;
@@ -39,15 +39,15 @@ fi;
 #Uninstalling extensions will probably force enable it again though
 if [ -n "$(gnome-shell --version)" ];
     then for ext in /etc/gnome-extensions/*; do
-        if [ ! -d ~/.local/share/gnome-shell/extensions/$(basename $ext) ];
+        if [ ! -d ~/.local/share/gnome-shell/extensions/"$(basename "$ext")" ];
           then cp -r "$ext" ~/.local/share/gnome-shell/extensions/
-          gnome-extensions enable $(basename $ext)
+          gnome-extensions enable "$(basename "$ext")"
         fi;
     done
 fi;
 
 #Set ownership of justfile, zsh stuff, autostart and extension folders for each user profile
-chown $USER:$USER ~/.config/autostart ~/.local/share/gnome-shell/extensions ~/.config/rustdesk ~/.justfile ~/.oh-my-zsh ~/.zshrc -R
+chown "$USER":"$USER" ~/.config/autostart ~/.local/share/gnome-shell/extensions ~/.config/rustdesk ~/.justfile ~/.oh-my-zsh ~/.zshrc -R
 
 #Not sure where these come from and I'm too lazy to figure it out so just delete them lol
 rm -f ~/Desktop/network.desktop ~/Desktop/user-home.desktop ~/Desktop/trash-can.desktop ~/Desktop/computer.desktop

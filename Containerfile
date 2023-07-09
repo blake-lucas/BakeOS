@@ -148,6 +148,7 @@ RUN wget https://github.com/lassekongo83/adw-gtk3/releases/download/v4.6/adw-gtk
 RUN if [ "${BASE_IMAGE_NAME}" == "silverblue" ]; then \
         rpm-ostree override remove gnome-terminal-nautilus; \
         pip install --prefix=/usr nautilus-open-any-terminal; \
+        glib-compile-schemas /usr/share/glib-2.0/schemas; \
     fi
 
 COPY packages.json /tmp/packages.json
