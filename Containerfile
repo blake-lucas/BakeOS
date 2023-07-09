@@ -145,9 +145,9 @@ RUN wget https://github.com/lassekongo83/adw-gtk3/releases/download/v4.6/adw-gtk
     sudo tar -xvf /tmp/adw-gtk3.tar.xz -C /usr/share/themes
 
 #If building silverblue image, remove default nautilus open terminal deal thing
-RUN if [ "${BASE_IMAGE_NAME}" == "silverblue" ]; then \
-        rpm-ostree override remove gnome-terminal-nautilus; \
-    fi
+#RUN if [ "${BASE_IMAGE_NAME}" == "silverblue" ]; then \
+#        rpm-ostree override remove gnome-terminal-nautilus; \
+#    fi
 
 COPY packages.json /tmp/packages.json
 COPY build.sh /tmp/build.sh
@@ -155,7 +155,7 @@ COPY build.sh /tmp/build.sh
 RUN /tmp/build.sh && \
     #Install yafti setup thing
     pip install --prefix=/usr yafti && \
-    pip install --prefix=/usr nautilus-open-any-terminal && \
+    #pip install --prefix=/usr nautilus-open-any-terminal && \
     glib-compile-schemas /usr/share/glib-2.0/schemas && \
     systemctl unmask dconf-update.service && \
     systemctl enable dconf-update.service && \

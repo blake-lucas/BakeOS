@@ -52,7 +52,8 @@ chown "$USER":"$USER" ~/.config/autostart ~/.local/share/gnome-shell/extensions 
 #Not sure where these come from and I'm too lazy to figure it out so just delete them lol
 rm -f ~/Desktop/network.desktop ~/Desktop/user-home.desktop ~/Desktop/trash-can.desktop ~/Desktop/computer.desktop
 
-#Run these to set default Nautilus terminal stuff via https://github.com/Stunkymonkey/nautilus-open-any-terminal
-gsettings set com.github.stunkymonkey.nautilus-open-any-terminal terminal blackbox
-gsettings set com.github.stunkymonkey.nautilus-open-any-terminal flatpak user
-gsettings set com.github.stunkymonkey.nautilus-open-any-terminal new-tab true
+## System-wide install for this doesn't work anymore - https://github.com/Stunkymonkey/nautilus-open-any-terminal/issues/86
+##Run these to set default Nautilus terminal stuff via https://github.com/Stunkymonkey/nautilus-open-any-terminal
+#gsettings set com.github.stunkymonkey.nautilus-open-any-terminal terminal blackbox
+#gsettings set com.github.stunkymonkey.nautilus-open-any-terminal flatpak user
+#gsettings set com.github.stunkymonkey.nautilus-open-any-terminal new-tab true
