@@ -26,7 +26,7 @@ COPY tmp /tmp
 #    fi
 
 #If nvidia image, copy gdm.conf to disable Wayland
-RUN if [ "$IMAGE_FLAVOR" == "nvidia" ] && [ "$BASE_IMAGE_NAME" == "silverblue" ]; then \
+RUN if [ "$IMAGE_FLAVOR" == *"nvidia"* ] && [ "$BASE_IMAGE_NAME" == "silverblue" ]; then \
         echo "Disabling Wayland via gdm custom.conf"; \
         cat /tmp/gdm.conf; \
         cp -f /tmp/gdm.conf /etc/gdm/custom.conf; \

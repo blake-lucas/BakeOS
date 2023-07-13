@@ -31,7 +31,7 @@ jobs:
       fail-fast: false
       matrix:
         base_image_name: [silverblue, kinoite, vauxite]
-        image_flavor: [main, nvidia]
+        image_flavor: [main, nvidia-530]
         image_type: [std, lts]
         major_version: [38]
         include:
