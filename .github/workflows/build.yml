@@ -52,11 +52,9 @@ jobs:
           #For main silverblue nvidia image: bakeos-nvidia
           elif [[ "${{ matrix.base_image_name }}" == "silverblue" ]] && [[ "${{ matrix.image_flavor }}" == "nvidia" ]] && [[ "${{ matrix.image_type }}" == "std" ]]; then
               echo "IMAGE_NAME=bakeos-nvidia" >> $GITHUB_ENV
-              echo "MAJOR_VERSION=38-530" >> $GITHUB_ENV
           #For nvidia silverblue lts: bakeos-nvidia-lts
           elif [[ "${{ matrix.base_image_name }}" == "silverblue" ]] && [[ "${{ matrix.image_flavor }}" == "nvidia" ]] && [[ "${{ matrix.image_type }}" == "lts" ]]; then
               echo "IMAGE_NAME=bakeos-nvidia-lts" >> $GITHUB_ENV
-              echo "MAJOR_VERSION=38-530" >> $GITHUB_ENV
           #For images like: bakeos-lts (main lts image)
           elif [[ "${{ matrix.base_image_name }}" == "silverblue" ]] && [[ "${{ matrix.image_type }}" == "lts" ]] && [[ "${{ matrix.image_flavor }}" == "main" ]]; then
               echo "IMAGE_NAME=bakeos-lts" >> $GITHUB_ENV
@@ -69,7 +67,6 @@ jobs:
           #For images like: bakeos-vauxite-nvidia
           elif [[ "${{ matrix.image_type }}" == "std" ]]; then
               echo "IMAGE_NAME=${{ format('{0}-{1}-{2}', env.IMAGE_BASE_NAME, matrix.base_image_name, matrix.image_flavor) }}" >> $GITHUB_ENV
-              echo "MAJOR_VERSION=38-530" >> $GITHUB_ENV
           #For everything else: bakeos-kinoite-nvidia-lts, bakeos-vauxite-nvidia-lts
           else
               echo "IMAGE_NAME=${{ format('{0}-{1}-{2}-{3}', env.IMAGE_BASE_NAME, matrix.base_image_name, matrix.image_flavor, matrix.image_type) }}" >> $GITHUB_ENV
@@ -220,4 +217,3 @@ jobs:
         if: github.event_name != 'pull_request'
         run: |
           echo "${{ toJSON(steps.push.outputs) }}"
-
