@@ -145,10 +145,19 @@ RUN wget https://github.com/WoeUSB/WoeUSB/releases/download/v5.2.4/woeusb-5.2.4.
 RUN wget https://github.com/lassekongo83/adw-gtk3/releases/download/v4.6/adw-gtk3v4-6.tar.xz -O /tmp/adw-gtk3.tar.xz && \
     sudo tar -xvf /tmp/adw-gtk3.tar.xz -C /usr/share/themes
 
-#If building silverblue image, remove default nautilus open terminal deal thing
-#RUN if [ "${BASE_IMAGE_NAME}" == "silverblue" ]; then \
-#        rpm-ostree override remove gnome-terminal-nautilus; \
-#    fi
+#If building silverblue image, install additional stuffs
+RUN if [ "${BASE_IMAGE_NAME}" == "silverblue" ]; then \
+        rpm-ostree install  adw-gtk3-theme \
+                            gnome-tweaks \
+                            raw-thumbnailer \
+                            yaru-theme \
+                            gnome-shell-extension-appindicator \
+                            gnome-shell-extension-blur-my-shell \
+                            gnome-shell-extension-caffeine \
+                            gnome-shell-extension-gsconnect \
+                            gnome-text-editor \
+                            nautilus-gsconnect; \
+    fi
 
 COPY packages.json /tmp/packages.json
 COPY build.sh /tmp/build.sh
