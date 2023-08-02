@@ -171,9 +171,6 @@ RUN /tmp/build.sh && \
     systemctl enable dconf-update.service && \
     #Install Docker over Podman due to crun permission denied bs I don't want to keep resetting containers
     systemctl enable docker.service && \
-    #I'm well aware that this is stupid
-    mv /usr/bin/podman /usr/bin/podman.real && \
-    ln -s /usr/bin/docker /usr/bin/podman && \
     systemctl enable rpm-ostree-countme.service && \
     systemctl enable bakeos-everyboot.service && \
     systemctl enable tailscaled.service && \
