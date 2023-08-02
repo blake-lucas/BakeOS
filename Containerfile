@@ -173,7 +173,7 @@ RUN /tmp/build.sh && \
     systemctl enable docker.service && \
     #I'm well aware that this is stupid
     mv /usr/bin/podman /usr/bin/podman.real && \
-    ln -s /usr/bin/podman /usr/bin/docker && \
+    ln -s /usr/bin/docker /usr/bin/podman && \
     systemctl enable rpm-ostree-countme.service && \
     systemctl enable bakeos-everyboot.service && \
     systemctl enable tailscaled.service && \
