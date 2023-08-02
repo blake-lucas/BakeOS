@@ -169,7 +169,9 @@ RUN /tmp/build.sh && \
     glib-compile-schemas /usr/share/glib-2.0/schemas && \
     systemctl unmask dconf-update.service && \
     systemctl enable dconf-update.service && \
+    #Install Docker over Podman due to crun permission denied bs I don't want to keep resetting containers
     systemctl enable docker.service && \
+    rpm-ostree override remove podman podman-plugins podman-compose toolbox && \
     systemctl enable rpm-ostree-countme.service && \
     systemctl enable bakeos-everyboot.service && \
     systemctl enable tailscaled.service && \
