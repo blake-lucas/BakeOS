@@ -169,6 +169,7 @@ RUN /tmp/build.sh && \
     glib-compile-schemas /usr/share/glib-2.0/schemas && \
     systemctl unmask dconf-update.service && \
     systemctl enable dconf-update.service && \
+    systemctl enable docker.service && \
     systemctl enable rpm-ostree-countme.service && \
     systemctl enable bakeos-everyboot.service && \
     systemctl enable tailscaled.service && \
