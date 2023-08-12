@@ -76,8 +76,9 @@ Currently you'll need to have Fedora Silverblue installed to rebase to this imag
 
 6. Last thing, I'd recommend running the following once your drivers are working:
 
-        just apx-init - Creates APX containers and tweaks a few things
-        just apx-nvidia (or apx-amd/apx-intel) - This sets up video accel in APX containers
+        just distrobox-init - Creates initial Ubuntu/Fedora distrobox containers with basic packages.
+        OR
+        just distrobox-init-nvidia, if running the Nvidia image.
 
 7. To revert back:
 
