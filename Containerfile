@@ -94,7 +94,7 @@ RUN wget https://github.com/Vanilla-OS/apx/releases/latest/download/apx_Linux_x8
 RUN wget https://github.com/TheAssassin/AppImageLauncher/releases/download/v2.2.0/appimagelauncher-2.2.0-travis995.0f91801.x86_64.rpm -qO /tmp/appimagelauncher.rpm
 
 #RustDesk download. Install is handled by build.sh and is at the top of the packages.json file.
-RUN wget https://github.com/rustdesk/rustdesk/releases/download/1.2.1/rustdesk-1.2.1-0.x86_64.rpm -qO /tmp/rustdesk.rpm
+RUN wget https://github.com/rustdesk/rustdesk/releases/download/1.2.3/rustdesk-1.2.3-0.x86_64.rpm -qO /tmp/rustdesk.rpm
 
 #NextShot download and install
 #RUN git clone -b master https://github.com/dshoreman/nextshot.git && \
