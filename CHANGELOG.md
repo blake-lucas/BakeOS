@@ -1,5 +1,36 @@
 # Changelog
 
+## [1.3.0](https://github.com/blake-lucas/BakeOS/compare/v1.2.0...v1.3.0) (2023-12-14)
+
+
+### Features
+
+* recommended containers to distrobox with assemble ([4e9687e](https://github.com/blake-lucas/BakeOS/commit/4e9687e0983cf4f658be6fe33840fa9c540de9ec))
+* start building kde and xfce images ([c3030c0](https://github.com/blake-lucas/BakeOS/commit/c3030c0fecaf1f3278d969434343be5eadbab291))
+* update rustdesk to v1.2.3 ([331c5fa](https://github.com/blake-lucas/BakeOS/commit/331c5faac1e65ff307e5294c797efd744433cc21))
+
+
+### Bug Fixes
+
+* add missing var in build.yml ([0b5ece7](https://github.com/blake-lucas/BakeOS/commit/0b5ece7666b73f87d1042425f27d01e8bd9f1e55))
+* add nextshot deps for wayland ([7a163bd](https://github.com/blake-lucas/BakeOS/commit/7a163bd648d007f9a05a15a5e3b972c1a1a93dab))
+* another maybe fix for terminal open thing ([361112f](https://github.com/blake-lucas/BakeOS/commit/361112f96e644e99234d8db76fb0a4b3d36724c4))
+* disable firmware git ([e7b2902](https://github.com/blake-lucas/BakeOS/commit/e7b290269610f5e208fa9542670b56adf9349598))
+* fix missing packages from build.sh ([f3335dd](https://github.com/blake-lucas/BakeOS/commit/f3335dd76193a0d2696b763e9d81e1c7497fcac1))
+* grab host nvidia version for apx-nvidia ([60d104a](https://github.com/blake-lucas/BakeOS/commit/60d104a20fc6cfa426599feada9cde8468c7dbee))
+* maybe fix bakeos-lts image tagging ([a3f8c47](https://github.com/blake-lucas/BakeOS/commit/a3f8c4763db4043f7541a2146e804c42f6117880))
+* maybe fix final image names ([7381f66](https://github.com/blake-lucas/BakeOS/commit/7381f665e523aa698b9407c83fd8f692611367ea))
+* maybe fix silverblue builds ([7c52580](https://github.com/blake-lucas/BakeOS/commit/7c525800f3a02b0c1e5609dbc7aa50df8abdb653))
+* maybe fix terminal schema error ([732259d](https://github.com/blake-lucas/BakeOS/commit/732259d09ef7646e9b263e7ec348c02c1010f811))
+* more fixes for new images ([f4ad1a9](https://github.com/blake-lucas/BakeOS/commit/f4ad1a9f4ad4596fa62d6b68e89c580ea2a39650))
+* nautilus terminal pkg system install broken ([5d1b81b](https://github.com/blake-lucas/BakeOS/commit/5d1b81b56d4fcef994751f4de0a01051c6e3efd7))
+* only run gnome ext copy when gnome-shell exists ([f2339ce](https://github.com/blake-lucas/BakeOS/commit/f2339ce4d07ce8a7fe267d875cf8ba80da9e5b98))
+* oops forgot about existing image_name var ([e7c1993](https://github.com/blake-lucas/BakeOS/commit/e7c199318434903a0967ec06dabbafc71d862335))
+* rename var in containerfile for new images ([19e5d76](https://github.com/blake-lucas/BakeOS/commit/19e5d766bb97bd0f15ef00de861ead782abc4598))
+* retry firmware download up to 3 times ([a8f2844](https://github.com/blake-lucas/BakeOS/commit/a8f2844848bd5e77376719511a99c0758fa09053))
+* try switching to nvidia 530 ([a5f1af4](https://github.com/blake-lucas/BakeOS/commit/a5f1af492108e6ff3a3f62d47f66841deaa7945f))
+* update rustdesk rpm download url ([45f3806](https://github.com/blake-lucas/BakeOS/commit/45f3806d62130f4f7bac1a0e32d2ac3f393cef64))
+
 ## [1.2.0](https://github.com/blake-lucas/BakeOS/compare/v1.1.1...v1.2.0) (2023-06-12)
 
 
